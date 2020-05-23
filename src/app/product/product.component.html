@@ -1,7 +1,10 @@
 <div>
     <h2>Les produits</h2>
     <button (click)="toggleImage()">Show/Hide Image</button>
-    <input [(ngModel)]="searchProduct" type="text" placeholder="Search product"/>
+   
+    <div>
+        <input type="text" name="search" [(ngModel)]="searchProduct" placeholder="Start searching">
+    </div>
     <p>Search result : {{ searchProduct }}</p>
 
     <table *ngIf="products.length > 0; else noProductTemplate"
@@ -21,7 +24,7 @@
                 <td>Rating</td>
             </tr>
         </thead>
-        <tbody  *ngFor="let product of products">
+        <tbody  *ngFor="let product of products | filter:searchProduct"> <!-- filter: nomCreeDansProductComponent-->
             <tr>
                 <td>{{ product.id }}</td>
                 <td *ngIf="imageIsShown" >

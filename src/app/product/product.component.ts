@@ -6,15 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 
-//public products: Product[]
-
-//let products: Product = "";
 
 export class ProductComponent implements OnInit {
-
-  public searchProduct: string = '';
+  //public searchProduct: string = '';
   public imageIsShown: boolean = true; // display by default
   public noProductTemplate: string = 'Pas de tableau';
+  public searchText: string = 'hallo';
 
   //Fonction appelée lors du clic
   toggleImage() {
@@ -26,6 +23,8 @@ export class ProductComponent implements OnInit {
   //constructor() { } // mettre ce bout de code en commentaire car il sert à rien n'est-ce pas ? 
 
   ngOnInit(): void {}
+
+  searchProduct: string;
 
   public products: Product[] = [
     {
