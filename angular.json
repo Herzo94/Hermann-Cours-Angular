@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angularhermannproject"
+    }
+  },
+  "defaultProject": "angularhermannproject",
+  "cli": {
+    "analytics": "bb177af5-9397-4034-bc97-6c38beea315f"
+  }
 }
