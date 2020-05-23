@@ -23,7 +23,6 @@ export class ProductComponent implements OnInit {
     
     }
 
-
   //constructor() { } // mettre ce bout de code en commentaire car il sert à rien n'est-ce pas ? 
 
   ngOnInit(): void {}
@@ -80,7 +79,6 @@ export class ProductComponent implements OnInit {
         "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
     }
   ]
-
 }
 
 export interface Product {
@@ -93,6 +91,3 @@ export interface Product {
   starRating : number
   imageUrl : string
 }
-
-
-

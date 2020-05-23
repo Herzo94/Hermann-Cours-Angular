@@ -1,7 +1,8 @@
 <div>
     <h2>Les produits</h2>
     <button (click)="toggleImage()">Show/Hide Image</button>
-    <input [(ngModel)]="searchProduct" type="text" />
+    <input [(ngModel)]="searchProduct" type="text" placeholder="Search product"/>
+    <p>Search result : {{ searchProduct }}</p>
 
     <table *ngIf="products.length > 0; else noProductTemplate"
     border="1"
