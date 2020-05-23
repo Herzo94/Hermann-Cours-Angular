@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-import { MatSidenav } from '@angular/material';
+//import { MatSidenav } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     Ng2SearchPipeModule,
-    MatSidenav,
+    //MatSidenav,
     BrowserAnimationsModule,
   ],
   providers: [],
