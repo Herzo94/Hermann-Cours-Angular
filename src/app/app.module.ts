@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+import { MatSidenav } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,9 +22,14 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatSidenav,
+    BrowserAnimationsModule,
   ],
   providers: [],
+  /*exports: [
+    MatSidenav
+  ],*/
   bootstrap: [AppComponent]
 })
 export class AppModule { }
