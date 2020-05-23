@@ -23,7 +23,11 @@ export class ProductComponent implements OnInit {
   searchProduct: string; // Cette déclaration pas nécéssaire on dirait ?????????
   //Question GIT -> Comment publier les modifs réalisé en local sur le master du site github afin de voir les modifications directement depuis le site (J'avais déjà posé cette question)
   //-> $ git push -u origin
+  // ok
   // Comment réaliser les commits directement depuuis le terminal après avoir -> géré les states changed
+  //-> $ Git push origin(master ??
+  //Realision des quelques exercies sur le site de git jusqu'au -> git rebase master
+  //+Comment réaliser les commits directement depuuis le terminal après avoir -> géré les states changed
 
   public products: Product[] = [
     {
