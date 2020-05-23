@@ -28,7 +28,8 @@
             <tr>
                 <td>{{ product.id }}</td>
                 <td *ngIf="imageIsShown" >
-                    <img [src]="product.imageUrl" width="30px">
+                    <a href="product.imageUrl" target="_blank"><img [src]="product.imageUrl" width="30px"></a>
+                    <!-- rediriger sur le lien externe de l'image URL donc check le <base /> ????? -->
                 </td>
                 <td>{{ product.productName }}</td>
                 <td>{{ product.productCode }}</td>
