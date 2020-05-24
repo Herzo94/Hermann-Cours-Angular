@@ -2,20 +2,34 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+
+import { FormsModule } from '@angular/forms';
+
+//Components
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
-import { FormsModule } from '@angular/forms';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-//import { MatSidenav } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { MatListModule } from '@angular/material/list';
+
+import {MatIconModule} from '@angular/material/icon';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
+    SidenavComponent,
   
   ],
   imports: [
@@ -23,7 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     Ng2SearchPipeModule,
-    //MatSidenav,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
     BrowserAnimationsModule,
   ],
   providers: [],
