@@ -14,8 +14,9 @@ export class SidenavComponent implements OnInit {
   //fillerNav = Array(50).fill(0).map((_, i) => `Nav Item ${i + 1}`);
   fillerNav=[
     {name:"home", route:"", icon:"home"},
-    {name:"page1", route:"", icon:"pages"},
-    {name:"product", route:"", icon:"category"}
+    {name:"about", route:"", icon:"pages"},
+    {name:"product", route:"", icon:"category"},
+    {name:"contact", route:"", icon:"people"}
   ]
 
   fillerContent = Array(50).fill(0).map(() =>
