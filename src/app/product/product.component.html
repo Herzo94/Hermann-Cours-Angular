@@ -28,15 +28,21 @@
             <tr>
                 <td>{{ product.id }}</td>
                 <td *ngIf="imageIsShown" >
-                    <a href="product.imageUrl" target="_blank"><img [src]="product.imageUrl" width="30px"></a>
-                    <!-- rediriger sur le lien externe de l'image URL donc check le <base /> ????? -->
+                    <a [href]="product.imageUrl" target="_blank">
+                        <img [src]="product.imageUrl" width="30px">
+                    </a>
+                    <!-- [href] -> data binding ? -> [] -> correspond à une valeur qu'il doit chercher quelque part dans une variable etc. -->
                 </td>
                 <td>{{ product.productName }}</td>
                 <td>{{ product.productCode }}</td>
                 <td>{{ product.releaseDate }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
-                <td>{{ product.starRating }}</td>
+                <!-- <td>{{ product.starRating }} {{ rating }} </td> -->
+                <!-- 2. Affichage de l'info -->
+                <td>
+                    <app-star [rating]="product.starRating" (ratingClicked)="product.starRating = $event"></app-star>
+                </td>
             </tr>
         </tbody>
     </table>

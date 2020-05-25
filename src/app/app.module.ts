@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { StarComponent } from './shared/star/star.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ContactComponent } from './contact/contact.component';
     SidenavComponent,
     AboutComponent,
     ContactComponent,
+    StarComponent,
+    HomeComponent,
   
   ],
   imports: [
@@ -41,9 +45,6 @@ import { ContactComponent } from './contact/contact.component';
     AppRoutingModule,
   ],
   providers: [],
-  /*exports: [
-    MatSidenav
-  ],*/
   bootstrap: [AppComponent]
 })
 export class AppModule { }
