@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IProduct } from './../shared/model/product/product-service.service';
+
 
 @Component({
   selector: 'app-product',
@@ -29,7 +31,7 @@ export class ProductComponent implements OnInit {
   //Realision des quelques exercies sur le site de git jusqu'au -> git rebase master
   //+Comment réaliser les commits directement depuuis le terminal après avoir -> géré les states changed
 
-  public products: Product[] = [
+  public products: IProduct[] = [
     {
         "id": 1,
         "productName": "Leaf Rake",
@@ -83,13 +85,3 @@ export class ProductComponent implements OnInit {
   ]
 }
 
-export interface Product {
-  id : number
-  productName : string
-  productCode : string
-  releaseDate : string
-  description : string
-  price : number
-  starRating : number
-  imageUrl : string
-}

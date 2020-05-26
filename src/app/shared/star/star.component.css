@@ -1,17 +1,11 @@
-/* Ajouter le CSS */
-
 div{
     display:inline-block;
     width:18px;
     height: 18px;
     background-size: contain;
     background-image: url('src/assets/icon-star-empty.svg'); 
-    /*background-color: red;*/
-  
 }
 
 div.filled{
-    background-image: url('src/assets/icon-star-filled.svg');  
-    /*background-color: aqua;*/
-    
+    background-image: url('src/assets/icon-star-filled.svg');    
 }

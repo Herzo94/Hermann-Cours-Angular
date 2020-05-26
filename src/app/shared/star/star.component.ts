@@ -7,9 +7,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class StarComponent implements OnInit {
 
-  //Input et Output ok!
-  
-  //Pas réussir à afficher les étoiles
   
   //eventmitter -> Interface, Class dispo par Angular -> Package oû il y a les methodes essentielles à angular pas clair non plus
   //Problème au clique
