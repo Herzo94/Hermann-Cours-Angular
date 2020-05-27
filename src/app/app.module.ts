@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 
 //Components
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
-// search module
+// Search Module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,6 +44,7 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    HttpClient,
     AppRoutingModule,
   ],
   providers: [],
