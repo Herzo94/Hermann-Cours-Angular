@@ -14,11 +14,13 @@ import { Product } from './../shared/model/product/product';
     
 export class ProductDetailComponent implements OnInit {
   public product$: Observable<Product>
+
   constructor(
     private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute
   ) {
+    
     let currentId$: Observable<number> = route.paramMap.pipe(
       map(params => params.get('id')),
       filter(id => id !== null),
