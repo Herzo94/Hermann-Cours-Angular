@@ -24,6 +24,10 @@ export class ProductListComponent implements OnInit {
     this.displayImage = !this.displayImage
   }
 
+  public refreshProducts() {
+    this.productService.fetch()
+  }
+
   ngOnInit(): void {
   }
 

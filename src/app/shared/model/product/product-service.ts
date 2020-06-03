@@ -105,4 +105,8 @@ export class ProductService {
       )
     }
   }
+  public getProducts(): IProduct[] {
+    // Use the spread operator to return a cloned version of the array
+    return [...this.productsFromAPI]
+  }
 }
