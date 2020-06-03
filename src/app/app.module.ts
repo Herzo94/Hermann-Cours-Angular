@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 //Components
 import { AppComponent } from './app.component';
@@ -22,7 +23,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { StarComponent } from './shared/star/star.component';
 import { HomeComponent } from './home/home.component';
-import { ProductChildComponent } from './product/product-child.component';
+import { ProductListComponent } from './product/product-list.component';
+import { ProductDetailComponent } from './product/product-detail.component';
+import { ProductEditComponent } from './product/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { ProductChildComponent } from './product/product-child.component';
     ContactComponent,
     StarComponent,
     HomeComponent,
-    ProductChildComponent,
+    ProductEditComponent,
+    ProductListComponent,
+    ProductDetailComponent,
   
   ],
   imports: [
@@ -47,6 +52,7 @@ import { ProductChildComponent } from './product/product-child.component';
     MatToolbarModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
   ],
   providers: [],
