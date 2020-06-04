@@ -5,8 +5,8 @@ import { ProductService } from './../shared/model/product/product-service';
 
 @Component({
   selector: 'app-product-list',
-  templateUrl:  './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  templateUrl:  'product-list.component.html',
+  styleUrls: ['product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
   
@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   public displayImage: boolean = true
   public products$: Observable<Product[]>
 
-  constructor(productService: ProductService) {
+  constructor(public productService: ProductService) {
     this.products$ = productService.getProducts$()
    }
 

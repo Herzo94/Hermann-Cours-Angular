@@ -22,8 +22,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of products | productSearch:searchTerm">
-                <td>#{{ product.id }}</td>
+            <tr *ngFor="let product of products | productSearch:searchTerm">  
+        
                 <td>
                     <a [routerLink]="product.id">#{{ product.id }}</a>
                 </td>

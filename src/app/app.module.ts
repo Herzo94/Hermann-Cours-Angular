@@ -26,6 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product/product-list.component';
 import { ProductDetailComponent } from './product/product-detail.component';
 import { ProductEditComponent } from './product/product-edit.component';
+import { ProductSearchPipe } from './product/product-search.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ProductEditComponent } from './product/product-edit.component';
     ContactComponent,
     StarComponent,
     HomeComponent,
+    ProductSearchPipe,
     ProductEditComponent,
     ProductListComponent,
     ProductDetailComponent,

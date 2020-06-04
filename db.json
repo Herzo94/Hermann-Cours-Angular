@@ -48,6 +48,16 @@
       "price": 35.95,
       "starRating": 4.6,
       "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
-  }
+  },
+  {
+    "id": 11,
+    "productName": "Video",
+    "productCode": "GMG-0045",
+    "releaseDate": "October 15, 2018",
+    "description": "Standard two-button",
+    "price": 55.95,
+    "starRating": 2.6,
+    "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
+}
 ]
 }
