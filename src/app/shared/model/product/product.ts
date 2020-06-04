@@ -1,30 +1,41 @@
-import { IProduct } from './product-service'
+export interface IProduct {
+  id: number
+  productName: string
+  productCode: string
+  releaseDate: string
+  description: string
+  price: number
+  starRating: number
+  imageUrl: string
+}
 
-//Challenge dispo sur le github + correction
-export class Product {
-  public id : number
-  public productName : string
-  public productCode : string
-  public releaseDate : string
-  public description : string
-  public price : number
-  public starRating : number
-  public imageUrl : string
 
-  constructor(data: IProduct){
+export class Product implements IProduct {
+  public id: number
+  public productName: string
+  public productCode: string
+  public releaseDate: string
+  public description: string
+  public price: number
+  public starRating: number
+  public imageUrl: string
+
+  constructor(data: IProduct) {
       this.fromData(data)
   }
 
-  private fromData(data:IProduct){
-    this.id = data.id || null 
-    this.productName = data.productName || ''
-    this.productCode || ''
-    this.releaseDate || ''
-    this.description || ''
-    this.price || 0
-    this.starRating || 0
-    this.imageUrl  || ''
+  private fromData(data: IProduct) {
+      this.id = data.id || null
+      this.productName = data.productName || ''
+      this.productCode = data.productCode || ''
+      this.releaseDate = data.releaseDate || ''
+      this.description = data.description || ''
+      this.price = data.price || 0
+      this.starRating = data.starRating || 0
+      this.imageUrl = data.imageUrl || ''
+  }
+
+  public toString(): string {
+      return `${this.id} - ${this.productName} - ${this.price}`
   }
 }
-
-//let myProductId1.productName;

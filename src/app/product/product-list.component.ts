@@ -5,9 +5,8 @@ import { ProductService } from './../shared/model/product/product-service';
 
 @Component({
   selector: 'app-product-list',
-  template: 'product-list.component.html',
-  styles: [
-  ]
+  templateUrl:  './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
   
@@ -20,15 +19,15 @@ export class ProductListComponent implements OnInit {
     this.products$ = productService.getProducts$()
    }
 
+   ngOnInit(): void {
+   }
+
    public toggleImage(): void {
     this.displayImage = !this.displayImage
   }
 
   public refreshProducts() {
     this.productService.fetch()
-  }
-
-  ngOnInit(): void {
   }
 
 }
