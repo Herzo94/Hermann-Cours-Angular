@@ -55,7 +55,7 @@ import { ProductSearchPipe } from './product/product-search.pipe';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,8 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { IProduct, Product } from './../shared/model/product/product';
 import { ProductService } from './../shared/model/product/product-service';
+import { Router } from '@angular/router';
+
 
 const HTTP_URL_PATTERN: string =
   '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
@@ -12,7 +14,7 @@ const HTTP_URL_PATTERN: string =
 
 @Component({
   selector: 'app-product-edit',
-  template: 'product-edit.component.html',
+  templateUrl: './product-edit.component.html',
   styles: [
   ]
 })
@@ -22,7 +24,7 @@ export class ProductEditComponent implements OnInit {
   // This is used to store the subscription in order to clean it with the component
   private productSubscription: Subscription
 
-  constructor(fb: FormBuilder, route: ActivatedRoute, public productService: ProductService) {
+  constructor(fb: FormBuilder, route: ActivatedRoute, public productService: ProductService, private router: Router) {
     // We create our Form for product 
     this.productForm = fb.group({
              id: [null], // It is the same as `id: new FormControl(null)`
@@ -75,5 +77,7 @@ export class ProductEditComponent implements OnInit {
       product => console.log(`My product was saved ${product.id}`)
       )
     }
+
+    this.router.navigate(['/product']);
   }
 }

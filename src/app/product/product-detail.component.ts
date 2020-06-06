@@ -35,6 +35,6 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
   }
   public goToProducts() {
-    this.router.navigate(['/products'])
+    this.router.navigate(['/product'])
   }
 }
