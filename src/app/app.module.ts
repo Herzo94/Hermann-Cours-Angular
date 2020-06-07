@@ -34,6 +34,9 @@ import { AuthComponent } from './auth/auth.component';
 import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 import { ReservationViewComponent } from './reservation/reservation-view/reservation-view.component';
+import { CommandeViewComponent } from './commande/commande-view/commande-view.component';
+import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
+import { CommandeEditComponent } from './commande/commande-edit/commande-edit.component';
 
 
 @NgModule({
@@ -57,6 +60,9 @@ import { ReservationViewComponent } from './reservation/reservation-view/reserva
     ReservationDetailComponent,
     ReservationEditComponent,
     ReservationViewComponent,
+    CommandeViewComponent,
+    CommandeDetailComponent,
+    CommandeEditComponent,
   
   ],
   imports: [
