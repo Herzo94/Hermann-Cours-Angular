@@ -37,6 +37,10 @@ import { ReservationViewComponent } from './reservation/reservation-view/reserva
 import { CommandeViewComponent } from './commande/commande-view/commande-view.component';
 import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
 import { CommandeEditComponent } from './commande/commande-edit/commande-edit.component';
+import { AuthService } from './service/auth-service.service';
+import { SingleReservationComponent } from './reservation/single-reservation/single-reservation.component';
+import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
+import { ProductInsertComponent } from './product/product-insert/product-insert.component';
 
 
 @NgModule({
@@ -63,6 +67,9 @@ import { CommandeEditComponent } from './commande/commande-edit/commande-edit.co
     CommandeViewComponent,
     CommandeDetailComponent,
     CommandeEditComponent,
+    SingleReservationComponent,
+    ReservationListComponent,
+    ProductInsertComponent,
   
   ],
   imports: [
@@ -79,7 +86,7 @@ import { CommandeEditComponent } from './commande/commande-edit/commande-edit.co
     ReactiveFormsModule,
   
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

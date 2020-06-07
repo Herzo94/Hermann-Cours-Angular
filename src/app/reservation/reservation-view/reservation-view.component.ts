@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Reservation } from './../../shared/model/reservation/reservation';
+import { ReservationService } from './../../shared/model/reservation/reservation-service';
 
 @Component({
   selector: 'app-reservation-view',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationViewComponent implements OnInit {
 
-  constructor() { }
+  public reservations$: Observable<Reservation[]>
+
+  constructor(public reservationService : ReservationService) { 
+    this.reservations$ = reservationService.getReservations$()
+
+  }
 
   ngOnInit(): void {
   }
 
+  public refreshReservations() {
+    this.reservationService.fetch()
+  }
 }

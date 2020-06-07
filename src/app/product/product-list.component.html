@@ -19,6 +19,7 @@
                 <td>Description</td>
                 <td>Price</td>
                 <td>Rating</td>
+                <td>X</td>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,9 @@
                 <td>
                     <app-star [(rating)]="product.starRating"></app-star>
                 </td>
+                <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
+                <button (click)="deleteProduct()">X</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -48,3 +52,7 @@
 <div>
   <button (click)="refreshProducts()">Refresh products</button>
 </div>
+
+  <div> 
+     <button type="button" [routerLink]="['/product', 'insert']">Insert the product</button> 
+  </div> 

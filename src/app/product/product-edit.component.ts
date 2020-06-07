@@ -32,7 +32,7 @@ export class ProductEditComponent implements OnInit {
                '', // default value
                [
                  Validators.required, 
-                 Validators.minLength(8), 
+                 Validators.minLength(4), 
                  Validators.maxLength(80)
                 ] // All the validators to run against this field
               ],

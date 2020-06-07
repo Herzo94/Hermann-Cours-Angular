@@ -1,6 +1,6 @@
 <div *ngIf="product$ | async as product; else noProduct">
 
-<div>
+  <div>
     ID: {{ product.id }}
   </div>
   <div>
@@ -9,6 +9,12 @@
   <div>
     Description: {{ product.description }}
   </div>
+  <div>
+    <a [href]="product.imageUrl" target="_blank">
+      <img [src]="product.imageUrl" width="90px">
+  </a>
+  </div>
+
 
   <p>
       <button type="button" (click)="goToProducts()">Go back to product</button>>

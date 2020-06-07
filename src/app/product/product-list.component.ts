@@ -30,4 +30,9 @@ export class ProductListComponent implements OnInit {
     this.productService.fetch()
   }
 
+  public deleteProduct() {
+    //this.productService.fetch()
+    console.log("Delete product : ", this.products$);
+  }
+
 }

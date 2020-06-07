@@ -1,1 +1,39 @@
-<p>reservation-view works!</p>
+<h3>Reservation list</h3>
+<!-- <div>
+    <label for="search">Search: </label>
+    <input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter reservations" />
+</div>-->
+<div *ngIf="reservations$ | async as reservations">
+
+    <table *ngIf="reservations.length > 0; else noReservationTemplate"
+        border="1"
+        cellspacing="0"
+        cellpadding="10">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Date</td> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reservation of reservations">  
+        
+                <td>
+                    <a [routerLink]="reservation.id">#{{ reservation.id }}</a>
+                </td>
+            
+                <td>{{ reservation.reservationName }}</td>
+                <td>{{ reservation.reservationDate }}</td>
+             
+              
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #noReservationTemplate>
+        <h4>No product available! You can save money 💵💵💵 ;-)</h4>
+    </ng-template>
+</div>
+<div>
+  <button (click)="refreshReservations()">Refresh reservation</button>
+</div>

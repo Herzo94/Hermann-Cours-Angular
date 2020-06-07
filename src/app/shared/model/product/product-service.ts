@@ -106,6 +106,17 @@ export class ProductService {
       )
     }
   }
+
+
+  public delete(product: IProduct): Observable<IProduct> {
+    
+      return this.http.delete<IProduct>(`http://localhost:3000/products/${product.id}`).pipe(
+        tap(product => console.log(`delete the product: ${product.id}`)),
+        tap(() => this.fetch())
+      )
+    }
+  
+  
   public getProducts(): IProduct[] {
     // Use the spread operator to return a cloned version of the array
     return [...this.productsFromAPI]

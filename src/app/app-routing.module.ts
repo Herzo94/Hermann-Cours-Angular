@@ -12,21 +12,24 @@ import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
+import { AuthGuard } from './service/auth.guard';
+import { ProductInsertComponent } from './product/product-insert/product-insert.component';
 
 const routes: Routes = [
   
   { path: 'auth', component: AuthComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'product', component: ProductComponent, children: [
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+  { path: 'product', canActivate: [AuthGuard], component: ProductComponent, children: [
     { path: '', component: ProductListComponent },
+    { path: 'insert', component: ProductInsertComponent},
     { path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent}
   ] },
-  { path: 'reservation', component: ReservationComponent },
-  { path: 'commande', component: CommandeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: 'reservation', canActivate: [AuthGuard], component: ReservationComponent },
+  { path: 'commande', canActivate: [AuthGuard], component: CommandeComponent },
+  { path: 'about', canActivate: [AuthGuard], component: AboutComponent },
+  { path: 'contact', canActivate: [AuthGuard], component: ContactComponent },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
