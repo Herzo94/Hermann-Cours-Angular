@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService,
@@ -19,7 +20,7 @@ export class AuthGuard implements CanActivate {
       } else {
         this.router.navigate(['/auth']);
       }
-   
+      
   }
-  
+
 }

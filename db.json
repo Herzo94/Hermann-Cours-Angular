@@ -69,6 +69,16 @@
       "price": 100,
       "starRating": 2,
       "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+    },
+    {
+      "id": 8,
+      "productName": "shgdfjd",
+      "productCode": "jhggkhjggj",
+      "releaseDate": "2020-06-07T21:25:30.170Z",
+      "description": "khlhjkhjk",
+      "price": 0,
+      "starRating": 0,
+      "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
     }
   ],
   "reservations": [

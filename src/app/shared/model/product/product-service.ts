@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
   private productsFromAPI: IProduct[] = [
     {
@@ -83,16 +84,17 @@ export class ProductService {
       products => this._products.next(products)
     )
   }
+
   public getProducts$(): Observable<Product[]> {
     return this.products$
   }
-
+  
   public getProductById$(id: number): Observable<Product> {
     return this.products$.pipe(
       map(products => products.find(product => product.id === id))
     )
   }
-
+  
   public save(product: IProduct): Observable<IProduct> {
     if (product.id === null) { // We have to create the product (POST)
       return this.http.post<IProduct>('http://localhost:3000/products', product, this.httpOptions).pipe(
@@ -107,16 +109,21 @@ export class ProductService {
     }
   }
 
-
-  public delete(product: IProduct): Observable<IProduct> {
-    
+  public deleteProduct(product: IProduct): Observable<IProduct> {
       return this.http.delete<IProduct>(`http://localhost:3000/products/${product.id}`).pipe(
         tap(product => console.log(`delete the product: ${product.id}`)),
         tap(() => this.fetch())
       )
-    }
-  
-  
+  }
+
+
+  // HttpClient API delete() method => Delete employee
+   /* public deleteProduct(product: IProduct): Observable<IProduct>  {
+    return this.http.delete<Product>('http://localhost:3000/products/')
+    
+  }*/
+
+
   public getProducts(): IProduct[] {
     // Use the spread operator to return a cloned version of the array
     return [...this.productsFromAPI]

@@ -11,6 +11,8 @@ import { ProductService } from './../../shared/model/product/product-service';
 const HTTP_URL_PATTERN: string =
   '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
 
+  //const HTTP_URL_PATTERN: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$'
+
 
 @Component({
   selector: 'app-product-insert',
@@ -33,10 +35,10 @@ export class ProductInsertComponent implements OnInit {
           Validators.maxLength(80)
          ] // All the validators to run against this field
        ],
-      productCode: [''],
+      productCode: ['', Validators.required,],
       releaseDate: [new Date()],
       description: [''],
-      price: [0, Validators.min(0)],
+      price: [1, Validators.min(1)],
       starRating: [0, [Validators.min(0), Validators.max(5)]],
       imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)]
  })  

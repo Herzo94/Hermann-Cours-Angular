@@ -17,8 +17,9 @@ export class ReservationViewComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
+
+  searchReservation: string;
 
   public refreshReservations() {
     this.reservationService.fetch()
