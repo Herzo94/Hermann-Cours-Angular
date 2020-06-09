@@ -31,11 +31,10 @@ export class ProductListComponent implements OnInit {
     this.productService.fetch()
   }
 
-  public deleteProduct() {
+  public deleteProduct(id: string) { // je passe l'id du produit depuis le template (html)
     //this.productService.fetch()
-    console.log("Delete product : ", this.products$);
-    //C'est ici où je ne sais pas trop quoi faire
-    //this.productService.deleteProduct();
+    console.log("Delete product : ", id);
+    this.productService.deleteProduct(id); // je pass l'id au service
   }
 
 }
