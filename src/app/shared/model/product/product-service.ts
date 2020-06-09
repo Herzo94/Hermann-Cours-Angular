@@ -109,11 +109,20 @@ export class ProductService {
     }
   }
 
-  public deleteProduct(product: IProduct): Observable<IProduct> {
-      return this.http.delete<IProduct>(`http://localhost:3000/products/${product.id}`).pipe(
-        tap(product => console.log(`delete the product: ${product.id}`)),
-        tap(() => this.fetch())
+  public async deleteProduct(id: string): Promise<IProduct> {
+      return await this.http.delete<IProduct>(`http://localhost:3000/products/${id}`).pipe(
+        tap((product: IProduct) => console.log(`delete the product: ${product.id}`)),
+        tap(() => {
+          // ici je filtre tous les produit en retirant celui qui à été supprimé
+          const products = this._products.value.filter(p => p.id !== +id);
+          // ici j'assigne un nouveau "state" à la BehaviorSubject
+          this._products.next(products);
+        })
       )
+      .toPromise();
+      // la demande ne sera faite que 1 seul fois (request/response => fin) 
+      // j'utilise toPromise() pour convertir l'observable en promise 
+      // et ainsi pas besoin de faire de "subscribe" dans tes composent
   }
 
 
