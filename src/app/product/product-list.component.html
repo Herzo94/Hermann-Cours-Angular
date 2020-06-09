@@ -40,7 +40,7 @@
                     <app-star [(rating)]="product.starRating"></app-star>
                 </td>
                 <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
-                <button (click)="deleteProduct()">X</button>
+                <button (click)="deleteProduct(product.id)">X</button>
                 </td>
             </tr>
         </tbody>
