@@ -14,6 +14,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
 //import { AuthGuard } from './service/auth-service.service';
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
+import { ReservationViewComponent } from './reservation/reservation-view/reservation-view.component';
 
 const routes: Routes = [
   
@@ -26,7 +27,7 @@ const routes: Routes = [
     { path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent}
   ] },
-  { path: 'reservation', /*canActivate: [AuthGuard],*/ component: ReservationComponent },
+  { path: 'reservation', /*canActivate: [AuthGuard],*/ component: ReservationViewComponent },
   { path: 'commande', /*canActivate: [AuthGuard],*/ component: CommandeComponent },
   { path: 'about', /*canActivate: [AuthGuard],*/ component: AboutComponent },
   { path: 'contact', /*canActivate: [AuthGuard],*/ component: ContactComponent },
