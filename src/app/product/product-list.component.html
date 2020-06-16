@@ -23,24 +23,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of products | productSearch:searchTerm">  
+            <!-- <tr *ngFor="let product of products | productSearch:searchTerm">  -->
+                 <tr>  
         
                 <td>
-                    <a [routerLink]="product.id">#{{ product.id }}</a>
+                    <!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
                 </td>
-                <td *ngIf="displayImage">
+                <!--<td *ngIf="displayImage">
                     <img [src]="product.imageUrl" width="30px" />
                 </td>
                 <td>{{ product.productName }}</td>
                 <td>{{ product.productCode }}</td>
                 <td>{{ product.releaseDate }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
+                <td>{{ product.price }}</td> -->
                 <td>
-                    <app-star [(rating)]="product.starRating"></app-star>
+                    <!-- <app-star [(rating)]="product.starRating"></app-star> -->
                 </td>
                 <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
-                <button (click)="deleteProduct(product.id)">X</button>
+                <!--<button (click)="deleteProduct(product.id)">X</button> -->
+                <button>X</button> 
                 </td>
             </tr>
         </tbody>
@@ -50,7 +52,7 @@
     </ng-template>
 </div>
 <div>
-  <button (click)="refreshProducts()">Refresh products</button>
+  <!-- <button (click)="refreshProducts()">Refresh products</button> -->
 </div>
 
   <div> 

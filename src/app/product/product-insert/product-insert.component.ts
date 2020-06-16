@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { IProduct, Product } from './../../shared/model/product/product';
+//import { IProduct, Product } from './../../shared/model/product/product';
 
 import { Router } from '@angular/router';
-import { ProductService } from './../../shared/model/product/product-service';
+//import { ProductService } from './../../shared/model/product/product-service';
 
 const HTTP_URL_PATTERN: string =
   '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
@@ -24,7 +24,7 @@ export class ProductInsertComponent implements OnInit {
   public productForm: FormGroup
   private productSubscription: Subscription
 
-  constructor(fb: FormBuilder, route: ActivatedRoute, public productService: ProductService, private router: Router) { 
+  constructor(fb: FormBuilder, route: ActivatedRoute,/* public productService: ProductService,*/ private router: Router) { 
     this.productForm = fb.group({
       id: [null], // It is the same as `id: new FormControl(null)`
       productName: [
@@ -49,13 +49,13 @@ export class ProductInsertComponent implements OnInit {
     map(id => Number(id))                              // We cast the string from URL to a Number
   )
 
-  // The subscription below will be store in productSubscription to destroy it with the component
+  /*// The subscription below will be store in productSubscription to destroy it with the component
   this.productSubscription = currentId$.pipe(                   // The source is the current id
     switchMap(id => productService.getProductById$(id)), // We change the source with the product of current id
     filter(product => product instanceof Product)      // We filter to avoid null/undefined value
   ).subscribe( // We subscribe (think about unsubscribe)
     product => this.productForm.setValue(product)         // We update the form
-  ) 
+  ) */
   }
 
   
@@ -67,7 +67,7 @@ export class ProductInsertComponent implements OnInit {
     this.productSubscription.unsubscribe() // We unsubscribe from the observable
   }
 
-  public onInsert() {
+  /*public onInsert() {
     
     console.log('Form submitted')
 
@@ -79,6 +79,6 @@ export class ProductInsertComponent implements OnInit {
     }
 
     this.router.navigate(['/product']);
-  }
+  }*/
 
 }

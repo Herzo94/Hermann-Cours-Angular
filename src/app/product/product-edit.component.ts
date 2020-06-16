@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { IProduct, Product } from './../shared/model/product/product';
-import { ProductService } from './../shared/model/product/product-service';
+//import { IProduct, Product } from './../shared/model/product/product';
+//import { ProductService } from './../shared/model/product/product-service';
 import { Router } from '@angular/router';
 
 
@@ -24,7 +24,7 @@ export class ProductEditComponent implements OnInit {
   // This is used to store the subscription in order to clean it with the component
   private productSubscription: Subscription
 
-  constructor(fb: FormBuilder, route: ActivatedRoute, public productService: ProductService, private router: Router) {
+  constructor(fb: FormBuilder, route: ActivatedRoute, /*public productService: ProductService,*/ private router: Router) {
     // We create our Form for product 
     this.productForm = fb.group({
              id: [null], // It is the same as `id: new FormControl(null)`
@@ -51,12 +51,12 @@ export class ProductEditComponent implements OnInit {
     )
 
     // The subscription below will be store in productSubscription to destroy it with the component
-    this.productSubscription = currentId$.pipe(                   // The source is the current id
+    /*this.productSubscription = currentId$.pipe(                   // The source is the current id
       switchMap(id => productService.getProductById$(id)), // We change the source with the product of current id
       filter(product => product instanceof Product)      // We filter to avoid null/undefined value
     ).subscribe( // We subscribe (think about unsubscribe)
       product => this.productForm.setValue(product)         // We update the form
-    ) 
+    ) */
   }
 
   ngOnInit(): void {
@@ -67,7 +67,7 @@ export class ProductEditComponent implements OnInit {
     this.productSubscription.unsubscribe() // We unsubscribe from the observable
   }
 
-  public onSubmit() {
+  /*public onSubmit() {
     
     console.log('Form submitted')
 
@@ -79,5 +79,5 @@ export class ProductEditComponent implements OnInit {
     }
 
     this.router.navigate(['/product']);
-  }
+  }*/
 }

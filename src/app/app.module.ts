@@ -20,7 +20,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { StarComponent } from './shared/star/star.component';
+//import { StarComponent } from './shared/star/star.component';
 import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product/product-list.component';
 import { ProductDetailComponent } from './product/product-detail.component';
@@ -41,7 +41,14 @@ import { AuthService } from './service/auth-service.service';
 import { SingleReservationComponent } from './reservation/single-reservation/single-reservation.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
+import { IonicModule } from '@ionic/angular';
 
+// Firebase imports
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -50,7 +57,7 @@ import { ProductInsertComponent } from './product/product-insert/product-insert.
     SidenavComponent,
     AboutComponent,
     ContactComponent,
-    StarComponent,
+   // StarComponent,
     HomeComponent,
     ProductSearchPipe,
     ProductEditComponent,
@@ -75,6 +82,8 @@ import { ProductInsertComponent } from './product/product-insert/product-insert.
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     FormsModule,
     Ng2SearchPipeModule,
     MatSidenavModule,
@@ -84,6 +93,7 @@ import { ProductInsertComponent } from './product/product-insert/product-insert.
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    IonicModule.forRoot(),
   
   ],
   providers: [AuthService],

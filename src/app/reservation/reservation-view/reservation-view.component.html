@@ -1,34 +1,26 @@
-<h3>Reservation list</h3>
+<h3>Les réservations </h3>
+
+<div *ngIf="reservations.length === 0; else resaList">
+    loading...
+  </div>
 <div>
     <input type="text" name="search" [(ngModel)]="searchReservation" placeholder="Start searching">
 </div>
-<div *ngIf="reservations$ | async as reservations">
 
-    <table *ngIf="reservations.length > 0; else noReservationTemplate"
-        border="1"
-        cellspacing="0"
-        cellpadding="10">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Date</td> 
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let reservation of reservations | filter:searchReservation">  
-                <td>
-                    <a [routerLink]="reservation.id">#{{ reservation.id }}</a>
-                </td>
-                <td>{{ reservation.reservationName }}</td>
-                <td>{{ reservation.reservationDate }}</td>  
-            </tr>
-        </tbody>
-    </table>
-    <ng-template #noReservationTemplate>
-        <h4>No reservation available! You can save money 💵💵💵 ;-)</h4>
-    </ng-template>
-</div>
-<div>
-  <button (click)="refreshReservations()">Refresh reservation</button>
-</div>
+<ng-template #resaList>
+    <div *ngFor="let res of reservations">
+      <div>Nom : {{ res.name }}</div>
+      <div>
+        <button
+          mat-stroked-button
+          color="primary"
+        
+        >
+          +
+        </button>
+        {{ res.type }}
+      </div>
+      <br />
+    </div>
+  
+  </ng-template>

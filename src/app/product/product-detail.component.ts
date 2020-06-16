@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductService } from './../shared/model/product/product-service';
+//import { ProductService } from './../shared/model/product/product-service';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { Product } from './../shared/model/product/product';
+//import { Product } from './../shared/model/product/product';
 
 
 @Component({
@@ -13,11 +13,11 @@ import { Product } from './../shared/model/product/product';
 })
     
 export class ProductDetailComponent implements OnInit {
-  public product$: Observable<Product>
+  //public product$: Observable<Product>
 
   constructor(
     private router: Router,
-    private productService: ProductService,
+    //private productService: ProductService,
     private route: ActivatedRoute
   ) {
     
@@ -27,9 +27,9 @@ export class ProductDetailComponent implements OnInit {
       map(id => Number(id))
     )
 
-    this.product$ = currentId$.pipe(
+    /*this.product$ = currentId$.pipe(
       switchMap(id => productService.getProductById$(id))
-    )
+    )*/
   }
 
   ngOnInit(): void {

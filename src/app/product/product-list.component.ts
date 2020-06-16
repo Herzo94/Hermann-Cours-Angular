@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from './../shared/model/product/product';
-import { ProductService } from './../shared/model/product/product-service';
+
 
 @Component({
   selector: 'app-product-list',
-  templateUrl:  'product-list.component.html',
+  templateUrl: 'product-list.component.html',
   styleUrls: ['product-list.component.css']
 })
 
@@ -14,10 +13,10 @@ export class ProductListComponent implements OnInit {
   public searchTerm: string = ''
   public myBorderSize: number = 1
   public displayImage: boolean = true
-  public products$: Observable<Product[]>
+  public products$: Observable<any[]>
 
-  constructor(public productService: ProductService) {
-    this.products$ = productService.getProducts$()
+  constructor(/*public productService: ProductService*/) {
+    //this.products$ = productService.getProducts$()
   }
 
   ngOnInit(): void {
@@ -27,7 +26,7 @@ export class ProductListComponent implements OnInit {
    this.displayImage = !this.displayImage
   }
 
-  public refreshProducts() {
+  /*public refreshProducts() {
     this.productService.fetch()
   }
 
@@ -35,6 +34,6 @@ export class ProductListComponent implements OnInit {
     //this.productService.fetch()
     console.log("Delete product : ", id);
     this.productService.deleteProduct(id); // je pass l'id au service
-  }
+  }*/
 
 }

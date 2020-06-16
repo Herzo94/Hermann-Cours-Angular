@@ -17,7 +17,7 @@ export class ReservationComponent implements OnInit {
   searchReservation: string;
 
 
-  public reservations: Reservation[] = [
+  /*public reservations: Reservation[] = [
   {
     "id": 1,
     "reservationName": "Leaf Rake",
@@ -35,6 +35,6 @@ export class ReservationComponent implements OnInit {
     id : number
     reservationName : string
     reservationDate : string 
-  }
-
+  }*/
+}
 
