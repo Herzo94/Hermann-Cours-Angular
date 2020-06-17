@@ -1,11 +1,14 @@
+<div style="display: flex; justify-content: center;"></div>
 <h3>Product list</h3>
 <div>
     <label for="search">Search: </label>
     <input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products" />
 </div>
-<div *ngIf="products$ | async as products">
+  <!-- <div *ngIf="products$ | async as products">-->
+    <div>
     <button (click)="toggleImage()">Show/Hide images</button>
-    <table *ngIf="products.length > 0; else noProductTemplate"
+    <!-- <table *ngIf="products.length > 0; else noProductTemplate"-->
+        <table
         border="1"
         cellspacing="0"
         cellpadding="10">
@@ -14,8 +17,6 @@
                 <td>ID</td>
                 <td *ngIf="displayImage">Image</td>
                 <td>Name</td>
-                <td>Code</td>
-                <td>Release date</td>
                 <td>Description</td>
                 <td>Price</td>
                 <td>Rating</td>
@@ -24,19 +25,17 @@
         </thead>
         <tbody>
             <!-- <tr *ngFor="let product of products | productSearch:searchTerm">  -->
-                 <tr>  
-        
+                <tr *ngFor="let product of products"> 
+                   
                 <td>
                     <!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
                 </td>
-                <!--<td *ngIf="displayImage">
-                    <img [src]="product.imageUrl" width="30px" />
+                <td *ngIf="displayImage">
+                    <img [src]="product.image" width="30px" />
                 </td>
-                <td>{{ product.productName }}</td>
-                <td>{{ product.productCode }}</td>
-                <td>{{ product.releaseDate }}</td>
+                <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td> -->
+                <td>{{ product.prix }}</td> 
                 <td>
                     <!-- <app-star [(rating)]="product.starRating"></app-star> -->
                 </td>

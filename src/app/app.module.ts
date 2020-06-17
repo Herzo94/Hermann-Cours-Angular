@@ -22,9 +22,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 //import { StarComponent } from './shared/star/star.component';
 import { HomeComponent } from './home/home.component';
-import { ProductListComponent } from './product/product-list.component';
-import { ProductDetailComponent } from './product/product-detail.component';
-import { ProductEditComponent } from './product/product-edit.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductSearchPipe } from './product/product-search.pipe';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
@@ -33,13 +33,11 @@ import { FourOhFourComponent } from './four-oh-four-component/four-oh-four-compo
 import { AuthComponent } from './auth/auth.component';
 import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
-import { ReservationViewComponent } from './reservation/reservation-view/reservation-view.component';
 import { CommandeViewComponent } from './commande/commande-view/commande-view.component';
 import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
 import { CommandeEditComponent } from './commande/commande-edit/commande-edit.component';
 import { AuthService } from './service/auth-service.service';
 import { SingleReservationComponent } from './reservation/single-reservation/single-reservation.component';
-import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
 import { IonicModule } from '@ionic/angular';
 
@@ -49,6 +47,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { UserComponent } from './user/user.component';
+import { ModalComponent } from './modal/modal.component';
+import { ReservationInsertComponent } from './reservation/reservation-insert/reservation-insert.component';
+import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 
 @NgModule({
   declarations: [
@@ -70,13 +72,15 @@ import { environment } from 'src/environments/environment';
     AuthComponent,
     ReservationDetailComponent,
     ReservationEditComponent,
-    ReservationViewComponent,
     CommandeViewComponent,
     CommandeDetailComponent,
     CommandeEditComponent,
     SingleReservationComponent,
-    ReservationListComponent,
     ProductInsertComponent,
+    UserComponent,
+    ModalComponent,
+    ReservationInsertComponent,
+    ReservationListComponent,
   
   ],
   imports: [

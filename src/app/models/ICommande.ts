@@ -1,8 +1,9 @@
-export interface Reservation {
+export interface Commande {
     id?: number;
     name: string;
+    contenu: string;
     type: string; 
-    employe: string;
     date: string;
     heure: string;
+    statut: string;
   }

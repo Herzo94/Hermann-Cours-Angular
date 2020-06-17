@@ -1,30 +1,25 @@
 <div>
-    <!-- <form [formGroup]="productForm" (ngSubmit)="onInsert()">-->
-        <form>
+   <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()">      
+        
         <p>
             <label>
-                productName: <input id="productName" required type="text" formControlName="productName" />
+                productName: <input id="name" required type="text" formControlName="name" />
             </label>
         </p>
-        <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">
-            <div *ngIf="productForm.get('productName').errors.required">
+        <div *ngIf="productForm.get('name').invalid && (productForm.get('name').dirty || productForm.get('productName').touched)">
+            <div *ngIf="productForm.get('name').errors.required">
                 The name is required
             </div>
-            <div *ngIf="productForm.get('productName').errors.minlength as minlength">
+            <div *ngIf="productForm.get('name').errors.minlength as minlength">
                 The name should be at least {{ minlength.requiredLength }} (actual: {{ minlength.actualLength }})
             </div>
-            <div *ngIf="productForm.get('productName').errors.maxlength as maxlength">
+            <div *ngIf="productForm.get('name').errors.maxlength as maxlength">
                 The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
             </div>
         </div>
         <p>
             <label>
-                productCode: <input id="productCode" type="text" formControlName="productCode" />
-            </label>
-        </p>
-        <p>
-            <label>
-                releaseDate: <input id="releaseDate" type="text" formControlName="releaseDate" />
+                image: <input id="image" type="text" formControlName="imageUrl" />
             </label>
         </p>
         <p>
@@ -32,22 +27,18 @@
                 description: <input id="description" type="text" formControlName="description" />
             </label>
         </p>
+      
         <p>
             <label>
-                price: <input id="price" type="number" formControlName="price" />
+                prix: <input id="prix" type="number" formControlName="prix" />
             </label>
         </p>
         <p>
             <label>
-                starRating: <input id="starRating" type="number" formControlName="starRating" />
+                starRating: <input id="rating" type="number" formControlName="rating" />
             </label>
         </p>
-        <p>
-            <label>
-                imageUrl: <input id="imageUrl" type="text" formControlName="imageUrl" />
-            </label>
-        </p>
-
+     
         <button type="submit" [disabled]="productForm.invalid">Save the product!</button>
     </form>
 </div>

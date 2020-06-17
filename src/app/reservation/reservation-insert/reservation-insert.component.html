@@ -1,0 +1,42 @@
+<div>
+    <form [formGroup]="reservationForm" (ngSubmit)="onInsertReservation()">         
+         <p>
+             <label>
+                 ReservationName: <input id="name" required type="text" formControlName="name" />
+             </label>
+         </p>
+         <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('productName').touched)">
+             <div *ngIf="reservationForm.get('name').errors.required">
+                 The name is required
+             </div>
+             <div *ngIf="reservationForm.get('name').errors.minlength as minlength">
+                 The name should be at least {{ minlength.requiredLength }} (actual: {{ minlength.actualLength }})
+             </div>
+             <div *ngIf="reservationForm.get('name').errors.maxlength as maxlength">
+                 The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
+             </div>
+         </div>
+         <p>
+             <label>
+                type: <input id="type" type="text" formControlName="type" />
+             </label>
+         </p>
+         <p>
+             <label>
+                employe: <input id="employe" type="text" formControlName="employe" />
+             </label>
+         </p>
+       
+         <p>
+             <label>
+                date: <input id="date" type="text" formControlName="date" />
+             </label>
+         </p>
+         <p>
+             <label>
+                heure: <input id="heure" type="text" formControlName="heure" />
+             </label>
+         </p>
+         <button type="submit" [disabled]="reservationForm.invalid">Save the reservation!</button>
+     </form>
+ </div>

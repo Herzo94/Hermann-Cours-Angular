@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, from } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-//import { IProduct, Product } from './../../shared/model/product/product';
-
+import { IProduct } from '../../models/IProduct';
 import { Router } from '@angular/router';
-//import { ProductService } from './../../shared/model/product/product-service';
+import { ProductService } from './../../service/product.service';
+
 
 const HTTP_URL_PATTERN: string =
   '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
@@ -21,13 +21,14 @@ const HTTP_URL_PATTERN: string =
 })
 export class ProductInsertComponent implements OnInit {
 
-  public productForm: FormGroup
-  private productSubscription: Subscription
+  public productForm: FormGroup;
+  private productSubscription: Subscription;
+  message = '';
 
-  constructor(fb: FormBuilder, route: ActivatedRoute,/* public productService: ProductService,*/ private router: Router) { 
+  constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router) { 
     this.productForm = fb.group({
       id: [null], // It is the same as `id: new FormControl(null)`
-      productName: [
+      name: [
         '', // default value
         [
           Validators.required, 
@@ -35,31 +36,23 @@ export class ProductInsertComponent implements OnInit {
           Validators.maxLength(80)
          ] // All the validators to run against this field
        ],
-      productCode: ['', Validators.required,],
-      releaseDate: [new Date()],
+      image: ['', Validators.pattern(HTTP_URL_PATTERN)],
       description: [''],
       price: [1, Validators.min(1)],
       starRating: [0, [Validators.min(0), Validators.max(5)]],
-      imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)]
+      
  })  
-   // The observable below retrieve the URL and ensure that it is a valid number
-   let currentId$: Observable<number> = route.paramMap.pipe(   // The source is the router params
-    map(params => params.get('id')),                   // We extract the param named "id"
-    filter(id => id !== null),                       // We filter to get only if id is not null
-    map(id => Number(id))                              // We cast the string from URL to a Number
-  )
-
-  /*// The subscription below will be store in productSubscription to destroy it with the component
-  this.productSubscription = currentId$.pipe(                   // The source is the current id
-    switchMap(id => productService.getProductById$(id)), // We change the source with the product of current id
-    filter(product => product instanceof Product)      // We filter to avoid null/undefined value
-  ).subscribe( // We subscribe (think about unsubscribe)
-    product => this.productForm.setValue(product)         // We update the form
-  ) */
+  
   }
 
-  
   ngOnInit(): void {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      description: ['', Validators.required],
+      prix: ['', Validators.required],
+      rating: ['', Validators.required],
+    });
   }
 
   // This methods run when Angular destroy a component (cf component life cycle)
@@ -67,18 +60,21 @@ export class ProductInsertComponent implements OnInit {
     this.productSubscription.unsubscribe() // We unsubscribe from the observable
   }
 
-  /*public onInsert() {
-    
-    console.log('Form submitted')
-
-    if (this.productForm.valid) {
-      let data: IProduct = this.productForm.value
-      this.productService.save(data).subscribe(
-      product => console.log(`My product was saved ${product.id}`)
-      )
+  async onInsertProduct() {
+    console.log('this.suggestionForm.value', this.productForm.value);
+    const result = await this.productService.createProduct(
+      this.productForm.value.imageUrl,
+      this.productForm.value.name,
+      this.productForm.value.description,
+      this.productForm.value.prix,
+      this.productForm.value.rating
+    );
+    console.log('result', result);
+    if ((result as any).jT) {
+      this.message = `Restaurant créé avec l'id ${(result as any).id}`;
     }
-
-    this.router.navigate(['/product']);
-  }*/
+    this.router.navigate(['/product']); //Question problèeme de retour à la page list après insertion
+    this.productForm.reset();
+  }
 
 }

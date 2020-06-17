@@ -1,36 +1,47 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { Observable } from 'rxjs';
 
-import { ReservationService } from './../../service/reservation.service';
-import { Reservation } from './../../models/reservation';
+import { ReservationService } from 'src/app/service/reservation.service';
+import { IReservation } from '../../models/IReservation';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-reservation-list',
   templateUrl: './reservation-list.component.html',
-  styleUrls: ['./reservation-list.component.css'],
+  
 })
-export class ReservationListComponent implements OnInit,  OnDestroy {
-  private reservationCollection: AngularFirestoreCollection<Reservation>;
-  reservation$: Observable<Reservation[]>;
-  reservations: Reservation[] = [];
+
+export class ReservationListComponent implements OnInit, OnDestroy {
+  private reservationsCollection: AngularFirestoreCollection<IReservation>;
+  reservations$: Observable<IReservation[]>
+  reservations: IReservation[] = [];
   sub;
 
-  constructor(private res: ReservationService) { }
+  constructor(private reservationService: ReservationService) { }
 
   async ngOnInit() {
-    this.reservationCollection = await this.res.readReservation();
-    this.sub = this.reservationCollection.valueChanges({
+    console.log("CoucouResa");
+
+    this.reservationsCollection = await this.reservationService.readReservation();
+    console.log("reservationsCollection : ", this.reservationsCollection);
+    this.sub = this.reservationsCollection.valueChanges({
       idField: 'id',
+      
     }).subscribe(data => {
       this.reservations = data;
-      console.log("data : ", data);
+      console.log("data", data);
     })
+    
   }
+
+  searchReservation: string;
+
+  
+  /*public refreshReservations() {
+    //this.reservationService.fetch()
+  }*/
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

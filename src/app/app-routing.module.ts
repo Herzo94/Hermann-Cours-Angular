@@ -4,9 +4,9 @@ import { ProductComponent } from './product/product.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
-import { ProductListComponent } from './product/product-list.component';
-import { ProductDetailComponent } from './product/product-detail.component';
-import { ProductEditComponent } from './product/product-edit.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { FourOhFourComponent } from './four-oh-four-component/four-oh-four-component.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,7 +14,10 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
 //import { AuthGuard } from './service/auth-service.service';
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
-import { ReservationViewComponent } from './reservation/reservation-view/reservation-view.component';
+import { ReservationInsertComponent } from './reservation/reservation-insert/reservation-insert.component';
+import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
+import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
+import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 
 const routes: Routes = [
   
@@ -27,12 +30,18 @@ const routes: Routes = [
     { path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent}
   ] },
-  { path: 'reservation', /*canActivate: [AuthGuard],*/ component: ReservationViewComponent },
+  { path: 'reservation', /*canActivate: [AuthGuard],*/ component: ReservationComponent, children: [
+    { path: '', component: ReservationListComponent },
+    { path: 'insert', component: ReservationInsertComponent},
+    { path: ':id', component: ReservationDetailComponent },
+    { path: ':id/edit', component: ReservationEditComponent}
+  ]
+ },
   { path: 'commande', /*canActivate: [AuthGuard],*/ component: CommandeComponent },
   { path: 'about', /*canActivate: [AuthGuard],*/ component: AboutComponent },
   { path: 'contact', /*canActivate: [AuthGuard],*/ component: ContactComponent },
   { path: 'not-found', component: FourOhFourComponent },
-  { path: '**', redirectTo: 'not-found' }
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

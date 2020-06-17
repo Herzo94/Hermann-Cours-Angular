@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Reservation } from '../models/reservation';
+import { IReservation } from '../models/IReservation';
 
 @Pipe({
   name: 'reservationSearch'
 })
 export class ReservationSearchPipe implements PipeTransform {
 
-  transform(value: Reservation[], term: string = ''): Reservation[] {
+  transform(value: IReservation[], term: string = ''): IReservation[] {
     if (Array.isArray(value)) {
       return value.filter(reservation => {
         //const name = reservation.reservationName.toLowerCase()
