@@ -22,7 +22,6 @@ const HTTP_URL_PATTERN: string =
 export class ProductInsertComponent implements OnInit {
 
   public productForm: FormGroup;
-  private productSubscription: Subscription;
   message = '';
 
   constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router) { 
@@ -55,11 +54,6 @@ export class ProductInsertComponent implements OnInit {
     });
   }
 
-  // This methods run when Angular destroy a component (cf component life cycle)
-  ngOnDestroy(): void {
-    this.productSubscription.unsubscribe() // We unsubscribe from the observable
-  }
-
   async onInsertProduct() {
     console.log('this.suggestionForm.value', this.productForm.value);
     const result = await this.productService.createProduct(
@@ -73,8 +67,9 @@ export class ProductInsertComponent implements OnInit {
     if ((result as any).jT) {
       this.message = `Restaurant créé avec l'id ${(result as any).id}`;
     }
-    this.router.navigate(['/product']); //Question problèeme de retour à la page list après insertion
     this.productForm.reset();
+    this.router.navigate(['/product']);
+    
   }
 
 }

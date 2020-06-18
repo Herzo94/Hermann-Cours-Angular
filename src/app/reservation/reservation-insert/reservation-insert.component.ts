@@ -12,9 +12,9 @@ import { ReservationService } from './../../service/reservation.service';
 })
 export class ReservationInsertComponent implements OnInit {
 
-  ;
+  
   public reservationForm: FormGroup;
-  private reservationSubscription: Subscription;
+  //private reservationSubscription: Subscription;
   message = '';
 
   constructor(private fb: FormBuilder, route: ActivatedRoute, private reservationService : ReservationService, private router: Router) {
@@ -24,15 +24,46 @@ export class ReservationInsertComponent implements OnInit {
         '', // default value
         [
           Validators.required, 
-          Validators.minLength(4), 
-          Validators.maxLength(80)
+          Validators.minLength(3), 
+          Validators.maxLength(30)
          ] // All the validators to run against this field
        ],
     
-      type: [''],
-      employe: [''],
-      date: [''],
-      heure: [''],
+      type: [
+        '', // default value
+        [
+          Validators.required, 
+          Validators.minLength(4), 
+          Validators.maxLength(25)
+         ] // All the validators to run against this field
+       ],
+
+      employe: [
+        '', // default value
+        [
+          Validators.required, 
+          Validators.minLength(4), 
+          Validators.maxLength(20)
+         ] // All the validators to run against this field
+       ],
+
+      date: [
+        '', // default value
+        [
+          Validators.required, 
+          Validators.minLength(4), 
+          Validators.maxLength(15)
+         ] // All the validators to run against this field
+       ],
+
+      heure: [
+        '', // default value
+        [
+          Validators.required, 
+          Validators.minLength(3), 
+          Validators.maxLength(6)
+         ] // All the validators to run against this field
+       ],
 
       /*price: [1, Validators.min(1)],
       starRating: [0, [Validators.min(0), Validators.max(5)]],*/
@@ -51,9 +82,9 @@ export class ReservationInsertComponent implements OnInit {
   }
 
   // This methods run when Angular destroy a component (cf component life cycle)
-  ngOnDestroy(): void {
+  /*ngOnDestroy(): void {
     this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
-  }
+  }*/
 
   async onInsertReservation() {
     console.log('this.suggestionForm.value', this.reservationForm.value);
@@ -65,11 +96,9 @@ export class ReservationInsertComponent implements OnInit {
       this.reservationForm.value.heure
     );
     console.log('result', result);
-    if ((result as any).jT) {
-      this.message = `Réservation créé avec l'id ${(result as any).id}`;
-    }
+
     this.reservationForm.reset();
-    this.router.navigate(['/reservation']); //Question problème de retour à la page list après insertion
+    this.router.navigate(['/reservation']);
   }
 
 }

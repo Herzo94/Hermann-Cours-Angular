@@ -3,45 +3,44 @@
 <div>
     <label for="search">Search: </label>
     <input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products" />
+    <button (click)="toggleImage()">Show/Hide images</button>
+    <button type="button" [routerLink]="['/product', 'insert']">Insert the product</button> 
+      
 </div>
   <!-- <div *ngIf="products$ | async as products">-->
     <div>
-    <button (click)="toggleImage()">Show/Hide images</button>
-    <!-- <table *ngIf="products.length > 0; else noProductTemplate"-->
-        <table
+   
+    <table *ngIf="products.length > 0; else noProductTemplate"  
         border="1"
         cellspacing="0"
         cellpadding="10">
         <thead>
             <tr>
-                <td>ID</td>
                 <td *ngIf="displayImage">Image</td>
                 <td>Name</td>
                 <td>Description</td>
                 <td>Price</td>
                 <td>Rating</td>
-                <td>X</td>
+                <td>Modifier/Supprimer</td>
             </tr>
         </thead>
         <tbody>
-            <!-- <tr *ngFor="let product of products | productSearch:searchTerm">  -->
-                <tr *ngFor="let product of products"> 
+                <tr *ngFor="let product of products | productSearch:searchTerm">
                    
-                <td>
-                    <!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
-                </td>
+        
                 <td *ngIf="displayImage">
-                    <img [src]="product.image" width="30px" />
+                    <img [src]="product.image" width="100px" />
                 </td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.prix }}</td> 
-                <td>
-                    <!-- <app-star [(rating)]="product.starRating"></app-star> -->
-                </td>
+                <td>{{ product.prix }}</td>
+                <td>{{ product.rating }}</td> 
+                <!--<td>
+                     <app-star [(rating)]="product.starRating"></app-star> 
+                </td>-->
                 <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
                 <!--<button (click)="deleteProduct(product.id)">X</button> -->
-                <button>X</button> 
+                <button>X</button> <!-- Question modifier et supprimer-->
                 </td>
             </tr>
         </tbody>
@@ -53,7 +52,3 @@
 <div>
   <!-- <button (click)="refreshProducts()">Refresh products</button> -->
 </div>
-
-  <div> 
-     <button type="button" [routerLink]="['/product', 'insert']">Insert the product</button> 
-  </div> 

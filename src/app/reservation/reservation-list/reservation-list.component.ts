@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { IReservation } from '../../models/IReservation';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-list',
@@ -16,11 +17,12 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   reservations$: Observable<IReservation[]>
   reservations: IReservation[] = [];
   sub;
+  public searchTerm: string = '';
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService, private router : Router) { }
 
   async ngOnInit() {
-    console.log("CoucouResa");
+    console.log("CoucouResa"); 
 
     this.reservationsCollection = await this.reservationService.readReservation();
     console.log("reservationsCollection : ", this.reservationsCollection);
@@ -30,12 +32,19 @@ export class ReservationListComponent implements OnInit, OnDestroy {
     }).subscribe(data => {
       this.reservations = data;
       console.log("data", data);
-    })
-    
+    }) 
   }
 
   searchReservation: string;
 
+  public modifReservation(id){
+    this.router.navigate([`reservation/${id}/edit`])
+  }
+
+  public deleteReservation(id){
+    console.log("Hello Delete Resa");
+    this.reservationService.deleteReservation(id)
+  }
   
   /*public refreshReservations() {
     //this.reservationService.fetch()

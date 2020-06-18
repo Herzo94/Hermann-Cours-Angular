@@ -18,14 +18,14 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
-import { AboutComponent } from './about/about.component';
+import { ProfilComponent } from './profil/profil.component';
 import { ContactComponent } from './contact/contact.component';
 //import { StarComponent } from './shared/star/star.component';
-import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductSearchPipe } from './product/product-search.pipe';
+import { ReservationSearchPipe } from './reservation/reservation-search.pipe';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
@@ -51,22 +51,23 @@ import { UserComponent } from './user/user.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReservationInsertComponent } from './reservation/reservation-insert/reservation-insert.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
+import { PrestationComponent } from './prestation/prestation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     SidenavComponent,
-    AboutComponent,
+    ProfilComponent,
     ContactComponent,
    // StarComponent,
-    HomeComponent,
     ProductSearchPipe,
     ProductEditComponent,
     ProductListComponent,
     ProductDetailComponent,
     DashboardComponent,
     ReservationComponent,
+    ReservationSearchPipe,
     CommandeComponent,
     FourOhFourComponent,
     AuthComponent,
@@ -81,6 +82,7 @@ import { ReservationListComponent } from './reservation/reservation-list/reserva
     ModalComponent,
     ReservationInsertComponent,
     ReservationListComponent,
+    PrestationComponent,
   
   ],
   imports: [

@@ -13,13 +13,14 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
 export class ProductListComponent implements OnInit, OnDestroy {
   private productsCollection: AngularFirestoreCollection<IProduct>;
-  products$: Observable<IProduct[]>
+  products$: Observable<IProduct[]>;
   products: IProduct[] = [];
   sub;
 
-  public searchTerm: string = ''
-  public myBorderSize: number = 1
-  public displayImage: boolean = true
+  public productSearch: string = '';
+  public myBorderSize: number = 1;
+  public displayImage: boolean = true;
+  public searchTerm: string = '';
  
   
   constructor(private productService: ProductService) {

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductComponent } from './product/product.component';
-import { AboutComponent } from './about/about.component';
+import { ProfilComponent } from './profil/profil.component';
 import { ContactComponent } from './contact/contact.component';
-import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
@@ -12,17 +11,20 @@ import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
-//import { AuthGuard } from './service/auth-service.service';
+//import { AuthGuard } from './service/auth-service.service'; 
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
 import { ReservationInsertComponent } from './reservation/reservation-insert/reservation-insert.component';
 import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
+import { PrestationComponent } from './prestation/prestation.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   
   { path: 'auth', component: AuthComponent },
-  { path: 'home', /*canActivate: [AuthGuard],*/ component: HomeComponent },
+  { path: 'user', /*canActivate: [AuthGuard],*/ component: UserComponent },
+  { path: 'prestation', /*canActivate: [AuthGuard],*/ component: PrestationComponent },
   { path: 'dashboard', /*canActivate: [AuthGuard],*/ component: DashboardComponent },
   { path: 'product', /*canActivate: [AuthGuard],*/ component: ProductComponent, children: [
     { path: '', component: ProductListComponent },
@@ -38,10 +40,11 @@ const routes: Routes = [
   ]
  },
   { path: 'commande', /*canActivate: [AuthGuard],*/ component: CommandeComponent },
-  { path: 'about', /*canActivate: [AuthGuard],*/ component: AboutComponent },
+  { path: 'profil', /*canActivate: [AuthGuard],*/ component: ProfilComponent },
   { path: 'contact', /*canActivate: [AuthGuard],*/ component: ContactComponent },
   { path: 'not-found', component: FourOhFourComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'auth', pathMatch: 'full'},
+  { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

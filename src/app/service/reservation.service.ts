@@ -21,8 +21,19 @@ export class ReservationService {
       .add({ name, type, employe, date, heure });
   }
 
+  /*async getByIdReservation(){
+    const datas = await this.afs.collection<IReservation>('table-reservation', (ref) =>
+      ref.orderBy('date', 'asc')
+    );
+    datas.
+  }*/
+
+  getByIdReservation(id) {
+    return this.afs.doc(`table-reservation/${id}`).valueChanges();
+  }
+
   //Update reservation
-  updateReservationt(reservation) {
+  updateReservation(reservation) {
     return this.afs.doc(`table-reservation/${reservation.id}`).update({
       ...reservation,
       name: reservation.name,
@@ -33,11 +44,9 @@ export class ReservationService {
     });
   }
 
-  
-
-  deleteReservation(reservation) {
+  deleteReservation(id) { 
     return this.afs
-      .doc<IReservation>(`table-reservation/${reservation.id}`)
+      .doc<IReservation>(`table-reservation/${id}`)
       .delete();
   }
 }

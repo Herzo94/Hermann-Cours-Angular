@@ -1,4 +1,5 @@
 <div>
+    <!--ReponseQues : Quand je quitte la routte des insert problème il ne sait pas ou aller -> c'est du au Subscription regarde les commentaire dans product  -->
    <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()">      
         
         <p>
@@ -42,3 +43,4 @@
         <button type="submit" [disabled]="productForm.invalid">Save the product!</button>
     </form>
 </div>
+

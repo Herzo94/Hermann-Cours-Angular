@@ -14,21 +14,19 @@ export class SidenavComponent implements OnInit {
   //fillerNav = Array(50).fill(0).map((_, i) => `Nav Item ${i + 1}`);
   fillerNav=[
     {name:"Auth", route:"auth", icon:"login"},
-    {name:"Home", route:"home", icon:"home"},
     {name:"Dashboard", route:"dashboard", icon:"dashboard"},
-    {name:"Product", route:"product", icon:"category"},
-    {name:"Reservation", route:"reservation", icon:"book"},
-    {name:"Commande", route:"commande", icon:"redeem"},
-    {name:"About", route:"about", icon:"pages"},
+    {name:"User", route:"user", icon:"people"},
+    {name:"Prestations", route:"prestation", icon:"home"},
+    {name:"Reservations", route:"reservation", icon:"book"},
+    {name:"Commandes", route:"commande", icon:"redeem"},
+    {name:"Products", route:"product", icon:"category"},
+    {name:"Profil", route:"profil", icon:"pages"},
     {name:"Contact", route:"contact", icon:"people"}
   ]
 
-  fillerContent = Array(50).fill(0).map(() =>
+  fillerContent = Array(50).fill(0).map(() => 
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
+       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco`);
 
   private _mobileQueryListener: () => void;
 

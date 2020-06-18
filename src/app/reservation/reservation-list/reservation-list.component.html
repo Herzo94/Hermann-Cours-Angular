@@ -7,35 +7,39 @@
 
 <ng-template #resaList>
   <div>
-    <input type="text" name="search" [(ngModel)]="searchReservation" placeholder="Start searching">
-  </div>
+    <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
+   
+    <button type="button" [routerLink]="['/reservation', 'insert']">Insert the reservation</button> 
+    <!-- <a routerLink="page">Page</a> -->
+ </div> 
 
   <br>
-    <div *ngFor="let res of reservations">
-      <div>Nom : {{ res.name }}</div>
+    <div *ngFor="let res of reservations | reservationSearch:searchTerm">
+      <div>Nom : {{ res.name }}
+
+        <button
+        mat-stroked-button
+        color="primary"
+        (click)="modifReservation(res.id)"
+      > <!-- passer l'id dans les fonctions -->
+        Modifier
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="deleteReservation(res.id)"
+      >
+        Supprimer 
+      </button>
+      </div>
       <div>
         {{ res.type }}
-        <button
-          mat-stroked-button
-          color="primary"
-        >
-          Modifier
-        </button>
-
-        <button
-          mat-stroked-button
-          color="primary"
-        >
-          Supprimer
-        </button>
       </div>
+      <div>Employée : {{ res.employe }}</div>
+      <div>Heure : {{ res.heure }}</div>
+      <div>Date : {{ res.date }}</div>
       <br />
     </div>
-
-    <div> 
-      <button type="button" [routerLink]="['/reservation', 'insert']">Insert the reservation</button> 
-   </div> 
-  
   </ng-template>
 
   <router-outlet></router-outlet>
