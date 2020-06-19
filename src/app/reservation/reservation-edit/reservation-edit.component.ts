@@ -72,7 +72,9 @@ export class ReservationEditComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.params.id;
     console.log('id : ', id);
-    const resa: any = await this.reservationService.getByIdReservation(id).pipe(first()) //demander à samir pk l'interface IReservation ne fonctionne pas donc j'ai mis any 
+
+    //Question pour Samir ci-dessous :  Pourquoi l'interface IReservation ne fonctionne pas donc j'ai mis any provisoirement 
+    const resa: any = await this.reservationService.getByIdReservation(id).pipe(first())
     .toPromise().catch(err=>err) //chercher dans le service
     console.log(resa);
     resa.id = id;
@@ -88,7 +90,5 @@ export class ReservationEditComponent implements OnInit {
     this.router.navigate(['/reservation']);
     console.log(this.reservationForm);
   }
-
-  
 
 }

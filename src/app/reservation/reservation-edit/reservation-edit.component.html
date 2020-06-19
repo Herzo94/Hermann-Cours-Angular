@@ -2,7 +2,7 @@
     <form [formGroup]="reservationForm" (ngSubmit)="onUpdateReservation()">         
          <p>
              <label>
-                 ReservationName: <input id="name" required type="text" formControlName="name" />
+                 name: <input id="name" required type="text" formControlName="name" />
              </label>
          </p>
          <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('name').touched)">
