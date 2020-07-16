@@ -42,9 +42,9 @@ export class ProductService {
 
   //Suppression avec modal ou juste en cliquant sur la croix
   
-  deleteProduct(product) {
+  deleteProduct(id) {
     return this.afs
-      .doc<IProduct>(`table-product/${product.id}`)
+      .doc<IProduct>(`table-product/${id}`)
       .delete();
   }
 }

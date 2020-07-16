@@ -32,7 +32,6 @@ export class AuthService {
         );
       }
     );*/
-
   }
 
   async login(email, password){
@@ -50,7 +49,6 @@ export class AuthService {
     else{
       this.isAuth = false;
       this.isAdmin = false;
-    
     }
     return user;
   }

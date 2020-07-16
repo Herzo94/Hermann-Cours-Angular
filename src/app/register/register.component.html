@@ -5,7 +5,7 @@
         <mat-label>Mot de passe</mat-label>
         <input type="password" matInput formControlName="password" placeholder="mot de passe">
       <br>
-      <button mat-button type="submit">créer un compte</button>
+      <button mat-button type="submit">Créer un compte</button>
 </form>
 <br>
 <br>
@@ -17,9 +17,10 @@
         <mat-label>Mot de passe</mat-label>
         <input type="password" matInput formControlName="password" placeholder="mot de passe">
       <br>
-      <button mat-button type="submit">se connecter</button> {{ message }}
+      <button mat-button type="submit">Se connecter</button> {{ message }}
 </form>
 
+<!-- 
 Register form is valid: {{ registerForm.valid }} <br>  
 Login form is valid: {{ loginForm.valid }} <br>  
 
@@ -29,7 +30,7 @@ Login form is valid: {{ loginForm.valid }} <br>
 {{ user | json }}
 <br><br>
 Bonjour {{ userProfil.displayName }}
-
+-->
 <!-- <ul class="nav navbar-nav navbar-right">
     <li routerLinkActive="active" *ngIf="!isAuth">
       <a>Créer un compte</a>

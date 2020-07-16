@@ -40,7 +40,11 @@
                 </td>-->
                 <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
                 <!--<button (click)="deleteProduct(product.id)">X</button> -->
-                <button>X</button> <!-- Question modifier et supprimer-->
+                <button
+                (click)="deleteProduct(product.id)"
+                >
+                X
+            </button> <!-- Question modifier et supprimer-->
                 </td>
             </tr>
         </tbody>
