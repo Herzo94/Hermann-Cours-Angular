@@ -31,7 +31,7 @@ export class SidenavComponent implements OnInit {
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco`);
 
-  isAuth : boolean = false;
+  isAuth = false;
 
   private _mobileQueryListener: () => void;
 

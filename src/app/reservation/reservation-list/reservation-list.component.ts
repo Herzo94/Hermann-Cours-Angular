@@ -5,6 +5,8 @@ import { ReservationService } from 'src/app/service/reservation.service';
 import { IReservation } from '../../models/IReservation';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth-service.service';
+
 
 @Component({
   selector: 'app-reservation-list',
@@ -19,7 +21,7 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   sub;
   public searchTerm: string = '';
 
-  constructor(private reservationService: ReservationService, private router : Router) { }
+  constructor(private reservationService: ReservationService, private router : Router, public authService : AuthService) { }
 
   async ngOnInit() {
     console.log("CoucouResa"); 
