@@ -73,7 +73,7 @@ export class ReservationEditComponent implements OnInit {
     const id = this.route.snapshot.params.id;
     console.log('id : ', id);
 
-    //Question pour Samir ci-dessous :  Pourquoi l'interface IReservation ne fonctionne pas donc j'ai mis any provisoirement 
+    //Question pour Samir ci-dessous :  Pourquoi l'interface IReservation ne fonctionne pas donc j'ai mis any provisoirement -> Regardé la réponse dans l'email
     const resa: any = await this.reservationService.getByIdReservation(id).pipe(first())
     .toPromise().catch(err=>err) //chercher dans le service
     console.log(resa);

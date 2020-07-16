@@ -1,0 +1,7 @@
+<div *ngIf="!(user$ |async)">
+    loading...
+</div>
+
+<div *ngIf="(user$ |async)">
+    {{ user$ | async | json}}
+</div>

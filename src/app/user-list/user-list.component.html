@@ -1,0 +1,11 @@
+<h3>Tous les utilisateurs</h3>
+
+<div *ngIf="(users$ | async)">
+    <div *ngFor="let user of users$ | async">
+        <a [routerLink]="['/user-details', user.id]">{{user.email}}</a>
+    </div>
+</div>
+
+<div *ngIf="!(users$ | async)">
+    loading...
+</div>

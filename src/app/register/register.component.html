@@ -1,0 +1,46 @@
+<form [formGroup]="registerForm" class="example-form" (ngSubmit)="register()">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="email">
+    <br>
+        <mat-label>Mot de passe</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="mot de passe">
+      <br>
+      <button mat-button type="submit">créer un compte</button>
+</form>
+<br>
+<br>
+<br>
+<form [formGroup]="loginForm" class="example-form" (ngSubmit)="login()">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="email">
+    <br>
+        <mat-label>Mot de passe</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="mot de passe">
+      <br>
+      <button mat-button type="submit">se connecter</button> {{ message }}
+</form>
+
+Register form is valid: {{ registerForm.valid }} <br>  
+Login form is valid: {{ loginForm.valid }} <br>  
+
+<hr>
+{{ result | json }}
+<hr>
+{{ user | json }}
+<br><br>
+Bonjour {{ userProfil.displayName }}
+
+<!-- <ul class="nav navbar-nav navbar-right">
+    <li routerLinkActive="active" *ngIf="!isAuth">
+      <a>Créer un compte</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="!isAuth">
+      <a (click)="onActif()">Connexion</a>
+    </li>
+    <li>
+      <a (click)="onSignOut()"
+         style="cursor:pointer"
+         *ngIf="isAuth">Déconnexion</a>
+    </li>
+  </ul>
+-->

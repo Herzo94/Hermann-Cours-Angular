@@ -9,6 +9,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+//import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+//import { MatFormField } from '@angular/material/form-field';
 //Components
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
@@ -16,7 +20,6 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 // Search Module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
 
 import { ProfilComponent } from './profil/profil.component';
 import { ContactComponent } from './contact/contact.component';
@@ -46,12 +49,15 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { environment } from 'src/environments/environment';
-import { UserComponent } from './user/user.component';
 import { ModalComponent } from './modal/modal.component';
 import { ReservationInsertComponent } from './reservation/reservation-insert/reservation-insert.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 import { PrestationComponent } from './prestation/prestation.component';
+import { RegisterComponent } from './register/register.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -78,11 +84,13 @@ import { PrestationComponent } from './prestation/prestation.component';
     CommandeEditComponent,
     SingleReservationComponent,
     ProductInsertComponent,
-    UserComponent,
     ModalComponent,
     ReservationInsertComponent,
     ReservationListComponent,
     PrestationComponent,
+    RegisterComponent,
+    UserDetailsComponent,
+    UserListComponent,
   
   ],
   imports: [
@@ -90,12 +98,18 @@ import { PrestationComponent } from './prestation/prestation.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
     FormsModule,
     Ng2SearchPipeModule,
     MatSidenavModule,
+    //MatFormFieldModule,
+    MatInputModule,
     MatListModule,
     MatIconModule,
     MatToolbarModule,
+    //MatFormField,
+ 
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,

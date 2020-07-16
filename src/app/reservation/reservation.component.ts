@@ -13,10 +13,6 @@ export class ReservationComponent implements OnInit {
 
 }
 
-
-
-
-
   
   /*public refreshReservations() {
     //this.reservationService.fetch()
