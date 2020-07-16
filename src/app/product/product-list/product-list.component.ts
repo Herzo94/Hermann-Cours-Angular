@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from './../../service/product.service';
 import { IProduct } from '../../models/IProduct';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/service/auth-service.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   public searchTerm: string = '';
  
   
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, public authService : AuthService) {
     //this.products$ = productService.getProducts$()
   }
 

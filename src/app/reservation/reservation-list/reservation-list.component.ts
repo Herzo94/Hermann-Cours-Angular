@@ -24,16 +24,13 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   constructor(private reservationService: ReservationService, private router : Router, public authService : AuthService) { }
 
   async ngOnInit() {
-    console.log("CoucouResa"); 
-
+    
     this.reservationsCollection = await this.reservationService.readReservation();
-    console.log("reservationsCollection : ", this.reservationsCollection);
     this.sub = this.reservationsCollection.valueChanges({
       idField: 'id',
       
     }).subscribe(data => {
       this.reservations = data;
-      console.log("data", data);
     }) 
   }
 
@@ -44,7 +41,6 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   }
 
   public deleteReservation(id){
-    console.log("Hello Delete Resa");
     this.reservationService.deleteReservation(id)
   }
   

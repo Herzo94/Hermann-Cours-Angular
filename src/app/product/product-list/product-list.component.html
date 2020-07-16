@@ -21,7 +21,9 @@
                 <td>Description</td>
                 <td>Price</td>
                 <td>Rating</td>
-                <td>Modifier/Supprimer</td>
+                <td
+                *ngIf="authService.isAdmin"
+                >Supprimer</td>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +43,7 @@
                 <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
                 <!--<button (click)="deleteProduct(product.id)">X</button> -->
                 <button
+                *ngIf="authService.isAdmin"
                 (click)="deleteProduct(product.id)"
                 >
                 X

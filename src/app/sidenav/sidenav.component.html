@@ -1,7 +1,11 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
 	<mat-toolbar color="primary" class="example-toolbar">
 	  <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-	  <h1 class="example-app-name">ApplicationName</h1>
+	  <h1 class="example-app-name">ApplicationName  </h1>
+
+	  <h2 class="example-app-name"
+	  *ngIf="authService.isAdmin"
+	  >COMPTE ADMIN</h2>
 	</mat-toolbar>
   
 	<mat-sidenav-container class="example-sidenav-container"
@@ -23,7 +27,6 @@
 	  </mat-sidenav>
   
 	  <mat-sidenav-content>
-		
 		<router-outlet></router-outlet>
 		<!-- {{ fillerContent }} -->
 	  </mat-sidenav-content>
