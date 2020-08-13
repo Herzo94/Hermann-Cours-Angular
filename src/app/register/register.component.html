@@ -1,23 +1,53 @@
-<form [formGroup]="registerForm" class="example-form" (ngSubmit)="register()">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="email">
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div id="centerElements">
+<!-- 
+Dois-je insérer la balise form dans les balises ionic ?
+Comment afficher la sidenav ?
+-->
+<!-- Register
+<h2>Register</h2>
+<ion-input placeholder="Username"></ion-input>
+<ion-input placeholder="Password"></ion-input>
+<ion-button color="primary">Register</ion-button>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>-->
+<!-- Login 
+<h2>Login</h2>
+<ion-input placeholder="Enter your username"></ion-input>
+<ion-input placeholder="Enter your password"></ion-input>
+<ion-button color="primary">Login</ion-button>-->
+
+ <form [formGroup]="registerForm" class="example-form" (ngSubmit)="register()">
+      <ion-label>Email</ion-label>
+      <ion-input formControlName="email" placeholder="email"></ion-input>
     <br>
-        <mat-label>Mot de passe</mat-label>
-        <input type="password" matInput formControlName="password" placeholder="mot de passe">
+        <ion-label>Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
       <br>
-      <button mat-button type="submit">Créer un compte</button>
+      <ion-button type="submit">Créer un compte</ion-button>
 </form>
 <br>
 <br>
 <br>
 <form [formGroup]="loginForm" class="example-form" (ngSubmit)="login()">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="email">
+      <ion-label>Email</ion-label>
+      <ion-input formControlName="email" placeholder="email"></ion-input>
     <br>
-        <mat-label>Mot de passe</mat-label>
-        <input type="password" matInput formControlName="password" placeholder="mot de passe">
+        <ion-label>Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
       <br>
-      <button mat-button type="submit">Se connecter</button> {{ message }}
+      <ion-button mat-button type="submit">Se connecter</ion-button> {{ message }}
 </form>
 
 <!-- 
@@ -45,3 +75,5 @@ Bonjour {{ userProfil.displayName }}
     </li>
   </ul>
 -->
+</div>
+</ion-content>

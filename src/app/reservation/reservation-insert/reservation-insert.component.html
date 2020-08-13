@@ -5,7 +5,7 @@
                  ReservationName: <input id="name" required type="text" formControlName="name" />
              </label>
          </p>
-         <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('productName').touched)">
+         <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('name').touched)">
              <div *ngIf="reservationForm.get('name').errors.required">
                  The name is required
              </div>

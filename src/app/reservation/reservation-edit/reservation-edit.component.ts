@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { first } from 'rxjs/operators';
 import { IReservation } from 'src/app/models/IReservation';
+import { ModalController } from '@ionic/angular';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-reservation-edit',
@@ -15,7 +17,7 @@ export class ReservationEditComponent implements OnInit {
   public reservationForm: FormGroup;
   message = '';
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private reservationService : ReservationService, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private reservationService : ReservationService, private router: Router, public modalController: ModalController) {
     this.reservationForm = fb.group({
       id: [null], // It is the same as `id: new FormControl(null)`
       name: [
@@ -69,6 +71,14 @@ export class ReservationEditComponent implements OnInit {
  }) 
    }
 
+   async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.params.id;
     console.log('id : ', id);
@@ -90,5 +100,4 @@ export class ReservationEditComponent implements OnInit {
     this.router.navigate(['/reservation']);
     console.log(this.reservationForm);
   }
-
 }

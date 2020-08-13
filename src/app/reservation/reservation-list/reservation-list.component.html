@@ -1,4 +1,15 @@
-<app-reservation></app-reservation>
+
+<ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Les réservations</ion-title>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+
 <h3>Les réservations </h3>
 
 <div *ngIf="reservations.length === 0; else resaList">
@@ -9,7 +20,7 @@
   <div>
     <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
    
-    <button *ngIf="authService.isAdmin" type="button" [routerLink]="['/reservation', 'insert']">Insert the reservation</button> 
+    <button *ngIf="authService.isAdmin" type="button" (click)="insertReservation()">Insert the reservation</button> 
     <!-- <a routerLink="page">Page</a> -->
  </div> 
 
@@ -45,5 +56,4 @@
       <br />
     </div>
   </ng-template>
-
-  <router-outlet></router-outlet>
+</ion-content>

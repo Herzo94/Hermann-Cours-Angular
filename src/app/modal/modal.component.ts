@@ -1,11 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ProductService } from './../service/product.service';
-
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { IReservation } from '../models/IReservation';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal',
@@ -14,10 +10,12 @@ import {
 })
 export class ModalComponent implements OnInit {
 // Question comment faire si je veux utiliser le modal pour les réservations et pas que pour les produits ?
-  constructor(
+@Input() data: IReservation;  
+constructor(
     private ps: ProductService,
-    public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data
+    //public dialogRef: MatDialogRef<any>,
+    //@Inject(MAT_DIALOG_DATA) public data
+    public modalController: ModalController,
   ) 
   
   {}
@@ -26,13 +24,13 @@ export class ModalComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close('nope');
+    this.modalController.dismiss('nope');
   }
 
   async delete() {
     console.log('TODO delete ', this.data);
     const result = await this.ps.deleteProduct(this.data);
-    this.dialogRef.close(result);
+    this.modalController.dismiss(result);
   }
 
 }

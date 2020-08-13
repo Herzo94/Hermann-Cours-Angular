@@ -1,12 +1,14 @@
-<h1 mat-dialog-title>Supprimer {{ data.name }}</h1>
-    <div mat-dialog-content>
+<ion-content class="ion-padding">
+<h1>Supprimer {{ data.name }}</h1>
+    <div>
       Etes-vous bien sûr de vouloir supprimer {{ data.name }} ?
     </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">
+    <div>
+      <ion-button (click)="onNoClick()">
         Non merci
-      </button>
-      <button mat-button cdkFocusInitial (click)="delete()">
+      </ion-button>
+      <ion-button cdkFocusInitial (click)="delete()">
         Oui, supprimer
-      </button>
+      </ion-button>
     </div>
+  </ion-content>

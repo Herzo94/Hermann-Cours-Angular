@@ -1,4 +1,16 @@
-<div>
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+      <ion-menu-button slot="start"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        Les edit reservations
+    </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+  <div id="centerElements">
+
     <form [formGroup]="reservationForm" (ngSubmit)="onUpdateReservation()">         
          <p>
              <label>
@@ -41,3 +53,4 @@
          <!-- Question pourquoi le bouton n'est plus disabled quel attribut de validation utilisé -->
      </form>
  </div>
+  </ion-content>

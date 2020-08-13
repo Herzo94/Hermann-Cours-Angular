@@ -40,7 +40,7 @@ export class AuthService {
       this.isAuth = true;
       console.log('email : ', email)
       console.log('ETAT PAS DANS CONDITION ADMIN : ', this.isAdmin)
-      if(email == 'admin@gmail.com'){ 
+      if(email === 'admin@gmail.com'){ 
          this.isAdmin = true;
          console.log('email ADMIN : ', email)
          console.log('STATE ADMIN : ', this.isAdmin)

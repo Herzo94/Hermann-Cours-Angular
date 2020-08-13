@@ -38,7 +38,7 @@ const routes: Routes = [
     { path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent}
   ] },
-  { path: 'reservation', canActivate: [AuthGuardService] , component: ReservationComponent, children: [
+  { path: 'reservation', canActivate: [AuthGuardService] , /*component: ReservationComponent,*/ children: [
     { path: '', component: ReservationListComponent },
     { path: 'insert', component: ReservationInsertComponent},
     { path: ':id', component: ReservationDetailComponent },

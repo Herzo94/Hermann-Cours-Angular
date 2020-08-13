@@ -86,8 +86,7 @@ export class ReservationInsertComponent implements OnInit {
     this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
   }*/
 
-  async onInsertReservation() {
-    console.log('this.suggestionForm.value', this.reservationForm.value);
+  async onInsertReservation() { //remplace le .then
     const result = await this.reservationService.createReservation(
       this.reservationForm.value.name,
       this.reservationForm.value.type,

@@ -6,6 +6,9 @@ import { IReservation } from '../../models/IReservation';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { ModalController } from '@ionic/angular';
+import { ModalComponent } from 'src/app/modal/modal.component';
+import { ReservationInsertComponent } from '../reservation-insert/reservation-insert.component';
 
 
 @Component({
@@ -21,7 +24,7 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   sub;
   public searchTerm: string = '';
 
-  constructor(private reservationService: ReservationService, private router : Router, public authService : AuthService) { }
+  constructor(private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
 
   async ngOnInit() {
     
@@ -36,9 +39,28 @@ export class ReservationListComponent implements OnInit, OnDestroy {
 
   searchReservation: string;
 
-  public modifReservation(id){
-    this.router.navigate([`reservation/${id}/edit`])
+  public async insertReservation(){
+    //this.router.navigate([`reservation/${id}/edit`])
+  
+      const modal = await this.modalController.create({
+        component: ReservationInsertComponent,
+        cssClass: 'my-custom-class',
+      });
+      return await modal.present();  
   }
+
+  public async modifReservation(id){
+    //this.router.navigate([`reservation/${id}/edit`])
+  
+      const modal = await this.modalController.create({
+        component: ModalComponent,
+        cssClass: 'my-custom-class',
+        componentProps: {
+          data: this.reservations.find( element => element.id === id )
+        }
+      });
+      return await modal.present();  
+  }   
 
   public deleteReservation(id){
     this.reservationService.deleteReservation(id)
