@@ -1,54 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons>
-    <ion-menu-button slot="start"></ion-menu-button>
-  </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
 <div id="centerElements">
-<!-- 
-Dois-je insérer la balise form dans les balises ionic ?
-Comment afficher la sidenav ?
--->
-<!-- Register
-<h2>Register</h2>
-<ion-input placeholder="Username"></ion-input>
-<ion-input placeholder="Password"></ion-input>
-<ion-button color="primary">Register</ion-button>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>-->
-<!-- Login 
-<h2>Login</h2>
-<ion-input placeholder="Enter your username"></ion-input>
-<ion-input placeholder="Enter your password"></ion-input>
-<ion-button color="primary">Login</ion-button>-->
-
+  <br>
+  <h1>S'enregistrer</h1>
+  <br>
+  <br>
  <form [formGroup]="registerForm" class="example-form" (ngSubmit)="register()">
       <ion-label>Email</ion-label>
       <ion-input formControlName="email" placeholder="email"></ion-input>
     <br>
-        <ion-label>Mot de passe</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
+      <ion-label>Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
       <br>
       <ion-button type="submit">Créer un compte</ion-button>
 </form>
-<br>
-<br>
-<br>
-<form [formGroup]="loginForm" class="example-form" (ngSubmit)="login()">
-      <ion-label>Email</ion-label>
-      <ion-input formControlName="email" placeholder="email"></ion-input>
-    <br>
-        <ion-label>Mot de passe</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
-      <br>
-      <ion-button mat-button type="submit">Se connecter</ion-button> {{ message }}
-</form>
+<p>Vous possédez déjà un compte ?  <a routerLink="/login">cliquez ici</a></p>
 
 <!-- 
 Register form is valid: {{ registerForm.valid }} <br>  
@@ -76,4 +40,3 @@ Bonjour {{ userProfil.displayName }}
   </ul>
 -->
 </div>
-</ion-content>

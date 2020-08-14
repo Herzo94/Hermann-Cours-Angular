@@ -1,3 +1,12 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Insérer un produit</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
 <div>
     <!--ReponseQues : Quand je quitte la routte des insert problème il ne sait pas ou aller -> c'est du au Subscription regarde les commentaire dans product  -->
    <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()">      
@@ -43,4 +52,4 @@
         <button type="submit" [disabled]="productForm.invalid">Save the product!</button>
     </form>
 </div>
-
+</ion-content>

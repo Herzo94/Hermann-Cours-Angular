@@ -1,7 +1,11 @@
 <ion-menu side="start" menuId="first" contentId="main">
 	<ion-header>
 	  <ion-toolbar color="primary">
-		<ion-title>Menu</ion-title>
+		<ion-title>Menu
+	   <span class="example-app-name"
+	  *ngIf="authService.isAdmin"
+	  >[COMPTE ADMIN]</span>
+		</ion-title>
 	  </ion-toolbar>
 	</ion-header>
 	<ion-content>
@@ -13,19 +17,13 @@
 			<ion-icon [name]="nav.icon"></ion-icon> 
 			 {{nav.name}}
 		</ion-item>
-		<!-- <ion-item>Register/Login</ion-item>
-		<ion-item>Dashboard</ion-item>
-		<ion-item>User</ion-item>
-		<ion-item>Prestations</ion-item>
-		<ion-item>Reservations</ion-item>
-		<ion-item>Commandes</ion-item>
-		<ion-item>Products</ion-item>
-		<ion-item>Profil</ion-item>
-		<ion-item>Contact</ion-item> -->
+		<ion-item (click)="authService.signOut()" [hidden]="!authService.isAuth">
+			Sign Out
+		</ion-item>
+		<!-- Highlitable ? mettre en évidence le sign out -->
 	  </ion-list>
 	</ion-content>
   </ion-menu>
-
   <ion-router-outlet id="main"></ion-router-outlet>
 
 <!-- <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">

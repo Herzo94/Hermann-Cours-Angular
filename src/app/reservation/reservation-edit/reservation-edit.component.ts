@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationService } from 'src/app/service/reservation.service';
@@ -6,6 +6,8 @@ import { first } from 'rxjs/operators';
 import { IReservation } from 'src/app/models/IReservation';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from '../../modal/modal.component';
+import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins;
 
 @Component({
   selector: 'app-reservation-edit',
@@ -14,8 +16,10 @@ import { ModalComponent } from '../../modal/modal.component';
 })
 export class ReservationEditComponent implements OnInit {
 
+  @Input() data: IReservation;  
   public reservationForm: FormGroup;
   message = '';
+  
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private reservationService : ReservationService, private router: Router, public modalController: ModalController) {
     this.reservationForm = fb.group({
@@ -70,7 +74,7 @@ export class ReservationEditComponent implements OnInit {
       
  }) 
    }
-
+  /*note*/ 
    async presentModal() {
     const modal = await this.modalController.create({
       component: ModalComponent,
@@ -80,24 +84,21 @@ export class ReservationEditComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const id = this.route.snapshot.params.id;
-    console.log('id : ', id);
-
-    //Question pour Samir ci-dessous :  Pourquoi l'interface IReservation ne fonctionne pas donc j'ai mis any provisoirement -> Regardé la réponse dans l'email
-    const resa: any = await this.reservationService.getByIdReservation(id).pipe(first())
-    .toPromise().catch(err=>err) //chercher dans le service
-    console.log(resa);
-    resa.id = id;
-    this.reservationForm.patchValue(resa); //met le contenu dans le formulaire
+    this.reservationForm.patchValue(this.data); //met le contenu dans le formulaire
   }
-
 
   async onUpdateReservation() {
     console.log('this.suggestionForm.value', this.reservationForm.value);
     const result = await this.reservationService.updateReservation(this.reservationForm.value as any);
     console.log('result', result);
-    this.reservationForm.reset();
-    this.router.navigate(['/reservation']);
+    this.modalController.dismiss();
     console.log(this.reservationForm);
+
+    await Toast.show({ //Problème -> Stackoverflow
+      text: 'Mise à jour effectué avec succès!'
+    });
+    console.log("Toast ?");
   }
+
+  
 }

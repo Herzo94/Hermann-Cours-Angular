@@ -9,10 +9,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-//import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-//import { MatFormField } from '@angular/material/form-field';
 //Components
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
@@ -23,7 +21,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ProfilComponent } from './profil/profil.component';
 import { ContactComponent } from './contact/contact.component';
-//import { StarComponent } from './shared/star/star.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
@@ -56,8 +53,7 @@ import { ReservationInsertComponent } from './reservation/reservation-insert/res
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 import { PrestationComponent } from './prestation/prestation.component';
 import { RegisterComponent } from './register/register.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +62,6 @@ import { UserListComponent } from './user-list/user-list.component';
     SidenavComponent,
     ProfilComponent,
     ContactComponent,
-   // StarComponent,
     ProductSearchPipe,
     ProductEditComponent,
     ProductListComponent,
@@ -89,8 +84,7 @@ import { UserListComponent } from './user-list/user-list.component';
     ReservationListComponent,
     PrestationComponent,
     RegisterComponent,
-    UserDetailsComponent,
-    UserListComponent,
+    LoginComponent,
   
   ],
   imports: [
@@ -103,13 +97,10 @@ import { UserListComponent } from './user-list/user-list.component';
     FormsModule,
     Ng2SearchPipeModule,
     MatSidenavModule,
-    //MatFormFieldModule,
     MatInputModule,
     MatListModule,
     MatIconModule,
     MatToolbarModule,
-    //MatFormField,
- 
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,

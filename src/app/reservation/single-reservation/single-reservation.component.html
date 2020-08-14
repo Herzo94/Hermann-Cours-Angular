@@ -1,3 +1,12 @@
-<h2>{{ name }}</h2>
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>La réservation {{ name }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
 <p>Date : {{ date }}</p>
 <a routerLink="/reservation">Retour à la liste</a>

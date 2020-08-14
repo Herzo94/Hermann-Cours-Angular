@@ -1,0 +1,16 @@
+  <div id="centerElements">
+  <br>
+  <h1>Login</h1>
+  <br>
+  <br>
+  <form [formGroup]="loginForm" class="example-form" (ngSubmit)="login()">
+        <ion-label>Email</ion-label>
+        <ion-input formControlName="email" placeholder="email"></ion-input>
+      <br>
+          <ion-label>Mot de passe</ion-label>
+          <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
+        <br>
+        <ion-button type="submit">Se connecter</ion-button> {{ message }}
+  </form>
+  <p>Pas de compte ? <a routerLink="/register">cliquez ici</a></p>
+  </div>

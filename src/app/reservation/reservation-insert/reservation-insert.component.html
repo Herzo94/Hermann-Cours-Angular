@@ -1,3 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Insérer une réservation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
 <div>
     <form [formGroup]="reservationForm" (ngSubmit)="onInsertReservation()">         
          <p>
@@ -40,3 +50,4 @@
          <button type="submit" [disabled]="reservationForm.invalid">Save the reservation!</button>
      </form>
  </div>
+</ion-content>

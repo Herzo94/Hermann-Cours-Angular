@@ -18,22 +18,17 @@ import { ReservationDetailComponent } from './reservation/reservation-detail/res
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
 import { PrestationComponent } from './prestation/prestation.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { UserListComponent } from './user-list/user-list.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  
-  //{ path: 'auth', component: AuthComponent },
+ 
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'user-list', canActivate: [AuthGuardService] , component: UserListComponent },
-  { path: 'user-details/:id', canActivate: [AuthGuardService], component: UserDetailsComponent },
-  //{ path: 'user', canActivate: [AuthGuardService], component: UserComponent },
   { path: 'prestation', canActivate: [AuthGuardService] , component: PrestationComponent },
   { path: 'dashboard', canActivate: [AuthGuardService] , component: DashboardComponent },
-  { path: 'product', canActivate: [AuthGuardService] , component: ProductComponent, children: [
-    { path: '', component: ProductListComponent },
+  { path: 'product', canActivate: [AuthGuardService] , component: ProductListComponent, children: [
     { path: 'insert', component: ProductInsertComponent},
     { path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent}
@@ -42,14 +37,13 @@ const routes: Routes = [
     { path: '', component: ReservationListComponent },
     { path: 'insert', component: ReservationInsertComponent},
     { path: ':id', component: ReservationDetailComponent },
-    { path: ':id/edit', component: ReservationEditComponent}
   ]
  },
   { path: 'commande', canActivate: [AuthGuardService] , component: CommandeComponent },
   { path: 'profil', canActivate: [AuthGuardService] , component: ProfilComponent },
   { path: 'contact', canActivate: [AuthGuardService] , component: ContactComponent },
   { path: 'not-found', component: FourOhFourComponent },
-  { path: '', redirectTo: 'register', pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: '**', redirectTo: 'not-found' }
 ];
 

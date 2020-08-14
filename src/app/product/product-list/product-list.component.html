@@ -1,5 +1,16 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Product</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+  <div id="centerElements">
+
 <div style="display: flex; justify-content: center;"></div>
-<h3>Product list</h3>
+
 <div>
     <label for="search">Search: </label>
     <input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products" />
@@ -11,7 +22,6 @@
 </div>
   <!-- <div *ngIf="products$ | async as products">-->
     <div>
-   
     <table *ngIf="products.length > 0; else noProductTemplate"  
         border="1"
         cellspacing="0"
@@ -30,8 +40,6 @@
         </thead>
         <tbody>
                 <tr *ngFor="let product of products | productSearch:searchTerm">
-                   
-        
                 <td *ngIf="displayImage">
                     <img [src]="product.image" width="100px" />
                 </td>
@@ -49,7 +57,7 @@
                 (click)="deleteProduct(product.id)"
                 >
                 X
-            </button> <!-- Question modifier et supprimer-->
+            </button>
                 </td>
             </tr>
         </tbody>
@@ -61,3 +69,5 @@
 <div>
   <!-- <button (click)="refreshProducts()">Refresh products</button> -->
 </div>
+</div>
+</ion-content>

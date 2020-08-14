@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/service/auth-service.service';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { ReservationInsertComponent } from '../reservation-insert/reservation-insert.component';
+import { ReservationEditComponent } from '../reservation-edit/reservation-edit.component';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class ReservationListComponent implements OnInit, OnDestroy {
     //this.router.navigate([`reservation/${id}/edit`])
   
       const modal = await this.modalController.create({
-        component: ModalComponent,
+        component: ReservationEditComponent,
         cssClass: 'my-custom-class',
         componentProps: {
           data: this.reservations.find( element => element.id === id )

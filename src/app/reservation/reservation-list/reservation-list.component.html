@@ -1,16 +1,12 @@
-
 <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>Les réservations</ion-title>
-
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-
-<h3>Les réservations </h3>
+    <ion-content class="ion-text-center">
 
 <div *ngIf="reservations.length === 0; else resaList">
     loading...
@@ -30,7 +26,6 @@
 
         <button
         *ngIf="authService.isAdmin"
-        mat-stroked-button
         color="primary"
         (click)="modifReservation(res.id)"
       > <!-- passer l'id dans les fonctions -->
@@ -38,7 +33,6 @@
       </button>
       <button
       *ngIf="authService.isAdmin"
-        mat-stroked-button
         color="primary"
         (click)="deleteReservation(res.id)"
       >
@@ -52,7 +46,6 @@
       <div>Employée : {{ res.employe }}</div>
       <div>Heure : {{ res.heure }}</div>
       <div>Date : {{ res.date }}</div>
-      
       <br />
     </div>
   </ng-template>
