@@ -37,8 +37,7 @@ const routes: Routes = [
     { path: '', component: ReservationListComponent },
     { path: 'insert', component: ReservationInsertComponent},
     { path: ':id', component: ReservationDetailComponent },
-  ]
- },
+  ]},
   { path: 'commande', canActivate: [AuthGuardService] , component: CommandeComponent },
   { path: 'profil', canActivate: [AuthGuardService] , component: ProfilComponent },
   { path: 'contact', canActivate: [AuthGuardService] , component: ContactComponent },

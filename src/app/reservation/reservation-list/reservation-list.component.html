@@ -15,30 +15,43 @@
 <ng-template #resaList>
   <div>
     <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
-   
-    <button *ngIf="authService.isAdmin" type="button" (click)="insertReservation()">Insert the reservation</button> 
-    <!-- <a routerLink="page">Page</a> -->
+    <ion-icon name="search-sharp"></ion-icon><br>
+    <!-- <button *ngIf="authService.isAdmin" type="button" (click)="insertReservation()">Insert the reservation</button> -->
+  
+    <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
  </div> 
 
   <br>
     <div *ngFor="let res of reservations | reservationSearch:searchTerm">
       <div>Nom : {{ res.name }}
 
-        <button
+        <!-- <button
         *ngIf="authService.isAdmin"
         color="primary"
         (click)="modifReservation(res.id)"
-      > <!-- passer l'id dans les fonctions -->
+      > 
         Modifier
-      </button>
+      </button> 
+
       <button
       *ngIf="authService.isAdmin"
         color="primary"
         (click)="deleteReservation(res.id)"
       >
-      <!-- passer l'id dans les fonctions -->
+    
         Supprimer 
-      </button>
+      </button> -->
+
+      <ion-icon name="create-outline"
+        *ngIf="authService.isAdmin"
+        (click)="modifReservation(res.id)"
+      ></ion-icon>
+
+      <ion-icon name="trash-outline"
+        *ngIf="authService.isAdmin"
+        (click)="deleteReservation(res.id)"
+      ></ion-icon>
+      
       </div>
       <div>
         {{ res.type }}

@@ -55,7 +55,6 @@ export class AuthService {
 
   signOut() {
     this.isAuth = false;
-    console.log("sign out");
-    this.router.navigate(['/register'])
+    this.router.navigate(['/login'])
   }
 }

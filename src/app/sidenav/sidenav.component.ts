@@ -13,13 +13,13 @@ export class SidenavComponent implements OnInit {
   mobileQuery: MediaQueryList;
 
   fillerNav=[
-    {name:"Dashboard", route:"dashboard", icon:"dashboard"},
-    {name:"Prestations", route:"prestation", icon:"home"},
+    {name:"Dashboard", route:"dashboard", icon:"keypad-outline"},
+    {name:"Prestations", route:"prestation", icon:"home-outline"},
     {name:"Reservations", route:"reservation", icon:"book"},
-    {name:"Commandes", route:"commande", icon:"redeem"},
+    {name:"Commandes", route:"commande", icon:"book-outline"},
     {name:"Products", route:"product", icon:"category"},
-    {name:"Profil", route:"profil", icon:"pages"},
-    {name:"Contact", route:"contact", icon:"people"}
+    {name:"Profil", route:"profil", icon:"person-outline"},
+    {name:"Contact", route:"contact", icon:"mail-outline"}
   ]
 
   fillerContent = Array(50).fill(0).map(() => 
