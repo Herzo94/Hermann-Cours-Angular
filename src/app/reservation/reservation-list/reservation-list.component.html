@@ -6,7 +6,7 @@
       <ion-title>Les réservations</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-text-center">
+    <ion-content class="ion-text-center ion-padding">
 
 <div *ngIf="reservations.length === 0; else resaList">
     loading...
@@ -23,24 +23,7 @@
 
   <br>
     <div *ngFor="let res of reservations | reservationSearch:searchTerm">
-      <div>Nom : {{ res.name }}
-
-        <!-- <button
-        *ngIf="authService.isAdmin"
-        color="primary"
-        (click)="modifReservation(res.id)"
-      > 
-        Modifier
-      </button> 
-
-      <button
-      *ngIf="authService.isAdmin"
-        color="primary"
-        (click)="deleteReservation(res.id)"
-      >
-    
-        Supprimer 
-      </button> -->
+      <div>Nom Client : {{ res.name }}
 
       <ion-icon name="create-outline"
         *ngIf="authService.isAdmin"
@@ -51,14 +34,13 @@
         *ngIf="authService.isAdmin"
         (click)="deleteReservation(res.id)"
       ></ion-icon>
-      
+  
       </div>
-      <div>
-        {{ res.type }}
-      </div>
-      <div>Employée : {{ res.employe }}</div>
-      <div>Heure : {{ res.heure }}</div>
       <div>Date : {{ res.date }}</div>
+      <div>Heure : {{ res.heure }}</div>
+      <div>Type Prestation : {{ res.type }}</div>
+      <div>Spécialiste : {{ res.employe }}</div>
+     
       <br />
     </div>
   </ng-template>

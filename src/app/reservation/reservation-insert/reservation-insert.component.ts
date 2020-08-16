@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, from } from 'rxjs';
 import { Router } from '@angular/router';
 import { ReservationService } from './../../service/reservation.service';
+import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins;
 
 @Component({
   selector: 'app-reservation-insert',
@@ -22,47 +24,47 @@ export class ReservationInsertComponent implements OnInit {
       id: [null], // It is the same as `id: new FormControl(null)`
       name: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(3), 
           Validators.maxLength(30)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
     
       type: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(25)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       employe: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(20)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       date: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(15)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       heure: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(3), 
           Validators.maxLength(6)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       /*price: [1, Validators.min(1)],
@@ -94,7 +96,10 @@ export class ReservationInsertComponent implements OnInit {
       this.reservationForm.value.date,
       this.reservationForm.value.heure
     );
-    console.log('result', result);
+    
+    await Toast.show({ //si problème -> Stackoverflow 
+      text: 'Insertion effectué avec succès!'
+    });
 
     this.reservationForm.reset();
     this.router.navigate(['/reservation']);

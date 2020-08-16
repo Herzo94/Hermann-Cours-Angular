@@ -6,6 +6,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from './../service/user.service';
 import { Router } from '@angular/router';
 import { auth, User } from 'firebase';
+import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins;
 
 @Component({
   selector: 'app-register',
@@ -40,26 +42,25 @@ export class RegisterComponent implements OnInit {
     });
 
     //this.authStatus = this.authGuardService.isAuth;
-    console.log("user profil : ", this.userProfil);
 }
 
 async register() {
   if (!this.registerForm.valid) {
     return;
   } 
-  console.log('register', this.registerForm.value); 
   //this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
   this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
-  console.log('register / result ', this.result);
-  
+
+  await Toast.show({ //si problème -> Stackoverflow 
+    text: 'Enregistrement du compte effectué avec succès!'
+  });
+
   this.registerForm.reset();
   if( this.result && this.result.user) {
     const userCreated = await this.userService.createUser(this.result.user);
-    console.log('userCreated', userCreated);
     this.result = null;
   }
 }
-
 
 onActif(){
   this.isAuth = true;
@@ -67,28 +68,5 @@ onActif(){
 onSignOut() {
   this.isAuth = false;
 }
-
-/*authStatus: boolean;
-
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.authStatus = this.authService.isAuth;
-  }
-
-  onSignIn() {
-    this.authService.signIn().then(
-      () => {
-        console.log('Sign in successful!');
-        this.authStatus = this.authService.isAuth;
-        this.router.navigate(['dashboard']);
-      }
-    );
-  }
-
-  onSignOut() {
-    this.authService.signOut();
-    this.authStatus = this.authService.isAuth;
-  }*/
 
 }

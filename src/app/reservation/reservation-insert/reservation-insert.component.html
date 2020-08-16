@@ -1,18 +1,15 @@
 <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>Insérer une réservation</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-
-<div>
+  <ion-content class="ion-text-center ion-padding">
+    <div>
     <form [formGroup]="reservationForm" (ngSubmit)="onInsertReservation()">         
          <p>
              <label>
-                 ReservationName: <input id="name" required type="text" formControlName="name" />
+                 Nom Client: <!-- <input id="name" required type="text" formControlName="name" /> -->
+                 <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
              </label>
          </p>
          <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('name').touched)">
@@ -27,27 +24,51 @@
              </div>
          </div>
          <p>
-             <label>
-                type: <input id="type" type="text" formControlName="type" />
-             </label>
+             <!-- <label>
+                Type Prestation : <input id="type" type="text" formControlName="type" /> 
+                <ion-input id="type" placeholder="Entrez un type de prestation" formControlName="type"></ion-input>
+             </label> -->
+
+             <ion-label>Prestation</ion-label>
+             <ion-select placeholder="Selectionner une prestation" formControlName="type">
+                <ion-select-option value="Pose complète gel">Pose complète gel</ion-select-option>
+                <ion-select-option value="Remplissage naturel">Remplissage naturel</ion-select-option>
+                <ion-select-option value="Remplissage gel vernis semi-permanent">Remplissage gel vernis semi-permanent</ion-select-option>
+                <ion-select-option value="Suppplement ongles cassés">Supplément ongles cassés</ion-select-option>
+                <ion-select-option value="Reparation ongle cassé">Réparation ongle cassé (hors remplissage)	</ion-select-option>
+                <ion-select-option value="Depose gel">Dépose gel</ion-select-option>
+                <ion-select-option value="Nail art/déco">Nail art/déco</ion-select-option>
+              </ion-select>
          </p>
+         
          <p>
-             <label>
-                employe: <input id="employe" type="text" formControlName="employe" />
-             </label>
+            <ion-item>
+                <ion-label>Spécialiste</ion-label>
+                <ion-select placeholder="Selectionner une spécialiste" formControlName="employe">
+                  <ion-select-option value="Giliane">Giliane</ion-select-option>
+                  <ion-select-option value="Christelle">Christelle</ion-select-option>
+                  <ion-select-option value="Stephanie">Stéphanie</ion-select-option>
+                  <ion-select-option value="Carmen">Carmen</ion-select-option>
+                </ion-select>
+              </ion-item>
          </p>
        
          <p>
-             <label>
-                date: <input id="date" type="text" formControlName="date" />
-             </label>
+             <!-- <label>
+                Date : <input id="date" type="date" formControlName="date" />
+             </label>-->
+             <ion-label>Date :</ion-label>
+             <ion-input id="date" formControlName="date" type="date"></ion-input>
          </p>
          <p>
-             <label>
-                heure: <input id="heure" type="text" formControlName="heure" />
-             </label>
+            <!-- <label>
+                Heure: <input id="heure" type="time" formControlName="heure" />
+             </label>-->
+             <ion-label>Heure :</ion-label>
+             <ion-input id="heure" formControlName="heure" type="time"></ion-input>
          </p>
-         <button type="submit" [disabled]="reservationForm.invalid">Save the reservation!</button>
+         <!-- <button type="submit" [disabled]="reservationForm.invalid">Save the reservation!</button> -->
+         <ion-button type="submit" [disabled]="reservationForm.invalid">Enregistrer</ion-button>
      </form>
  </div>
 </ion-content>

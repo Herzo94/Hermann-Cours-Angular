@@ -35,38 +35,38 @@ export class ReservationEditComponent implements OnInit {
     
       type: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(25)
-         ] // All the validators to run against this field
+         ] */ //All the validators to run against this field
        ],
 
       employe: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(20)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       date: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(15)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       heure: [
         '', // default value
-        [
+        /*[
           Validators.required, 
           Validators.minLength(3), 
           Validators.maxLength(40)
-         ] // All the validators to run against this field
+         ]*/ // All the validators to run against this field
        ],
 
       /*price: [1, Validators.min(1)],
@@ -90,14 +90,11 @@ export class ReservationEditComponent implements OnInit {
   async onUpdateReservation() {
     console.log('this.suggestionForm.value', this.reservationForm.value);
     const result = await this.reservationService.updateReservation(this.reservationForm.value as any);
-    console.log('result', result);
     this.modalController.dismiss();
-    console.log(this.reservationForm);
 
-    await Toast.show({ //Problème -> Stackoverflow
+    await Toast.show({ //si problème -> Stackoverflow 
       text: 'Mise à jour effectué avec succès!'
     });
-    console.log("Toast ?");
   }
 
   

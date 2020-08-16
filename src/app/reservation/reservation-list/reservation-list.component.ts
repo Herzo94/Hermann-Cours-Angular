@@ -10,6 +10,8 @@ import { ModalController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { ReservationInsertComponent } from '../reservation-insert/reservation-insert.component';
 import { ReservationEditComponent } from '../reservation-edit/reservation-edit.component';
+import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins;
 
 
 @Component({
@@ -63,8 +65,12 @@ export class ReservationListComponent implements OnInit, OnDestroy {
       return await modal.present();  
   }   
 
-  public deleteReservation(id){
+  async  deleteReservation(id){
     this.reservationService.deleteReservation(id)
+
+    await Toast.show({ //si problème -> Stackoverflow 
+      text: 'Suppression effectuée avec succès!'
+    });
   }
   
   /*public refreshReservations() {

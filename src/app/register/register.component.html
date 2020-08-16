@@ -11,6 +11,8 @@
       <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
       <br>
       <ion-button type="submit">Créer un compte</ion-button>
+      <br>
+      <p>{{ message }}</p>
 </form>
 <p>Vous possédez déjà un compte ?  <a routerLink="/login">cliquez ici</a></p>
 
@@ -24,19 +26,5 @@ Login form is valid: {{ loginForm.valid }} <br>
 {{ user | json }}
 <br><br>
 Bonjour {{ userProfil.displayName }}
--->
-<!-- <ul class="nav navbar-nav navbar-right">
-    <li routerLinkActive="active" *ngIf="!isAuth">
-      <a>Créer un compte</a>
-    </li>
-    <li routerLinkActive="active" *ngIf="!isAuth">
-      <a (click)="onActif()">Connexion</a>
-    </li>
-    <li>
-      <a (click)="onSignOut()"
-         style="cursor:pointer"
-         *ngIf="isAuth">Déconnexion</a>
-    </li>
-  </ul>
 -->
 </div>

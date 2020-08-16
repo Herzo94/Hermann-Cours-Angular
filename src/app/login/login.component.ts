@@ -38,10 +38,7 @@ export class LoginComponent implements OnInit {
   
       this.afAuth.authState.subscribe((userProfil) => {
         this.userProfil = userProfil;
-      });
-  
-      console.log("user profil : ", this.userProfil);
-  
+      });  
   }
 
   async login() {
@@ -55,7 +52,8 @@ export class LoginComponent implements OnInit {
       const { email, password} = this.loginForm.value;
       this.user = await this.authService.login(email, password); //appel à la méthode
       if (this.user){
-        this.router.navigate(['dashboard']);    
+        //this.router.navigate(['dashboard']);  
+        this.router.navigate(['reservation']);   
       }
     } catch (error) {
       this.message = error.message;
