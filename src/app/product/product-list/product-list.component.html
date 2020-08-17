@@ -12,12 +12,12 @@
 <div style="display: flex; justify-content: center;"></div>
 
 <div>
-    <label for="search">Search: </label>
-    <input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products" />
-    <button (click)="toggleImage()">Show/Hide images</button>
-    <button 
+    <ion-label for="search">Search: </ion-label>
+    <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products"></ion-input>
+    <ion-button (click)="toggleImage()">Show/Hide images</ion-button>
+    <ion-button 
     *ngIf="authService.isAdmin"
-    type="button" [routerLink]="['/product', 'insert']">Insert the product</button> 
+    type="button" [routerLink]="['/product', 'insert']">Insert the product</ion-button> 
       
 </div>
   <!-- <div *ngIf="products$ | async as products">-->
@@ -52,12 +52,16 @@
                 </td>-->
                 <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
                 <!--<button (click)="deleteProduct(product.id)">X</button> -->
-                <button
+                <!-- <button
                 *ngIf="authService.isAdmin"
                 (click)="deleteProduct(product.id)"
                 >
                 X
-            </button>
+            </button>--> 
+            <ion-icon name="trash-outline"
+        *ngIf="authService.isAdmin"
+        (click)="deleteProduct(product.id)"
+      ></ion-icon>
                 </td>
             </tr>
         </tbody>

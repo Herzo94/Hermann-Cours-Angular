@@ -23,6 +23,6 @@ export class ProfilComponent implements OnInit {
 
   //Ne pas oublier de mettre async de cette fonction
   /*await Toast.show({ //si problème -> Stackoverflow 
-    text: 'Enregistrement du compte effectué avec succès!'
+    text: 'Modification effectuée avec succès!'
   });*/
 }

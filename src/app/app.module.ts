@@ -4,12 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { MatInputModule } from '@angular/material/input';
 
 //Components
 import { AppComponent } from './app.component';
@@ -96,11 +91,6 @@ import { LoginComponent } from './login/login.component';
     AngularFireAuthModule,
     FormsModule,
     Ng2SearchPipeModule,
-    MatSidenavModule,
-    MatInputModule,
-    MatListModule,
-    MatIconModule,
-    MatToolbarModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,

@@ -29,7 +29,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    console.log("CoucouResa");
 
     this.productsCollection = await this.productService.readProduct();
     console.log("ProductsCollection : ", this.productsCollection);
@@ -38,7 +37,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
       
     }).subscribe(data => {
       this.products = data;
-      console.log("product data", data);
     })
     
   }
@@ -49,13 +47,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   updateProduct(product, id) {
     const ProductWithId = { ...product, id };
-    console.log('ProducttWithId', ProductWithId);
     this.productService.updateProduct(ProductWithId);
   }
-
  
   public deleteProduct(id){
-    console.log("Hello Delete Prod");
     this.productService.deleteProduct(id)
   }
 
@@ -65,11 +60,5 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   /*public refreshProducts() {
     this.productService.fetch()
-  }*/
-
-  /*public deleteProduct(id: string) { // je passe l'id du produit depuis le template (html)
-    //this.productService.fetch()
-    console.log("Delete product : ", id);
-    this.productService.deleteProduct(id); // je pass l'id au service
   }*/
 }

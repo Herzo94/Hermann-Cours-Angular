@@ -8,10 +8,10 @@
 
     <form [formGroup]="reservationForm" (ngSubmit)="onUpdateReservation()">         
         <p>
-            <label>
+            <ion-label>
                 Nom Client: <!-- <input id="name" required type="text" formControlName="name" /> -->
+            </ion-label>
                 <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
-            </label>
         </p>
          <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('name').touched)">
              <div *ngIf="reservationForm.get('name').errors.required">
