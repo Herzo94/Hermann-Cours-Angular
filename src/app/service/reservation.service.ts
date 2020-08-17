@@ -26,6 +26,12 @@ export class ReservationService {
     return this.afs.doc<IReservation>(`table-reservation/${id}`).valueChanges();
   }
 
+  readPersonalReservationByUID(id: string) { /*Question ici comment afficher les réservations d'un utilisateur*/
+    return this.afs
+      .collection('table-reservation', (ref) => ref.where('id', '==', id))
+      .valueChanges({ idField: 'id' });
+  }
+
   /*async getByIdReservation(){
     const datas = await this.afs.collection<IReservation>('table-reservation', (ref) =>
       ref.orderBy('date', 'asc')
@@ -36,8 +42,6 @@ export class ReservationService {
   /*getByIdReservation(id) { // ici je ne retournais pas d'observable, c'est pour ça que j'avais eu le problème lors du support avec Nico, le problème est que je ne pouvais pas typé en IPreservation
     return this.afs.doc(`table-reservation/${id}`).valueChanges();
   }*/
-
-  
 
   //Update reservation
   updateReservation(reservation) {
