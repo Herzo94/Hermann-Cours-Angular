@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Utilisateur</ion-title>
+    </ion-toolbar>
+</ion-header>
+  <ion-content class="ion-text-center ion-padding">
+
+<div *ngIf="!(user$ |async)">
+    loading...
+</div>
+
+<div *ngIf="(user$ |async)">
+    {{ user$ | async | json}}
+    <br>
+
+    {{ (user$ | async)?.createdAt.toDate() | date }}
+</div>
+
+<br>
+<ion-button routerLink="/user">Retour</ion-button>
+</ion-content>
+
+
+     

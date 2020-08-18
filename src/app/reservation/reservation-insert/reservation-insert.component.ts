@@ -14,7 +14,6 @@ const { Toast } = Plugins;
 })
 export class ReservationInsertComponent implements OnInit {
 
-  
   public reservationForm: FormGroup;
   //private reservationSubscription: Subscription;
   message = '';

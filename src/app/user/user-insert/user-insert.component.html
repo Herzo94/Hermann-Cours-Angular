@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+    <ion-title>Insérer un admin</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-text-center ion-padding">
+    <div>
+    <form [formGroup]="userForm" (ngSubmit)="onInsertUser()">         
+         <p>
+            <ion-label>Email</ion-label>
+            <ion-input formControlName="email" placeholder="email"></ion-input>
+         </p>
+        
+         <p>
+            <p>
+                <label>Mot de passe :</label>
+                   <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>                
+            </p>
+        <!-- <p>
+             <ion-label>Type de privilège</ion-label>
+             <ion-select placeholder="Selectionner un type de privilège" formControlName="type">
+                <ion-select-option value="TrueAdmin">Admin</ion-select-option>
+                <ion-select-option value="TrueSuperAdmin">SuperAdmin</ion-select-option>
+            </ion-select>
+         </p> -->
+         <ion-button type="submit" [disabled]="userForm.invalid">Enregistrer</ion-button>
+     </form>
+ </div>
+</ion-content>

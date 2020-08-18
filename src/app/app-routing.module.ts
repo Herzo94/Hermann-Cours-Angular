@@ -21,12 +21,23 @@ import { PrestationComponent } from './prestation/prestation.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserInsertComponent } from './user/user-insert/user-insert.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 const routes: Routes = [
  
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'prestation', canActivate: [AuthGuardService] , component: PrestationComponent },
+  { path: 'user', canActivate: [AuthGuardService] , children: [
+    { path: '', component: UserListComponent },
+    { path: 'insert', component: UserInsertComponent},
+    //{ path: ':id', component: UserDetailComponent },
+    //{ path: 'details/:id', component: UserDetailComponent }
+  ]},
+  { path: 'user-detail/:id', component: UserDetailComponent },
   { path: 'dashboard', canActivate: [AuthGuardService] , component: DashboardComponent },
   { path: 'product', canActivate: [AuthGuardService] , component: ProductListComponent, children: [
     { path: 'insert', component: ProductInsertComponent},

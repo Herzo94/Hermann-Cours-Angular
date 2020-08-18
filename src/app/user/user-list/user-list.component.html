@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Les utilisateurs</ion-title>
+    </ion-toolbar>
+</ion-header>
+  <ion-content class="ion-text-center ion-padding">
+
+    <div *ngIf="(users$ | async)">
+        <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
+ 
+        <div *ngFor="let user of users$ | async">
+            <a [routerLink]="['/user-detail', user.id]">{{user.email}}</a>
+        </div>
+    </div>
+    
+    <div *ngIf="!(users$ | async)">
+        loading...
+    </div>
+
+<!-- <div *ngIf="users.length === 0; else userList">
+  loading...
+</div>
+
+<ng-template #userList>-->
+
+<!-- <div>
+  <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
+  <ion-icon name="search-sharp"></ion-icon><br>
+
+  <ion-icon *ngIf="authService.isSuperAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
+</div> 
+<p>Cool</p>
+<br>-->
+<!-- <div *ngFor="let user of users"> -->
+
+
+  <!-- <div *ngFor="let user of users | userSearch:searchTerm"> -->
+    <!-- <div>User : {{ user.name }}
+
+   <ion-icon name="create-outline"
+      *ngIf="authService.isSuperAdmin"
+      (click)="modifUser(user.id)"
+    ></ion-icon>
+
+    <ion-icon name="trash-outline"
+      *ngIf="authService.isSuperAdmin"
+      (click)="deleteUser(user.id)"
+    ></ion-icon>
+
+    </div>
+    <div>User : {{ user ? }}</div> -->
+  
+   <!--  <br />
+  </div>
+</ng-template>-->
+</ion-content>

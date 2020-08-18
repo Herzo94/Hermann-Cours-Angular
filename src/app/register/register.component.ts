@@ -58,6 +58,7 @@ async register() {
   this.registerForm.reset();
   if( this.result && this.result.user) {
     const userCreated = await this.userService.createUser(this.result.user);
+    console.log('userCreated', userCreated);
     this.result = null;
   }
 }

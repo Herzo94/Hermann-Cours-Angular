@@ -10,6 +10,12 @@ export class ReservationService {
 
   constructor(private afs: AngularFirestore) {}
 
+  readPersonalReservationByUID(id: string) { /*Question ici comment afficher les réservations d'un utilisateur*/
+    return this.afs
+      .collection('personnal-reservation', (ref) => ref.where('id', '==', id))
+      .valueChanges({ idField: 'id' });
+  }
+  
   readReservation() {
     return this.afs.collection<IReservation>('table-reservation', (ref) =>
       ref.orderBy('date', 'asc')
@@ -24,12 +30,6 @@ export class ReservationService {
 
   getByIdReservation(id): Observable<IReservation> { //je retourne un observable
     return this.afs.doc<IReservation>(`table-reservation/${id}`).valueChanges();
-  }
-
-  readPersonalReservationByUID(id: string) { /*Question ici comment afficher les réservations d'un utilisateur*/
-    return this.afs
-      .collection('table-reservation', (ref) => ref.where('id', '==', id))
-      .valueChanges({ idField: 'id' });
   }
 
   /*async getByIdReservation(){

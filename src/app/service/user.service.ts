@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { IUser } from '../models/IUser';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  //collectionName = 'table-user';
   collectionName = 'user';
+  valueAdmin = 'true';
 
   constructor(private afs: AngularFirestore) { }
 
-  createUser(user) {
+  /*readUser() {
+    //this.afs.collection(`${this.collectionName}`);
+    return this.afs.collection<IUser>('table-user');
+  }*/
+
+  createUser (user) {
     const  newUser = {
       uid: user.uid,
       email: user.email,
-      emailVerified: user.emailVerified,
-      createdAt: new Date()
+      //emailVerified: user.emailVerified,
+      createdAt: new Date(),
+      type: this.valueAdmin, //Question : C'est ici que je dois récupérer la valeur du champ "type" du formulaire de si c'est un super admin ou un admin simple. Mais je ne vois pas comment faire ?
+   
     }
 
     const usersCollection = this.afs.collection(`${this.collectionName}`); //créer ici le typage pour l'interface <IUser> -> 3:51 à la vidéo
