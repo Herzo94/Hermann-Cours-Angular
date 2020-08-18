@@ -14,22 +14,24 @@ export class PersonnalReservationComponent implements OnInit {
 
   constructor(afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
 
+  
+  ngOnInit() { 
+    
 
-  ngOnInit() {
     /*this.afAuth.authState.subscribe((user) => {
       console.log('user', user);
 
       this.user = user;
       if (this.user) {
-        // console.log(this.db.readPersonalSpaceByUID(user.uid));
+         console.log(this.reservationService.readPersonalReservationByUID(user.uid));
 
-        this.db.readPersonalSpaceByUID(user.uid).subscribe(
+        this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
           (data) => {
-            console.log('ngOnInt readPersonnalSpaceById / data', data);
+            console.log('ngOnInt readPersonnalReservationById / data', data);
             this.personalSpace = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-              this.db.createPersonalSpace(this.user);
+              this.reservationService.createPersonalReservation(this.user);
             }
           },
           (err) => {

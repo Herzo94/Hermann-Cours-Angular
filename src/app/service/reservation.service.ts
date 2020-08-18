@@ -15,6 +15,14 @@ export class ReservationService {
       .collection('personnal-reservation', (ref) => ref.where('id', '==', id))
       .valueChanges({ idField: 'id' });
   }
+
+  /*createPersonalReservation(user) {
+    return this.personalSpaceCollection.doc(`ps-${user.uid}`).set({
+      uid: user.uid,
+      displayName: user.displayName,
+      createdAt: Date.now(),
+    });
+  }*/
   
   readReservation() {
     return this.afs.collection<IReservation>('table-reservation', (ref) =>
