@@ -57,6 +57,7 @@ export class ProductInsertComponent implements OnInit {
       this.productForm.value.productName,
       this.productForm.value.description,
       this.productForm.value.price,
+      this.productForm.value.createdAt = Date.now(),
     );
     console.log('result', result);
     if ((result as any).jT) {

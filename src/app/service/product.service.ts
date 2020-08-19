@@ -17,15 +17,14 @@ export class ProductService {
 
   readProduct() {
     return this.afs.collection<IProduct>('table-product', (ref) =>
-      ref.orderBy('productName', 'asc')
+      ref.orderBy('createdAt', 'asc')
     );
   }
 
-  createProduct(imageUrl, productName, description, price) {
+  createProduct(imageUrl, productName, description, price, createdAt) {
     return this.afs
       .collection('table-product')
-      .add({imageUrl, productName, description, price});
-      //this.router.navigate(['/dashboard']);
+      .add({imageUrl, productName, description, price, createdAt});
   }
 
   //Update product
@@ -36,6 +35,7 @@ export class ProductService {
       name: product.productName,
       description : product.description,
       price: product.price,
+      //createdAt: Date.now(),
     });
   }
 
