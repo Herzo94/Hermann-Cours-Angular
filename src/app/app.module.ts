@@ -28,10 +28,8 @@ import { FourOhFourComponent } from './four-oh-four-component/four-oh-four-compo
 import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 import { CommandeViewComponent } from './commande/commande-view/commande-view.component';
-import { CommandeDetailComponent } from './commande/commande-detail/commande-detail.component';
 import { CommandeEditComponent } from './commande/commande-edit/commande-edit.component';
 import { AuthService } from './service/auth-service.service';
-import { SingleReservationComponent } from './reservation/single-reservation/single-reservation.component';
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
 import { IonicModule } from '@ionic/angular';
 
@@ -74,9 +72,7 @@ import { PersonnalReservationComponent } from './reservation/personnal-reservati
     ReservationDetailComponent,
     ReservationEditComponent,
     CommandeViewComponent,
-    CommandeDetailComponent,
     CommandeEditComponent,
-    SingleReservationComponent,
     ProductInsertComponent,
     ModalComponent,
     ReservationInsertComponent,

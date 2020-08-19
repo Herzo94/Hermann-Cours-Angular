@@ -10,7 +10,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class SidenavComponent implements OnInit {
 
-  mobileQuery: MediaQueryList;
+  mobileQuery: MediaQueryList; //mobileQuery c'est un lister qui est capable d'écouter la taille qu'a ma page, reconnaitre les dimensions de l'interface graphique
 
   fillerNav=[
     //{name:"Dashboard", route:"dashboard", icon:"keypad-outline"},
@@ -35,13 +35,13 @@ export class SidenavComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public authService : AuthService, private menu: MenuController) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges(); //listener qui déctect les changements
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.isAuth = this.authService.isAuth;
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this._mobileQueryListener); //on s'abonne et on supprime le listener, dans le but de ne plus l'écouter
   }
 
   shouldRun = true;

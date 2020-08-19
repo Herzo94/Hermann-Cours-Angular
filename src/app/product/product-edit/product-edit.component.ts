@@ -23,23 +23,8 @@ export class ProductEditComponent implements OnInit {
   public productForm: FormGroup
   message = '';
 
-  constructor(fb: FormBuilder, private route: ActivatedRoute, private productService: ProductService, private router: Router, public modalController: ModalController) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private productService: ProductService, private router: Router, public modalController: ModalController) {
     // We create our Form for product 
-    this.productForm = fb.group({
-             id: [null], // It is the same as `id: new FormControl(null)`
-             productName: [
-               '', // default value
-               [
-                 Validators.required, 
-                 Validators.minLength(4), 
-                 Validators.maxLength(80)
-                ] // All the validators to run against this field
-              ],
-       
-             description: [''],
-             price: [0, Validators.min(0)],
-             imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)]
-        })   
   }
 
   async presentModal() {
@@ -51,6 +36,23 @@ export class ProductEditComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    this.productForm = this.fb.group({
+      id: [null], // It is the same as `id: new FormControl(null)`
+      productName: [
+        '', // default value
+        [
+          Validators.required, 
+          Validators.minLength(4), 
+          Validators.maxLength(80)
+         ] // All the validators to run against this field
+       ],
+
+      description: [''],
+      price: [0, Validators.min(0)],
+      imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)] //Question : Modifier ici pour le chargement d'un fichier concernant l'image car ce ne sera plus un URL
+ })  
+
     this.productForm.patchValue(this.data); //met le contenu dans le formulaire
   }
 
@@ -58,10 +60,10 @@ export class ProductEditComponent implements OnInit {
     console.log('this.suggestionForm.value', this.productForm.value);      const result = await this.productService.updateProduct(this.productForm.value as any);
     this.modalController.dismiss();
   
-    await Toast.show({ 
-      text: 'Mise à jour effectué avec succès!'
-    });
-  }
+      await Toast.show({ 
+        text: 'Mise à jour effectué avec succès!'
+      });
+    }
 
     //this.router.navigate(['/product']);
 }

@@ -17,6 +17,7 @@ export class PersonnalReservationComponent implements OnInit {
   user;
   personalReservation;
   personnalReservations: IPersonalReservation[] = [];
+  
 
   constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
 
@@ -37,6 +38,7 @@ export class PersonnalReservationComponent implements OnInit {
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
               //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
+              //lié l'élément ici à une collection par exemple
             }
           },
           (err) => {

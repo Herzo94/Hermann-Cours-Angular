@@ -20,8 +20,10 @@ export class ReservationEditComponent implements OnInit {
   message = '';
   
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private reservationService : ReservationService, private router: Router, public modalController: ModalController) {
-    this.reservationForm = fb.group({
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private reservationService : ReservationService, private router: Router, public modalController: ModalController) { }
+
+   async ngOnInit(): Promise<void> {
+    this.reservationForm = this.fb.group({
       id: [null], // It is the same as `id: new FormControl(null)`
       name: [
         '', // default value
@@ -31,45 +33,20 @@ export class ReservationEditComponent implements OnInit {
           Validators.maxLength(30)
          ] // All the validators to run against this field
        ],
-    
-      type: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(4), 
-          Validators.maxLength(25)
-         ] */ //All the validators to run against this field
-       ],
-
+      type: ['', Validators.required],
       employe: [
         '', // default value
-        /*[
+        [
           Validators.required, 
           Validators.minLength(4), 
           Validators.maxLength(20)
-         ]*/ // All the validators to run against this field
+         ] // All the validators to run against this field
        ],
-
-      date: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(4), 
-          Validators.maxLength(15)
-         ]*/ // All the validators to run against this field
-       ],
-
-      heure: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(3), 
-          Validators.maxLength(40)
-         ]*/ // All the validators to run against this field
-       ],
-      
- }) 
-   }
+      date: ['', Validators.required],
+      heure: ['', Validators.required],
+    });
+    this.reservationForm.patchValue(this.data); //met le contenu dans le formulaire
+  }
 
    async presentModal() {
     const modal = await this.modalController.create({
@@ -77,10 +54,6 @@ export class ReservationEditComponent implements OnInit {
       cssClass: 'my-custom-class'
     });
     return await modal.present();
-  }
-
-  async ngOnInit(): Promise<void> {
-    this.reservationForm.patchValue(this.data); //met le contenu dans le formulaire
   }
 
   async onUpdateReservation() {
@@ -92,5 +65,5 @@ export class ReservationEditComponent implements OnInit {
       text: 'Mise à jour effectué avec succès!'
     });
   }
-  
 }
+

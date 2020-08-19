@@ -3,12 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductService } from './../../service/product.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { DbService } from '../../service/db.service';
+
 import { Plugins } from '@capacitor/core';
 const { Toast } = Plugins;
 
 
-const HTTP_URL_PATTERN: string =
-  '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
+const HTTP_URL_PATTERN: string = '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
 
   //const HTTP_URL_PATTERN: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$'
 
@@ -22,8 +26,13 @@ export class ProductInsertComponent implements OnInit {
 
   public productForm: FormGroup;
   message = '';
+  user;
+  photo = { file: '', title: '' };
+  photoServerURL;
+  uploadedImgURL = '';
+  personalSpace;
 
-  constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router) { 
+  constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router, private afAuth: AngularFireAuth, private afStorage: AngularFireStorage, private db: DbService) { 
     this.productForm = fb.group({
       id: [null], // It is the same as `id: new FormControl(null)`
       imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)],
@@ -65,7 +74,53 @@ export class ProductInsertComponent implements OnInit {
     }
     this.productForm.reset();
     this.router.navigate(['/product']);
-    
   }
+
+  
+  onFileChange(e) {
+    console.log(e.target.files[0]);
+    this.photo.file = e.target.files[0];
+  }
+
+  postPhoto() {
+    console.log(this.photo);
+    const uid = this.user.uid;
+    const photoPathOnServer = `personal-space/${uid}/${this.photo.title}`;
+    const photoRef = this.afStorage.ref(photoPathOnServer);
+    this.photoServerURL = '';
+
+    console.log('photoPathOnServer', photoPathOnServer);
+    console.log('uid', uid);
+    console.log('this.photo.file', this.photo.file);
+    console.log('this.photo.title', this.photo.title);
+
+    const currentUpload = this.afStorage.upload(
+      photoPathOnServer,
+      this.photo.file
+    );
+
+    currentUpload.catch((err) => console.error(err)); //permet de faire afficher des erreurs
+
+    currentUpload
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.photoServerURL = photoRef.getDownloadURL();
+          this.photoServerURL.subscribe((data) => {
+            console.log('data >>> ', data);
+            this.uploadedImgURL = data;
+            this.db.updatePersonalSpacePhotoURLs(
+              this.user,
+              this.uploadedImgURL
+            );
+          });
+        })
+      )
+      .subscribe();
+
+    // clear form
+    this.photo = { file: '', title: '' };
+  }
+  
 
 }

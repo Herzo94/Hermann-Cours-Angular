@@ -14,61 +14,11 @@ const { Toast } = Plugins;
 export class ReservationInsertComponent implements OnInit {
 
   public reservationForm: FormGroup;
-  //private reservationSubscription: Subscription;
   message = '';
+  user;
+  result;
 
-  constructor(private fb: FormBuilder, route: ActivatedRoute, private reservationService : ReservationService, private router: Router) {
-    this.reservationForm = fb.group({
-      id: [null], // It is the same as `id: new FormControl(null)`
-      name: [
-        '', // default value
-        [
-          Validators.required, 
-          Validators.minLength(3), 
-          Validators.maxLength(30)
-         ] // All the validators to run against this field
-       ],
-    
-      type: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(4), 
-          Validators.maxLength(25)
-         ]*/ // All the validators to run against this field
-       ],
-
-      employe: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(4), 
-          Validators.maxLength(20)
-         ]*/ // All the validators to run against this field
-       ],
-
-      date: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(4), 
-          Validators.maxLength(15)
-         ]*/ // All the validators to run against this field
-       ],
-
-      heure: [
-        '', // default value
-        /*[
-          Validators.required, 
-          Validators.minLength(3), 
-          Validators.maxLength(6)
-         ]*/ // All the validators to run against this field
-       ],
-
-      /*price: [1, Validators.min(1)],*/
-      
- }) 
-   }
+  constructor(private fb: FormBuilder, route: ActivatedRoute, private reservationService : ReservationService, private router: Router) { }
 
   ngOnInit(): void {
     this.reservationForm = this.fb.group({
@@ -80,11 +30,6 @@ export class ReservationInsertComponent implements OnInit {
     });
   }
 
-  // This methods run when Angular destroy a component (cf component life cycle)
-  /*ngOnDestroy(): void {
-    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
-  }*/
-
   async onInsertReservation() { //remplace le .then
     const result = await this.reservationService.createReservation(
       this.reservationForm.value.name,
@@ -92,6 +37,13 @@ export class ReservationInsertComponent implements OnInit {
       this.reservationForm.value.employe,
       this.reservationForm.value.date,
       this.reservationForm.value.heure
+      //Insérer ici l'id de l'utilisateur qui a réalisé une réservation
+
+      /*if( this.result && this.result.user) {
+        const userCreated = await this.userService.createUser(this.result.user);
+        console.log('userCreated', userCreated);
+        this.result = null;
+      }*/
     );
     
     await Toast.show({ //si problème -> Stackoverflow 
@@ -101,5 +53,10 @@ export class ReservationInsertComponent implements OnInit {
     this.reservationForm.reset();
     this.router.navigate(['/reservation']);
   }
+
+   // This methods run when Angular destroy a component (cf component life cycle)
+  /*ngOnDestroy(): void {
+    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
+  }*/
 
 }
