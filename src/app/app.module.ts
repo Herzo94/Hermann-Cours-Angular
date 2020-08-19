@@ -25,7 +25,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
 import { FourOhFourComponent } from './four-oh-four-component/four-oh-four-component.component'
-import { AuthComponent } from './auth/auth.component';
 import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 import { CommandeViewComponent } from './commande/commande-view/commande-view.component';
@@ -72,7 +71,6 @@ import { PersonnalReservationComponent } from './reservation/personnal-reservati
     ReservationSearchPipe,
     CommandeComponent,
     FourOhFourComponent,
-    AuthComponent,
     ReservationDetailComponent,
     ReservationEditComponent,
     CommandeViewComponent,

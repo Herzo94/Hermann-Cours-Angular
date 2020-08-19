@@ -7,7 +7,6 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { FourOhFourComponent } from './four-oh-four-component/four-oh-four-component.component';
-import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';

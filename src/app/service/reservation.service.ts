@@ -55,6 +55,7 @@ export class ReservationService {
   readReservation() {
     return this.afs.collection<IReservation>('table-reservation', (ref) =>
       ref.orderBy('date', 'asc')
+      
     );
   }
 
@@ -70,7 +71,7 @@ export class ReservationService {
 
   /*async getByIdReservation(){
     const datas = await this.afs.collection<IReservation>('table-reservation', (ref) =>
-      ref.orderBy('date', 'asc')
+      ref.orderBy('date', 'desc')
     );
     datas.
   }*/

@@ -21,7 +21,7 @@ export class SidenavComponent implements OnInit {
     //{name:"Commandes", route:"commande", icon:"book-outline"},
     {name:"Catalogue des produits", route:"product", icon:"cart-outline"},
     {name:"Profil", route:"profil", icon:"person-outline"},
-    {name:"Contact", route:"contact", icon:"mail-outline"}
+    //{name:"Contact", route:"contact", icon:"mail-outline"}
   ]
 
   /*fillerContent = Array(50).fill(0).map(() => 

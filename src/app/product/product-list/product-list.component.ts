@@ -6,6 +6,9 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { DbService } from '../../service/db.service';
 import { ProductInsertComponent } from '../product-insert/product-insert.component';
 import { ProductEditComponent } from '../product-edit/product-edit.component';
 import { Plugins } from '@capacitor/core';
@@ -28,7 +31,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
   public myBorderSize: number = 1;
   public displayImage: boolean = true;
 
-  constructor(private productService: ProductService, public authService : AuthService, public modalController: ModalController) { }
+  user;
+  photo = { file: '', title: '' };
+  photoServerURL;
+  uploadedImgURL = '';
+  personalSpace;
+
+  constructor(private productService: ProductService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage, private db: DbService) { }
 
   async ngOnInit() {
 
@@ -41,6 +50,51 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.products = data;
     })
     
+  }
+
+  onFileChange(e) {
+    console.log(e.target.files[0]);
+    this.photo.file = e.target.files[0];
+  }
+
+  postPhoto() {
+    console.log(this.photo);
+    const uid = this.user.uid;
+    const photoPathOnServer = `personal-space/${uid}/${this.photo.title}`;
+    const photoRef = this.afStorage.ref(photoPathOnServer);
+    this.photoServerURL = '';
+
+    console.log('photoPathOnServer', photoPathOnServer);
+    console.log('uid', uid);
+    console.log('this.photo.file', this.photo.file);
+    console.log('this.photo.title', this.photo.title);
+
+    const currentUpload = this.afStorage.upload(
+      photoPathOnServer,
+      this.photo.file
+    );
+
+    currentUpload.catch((err) => console.error(err));
+
+    currentUpload
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.photoServerURL = photoRef.getDownloadURL();
+          this.photoServerURL.subscribe((data) => {
+            console.log('data >>> ', data);
+            this.uploadedImgURL = data;
+            this.db.updatePersonalSpacePhotoURLs(
+              this.user,
+              this.uploadedImgURL
+            );
+          });
+        })
+      )
+      .subscribe();
+
+    // clear form
+    this.photo = { file: '', title: '' };
   }
 
   public async insertProduct(){

@@ -12,7 +12,24 @@
         <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
  
         <div *ngFor="let user of users$ | async">
-            <a [routerLink]="['/user-detail', user.id]">{{user.email}}</a>
+            
+            <div>
+              <ion-list>
+                <ion-item class="ion-text-center" style="border-bottom: 1px solid gray; margin-bottom:15px;">
+                  <!-- <ion-avatar>
+                    <img src="https://ionicframework.com/docs/demos/api/list/avatar-ben.png">
+                  </ion-avatar>-->
+                  <ion-label>
+                    <a [routerLink]="['/user-detail', user.id]">{{user.email}}</a>
+                    <p>Info1</p>
+                    <p>Info2</p>
+                    <!-- Afficher les privilège de l'utilisateur -->
+                    
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+
         </div>
     </div>
     

@@ -9,45 +9,58 @@
     <ion-content class="ion-text-center ion-padding">
 
 <div *ngIf="reservations.length === 0; else resaList">
-  <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-  <ion-icon name="search-sharp"></ion-icon><br>
-  <!-- <button *ngIf="authService.isAdmin" type="button" (click)="insertReservation()">Insert the reservation</button> -->
-
   <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
-
     <p>loading...</p>
 </div>
 
 <ng-template #resaList>
   <div>
-    <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-    <ion-icon name="search-sharp"></ion-icon><br>
-    <!-- <button *ngIf="authService.isAdmin" type="button" (click)="insertReservation()">Insert the reservation</button> -->
+    <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
+      <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
+    </ion-input>
+    <br>
   
     <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
  </div> 
 
   <br>
-    <div *ngFor="let res of reservations | reservationSearch:searchTerm">
-      <div>Nom Client : {{ res.name }}
 
-      <ion-icon name="create-outline"
-        *ngIf="authService.isAdmin"
-        (click)="modifReservation(res.id)"
-      ></ion-icon>
+  <ion-grid>
+    <ion-row *ngFor="let res of reservations | reservationSearch:searchTerm" class="ion-text-center" style="border-bottom: 1px solid gray; margin-bottom:15px;">
+      <ion-col>
+        <div>Nom Client : {{ res.name }}</div>
+      </ion-col>
+      <ion-col>
+        <div>Date : {{ res.date }} à {{ res.heure }}</div>
+      </ion-col>
+      <ion-col>
+        <div>Type Prestation : {{ res.type }}</div>
+      </ion-col>
+      <ion-col>
+        <div>Spécialiste : {{ res.employe }}</div>
+      </ion-col>
 
-      <ion-icon name="trash-outline"
-        *ngIf="authService.isAdmin"
-        (click)="deleteReservation(res.id)"
-      ></ion-icon>
-  
-      </div>
-      <div>Date : {{ res.date }}</div>
-      <div>Heure : {{ res.heure }}</div>
-      <div>Type Prestation : {{ res.type }}</div>
-      <div>Spécialiste : {{ res.employe }}</div>
-     
-      <br />
-    </div>
+      <ion-col>
+        <div>
+          <ion-icon 
+                name="create-outline"
+                *ngIf="authService.isAdmin"
+                (click)="modifReservation(res.id)"
+                style="margin-right:10px"
+              >
+              </ion-icon>
+
+              <ion-icon 
+                name="trash-outline"
+                *ngIf="authService.isAdmin"
+                (click)="deleteReservation(res.id)"
+              >
+              </ion-icon> 
+
+        </div>
+      </ion-col>
+    </ion-row>
+    <tr></tr>
+  </ion-grid>
   </ng-template>
 </ion-content>

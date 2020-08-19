@@ -13,10 +13,16 @@
 </div>
 
 <div *ngIf="(user$ |async)">
-    {{ user$ | async | json}}
+    
+    <p>{{ user$ | async | json}}</p>
+    
     <br>
 
-    {{ (user$ | async)?.createdAt.toDate() | date }}
+    <p>Date : {{ (user$ | async)?.createdAt.toDate() | date }}</p>
+
+    <!-- Comment afficher l'email de l'utilisateur : {{user.email}} <-- comment ça ça ne marche pas-->
+
+
 </div>
 
 <br>

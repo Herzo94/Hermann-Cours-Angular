@@ -17,7 +17,7 @@ export class ProductService {
 
   readProduct() {
     return this.afs.collection<IProduct>('table-product', (ref) =>
-      ref.orderBy('createdAt', 'asc')
+      ref.orderBy('createdAt', 'desc')
     );
   }
 
