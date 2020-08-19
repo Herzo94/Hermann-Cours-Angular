@@ -9,8 +9,14 @@
     <ion-content class="ion-text-center ion-padding">
 
 <div *ngIf="reservations.length === 0; else resaList">
-    loading...
-  </div>
+  <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
+  <ion-icon name="search-sharp"></ion-icon><br>
+  <!-- <button *ngIf="authService.isAdmin" type="button" (click)="insertReservation()">Insert the reservation</button> -->
+
+  <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+
+    <p>loading...</p>
+</div>
 
 <ng-template #resaList>
   <div>

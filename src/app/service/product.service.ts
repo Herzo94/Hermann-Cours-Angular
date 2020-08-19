@@ -17,14 +17,14 @@ export class ProductService {
 
   readProduct() {
     return this.afs.collection<IProduct>('table-product', (ref) =>
-      ref.orderBy('name', 'asc')
+      ref.orderBy('productName', 'asc')
     );
   }
 
-  createProduct(image, name, description, prix, rating) {
+  createProduct(imageUrl, productName, description, price) {
     return this.afs
       .collection('table-product')
-      .add({image, name, description, prix, rating});
+      .add({imageUrl, productName, description, price});
       //this.router.navigate(['/dashboard']);
   }
 
@@ -32,11 +32,10 @@ export class ProductService {
   updateProduct(product) {
     return this.afs.doc(`table-product/${product.id}`).update({
       ...product,
-      image: product.image,
-      name: product.name,
+      imageUrl: product.imageUrl,
+      name: product.productName,
       description : product.description,
-      prix: product.prix,
-      rating: product.rating
+      price: product.price,
     });
   }
 

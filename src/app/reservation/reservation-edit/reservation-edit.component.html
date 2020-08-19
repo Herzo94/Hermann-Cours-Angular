@@ -1,17 +1,17 @@
 <ion-header>
     <ion-toolbar>
-    <ion-title>Insérer une réservation</ion-title>
+    <ion-title>Modifier une réservation</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-text-center ion-padding">
-    <div>
+
 
     <form [formGroup]="reservationForm" (ngSubmit)="onUpdateReservation()">         
         <p>
             <ion-label>
-                Nom Client: <!-- <input id="name" required type="text" formControlName="name" /> -->
+                Nom Client: 
             </ion-label>
-                <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
+            <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
         </p>
          <div *ngIf="reservationForm.get('name').invalid && (reservationForm.get('name').dirty || reservationForm.get('name').touched)">
              <div *ngIf="reservationForm.get('name').errors.required">
@@ -56,8 +56,10 @@
             <ion-label>Heure :</ion-label>
             <ion-input id="heure" formControlName="heure" type="time"></ion-input>
          </p>
+        
          <ion-button type="submit" [disabled]="reservationForm.invalid">Enregistrer</ion-button>
+         
+    </form>
          <!-- Question pourquoi le bouton n'est plus disabled quel attribut de validation utilisé -->
-     </form>
- </div>
+         
   </ion-content>

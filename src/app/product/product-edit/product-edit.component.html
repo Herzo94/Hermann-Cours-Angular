@@ -1,24 +1,15 @@
 <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>Modifier un produit</ion-title>
     </ion-toolbar>
-  </ion-header>
-  <ion-content>
-<div>
-    <form>
-    <!-- <form [formGroup]="productForm" (ngSubmit)="onSubmit()"> -->
+</ion-header>
+  <ion-content class="ion-text-center ion-padding">
+  
+    <form [formGroup]="productForm" (ngSubmit)="onUpdateProduct()"> 
+        
         <p>
-            <label>
-                id: <input id="id" type="number" formControlName="id" />
-            </label>
-        </p>
-        <p>
-            <label>
-                productName: <input id="productName" required type="text" formControlName="productName" />
-            </label>
+            <ion-label> Nom Produit : </ion-label>
+            <ion-input id="productName" required type="text" formControlName="productName"></ion-input>
         </p>
         <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">
             <div *ngIf="productForm.get('productName').errors.required">
@@ -30,39 +21,19 @@
             <div *ngIf="productForm.get('productName').errors.maxlength as maxlength">
                 The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
             </div>
-        </div>
+        </div> 
         <p>
-            <label>
-                productCode: <input id="productCode" type="text" formControlName="productCode" />
-            </label>
+            <ion-label> Description: </ion-label>
+            <ion-input id="description" type="text" formControlName="description"></ion-input>
         </p>
         <p>
-            <label>
-                releaseDate: <input id="releaseDate" type="text" formControlName="releaseDate" />
-            </label>
+            <ion-label> Prix: </ion-label>
+            <ion-input id="price" type="number" formControlName="price"></ion-input>    
         </p>
         <p>
-            <label>
-                description: <input id="description" type="text" formControlName="description" />
-            </label>
+            <ion-label> Image: </ion-label>
+            <ion-input id="imageUrl" type="text" formControlName="imageUrl"></ion-input>   <!-- mettre type="file"--> 
         </p>
-        <p>
-            <label>
-                price: <input id="price" type="number" formControlName="price" />
-            </label>
-        </p>
-        <p>
-            <label>
-                starRating: <input id="starRating" type="number" formControlName="starRating" />
-            </label>
-        </p>
-        <p>
-            <label>
-                imageUrl: <input id="imageUrl" type="text" formControlName="imageUrl" />
-            </label>
-        </p>
-
-        <button type="submit" [disabled]="productForm.invalid">Save the product!</button>
+        <ion-button type="submit" [disabled]="productForm.invalid">Enregistrer</ion-button>
     </form>
-</div>
 </ion-content>

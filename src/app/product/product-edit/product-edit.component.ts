@@ -1,30 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
-//import { IProduct, Product } from './../shared/model/product/product';
-//import { ProductService } from './../shared/model/product/product-service';
+import { ModalController } from '@ionic/angular';
+import { ModalComponent } from '../../modal/modal.component';
 import { Router } from '@angular/router';
+import { IProduct } from 'src/app/models/IProduct';
+import { ProductService } from '../../service/product.service';
+import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins;
 
 
 const HTTP_URL_PATTERN: string =
   '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
 
-
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styles: [
-  ]
 })
 export class ProductEditComponent implements OnInit {
 
+  @Input() data: IProduct;  
   public productForm: FormGroup
-  // This is used to store the subscription in order to clean it with the component
-  private productSubscription: Subscription
+  message = '';
 
-  constructor(fb: FormBuilder, route: ActivatedRoute, /*public productService: ProductService,*/ private router: Router) {
+  constructor(fb: FormBuilder, private route: ActivatedRoute, private productService: ProductService, private router: Router, public modalController: ModalController) {
     // We create our Form for product 
     this.productForm = fb.group({
              id: [null], // It is the same as `id: new FormControl(null)`
@@ -36,48 +35,34 @@ export class ProductEditComponent implements OnInit {
                  Validators.maxLength(80)
                 ] // All the validators to run against this field
               ],
-             productCode: [''],
-             releaseDate: [new Date()],
+       
              description: [''],
              price: [0, Validators.min(0)],
-             starRating: [0, [Validators.min(0), Validators.max(5)]],
              imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)]
         })   
-        // The observable below retrieve the URL and ensure that it is a valid number
-    let currentId$: Observable<number> = route.paramMap.pipe(   // The source is the router params
-      map(params => params.get('id')),                   // We extract the param named "id"
-      filter(id => id !== null),                       // We filter to get only if id is not null
-      map(id => Number(id))                              // We cast the string from URL to a Number
-    )
-
-    // The subscription below will be store in productSubscription to destroy it with the component
-    /*this.productSubscription = currentId$.pipe(                   // The source is the current id
-      switchMap(id => productService.getProductById$(id)), // We change the source with the product of current id
-      filter(product => product instanceof Product)      // We filter to avoid null/undefined value
-    ).subscribe( // We subscribe (think about unsubscribe)
-      product => this.productForm.setValue(product)         // We update the form
-    ) */
   }
 
-  ngOnInit(): void {
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
   }
 
-  // This methods run when Angular destroy a component (cf component life cycle)
-  ngOnDestroy(): void {
-    this.productSubscription.unsubscribe() // We unsubscribe from the observable
+  async ngOnInit(): Promise<void> {
+    this.productForm.patchValue(this.data); //met le contenu dans le formulaire
   }
 
-  /*public onSubmit() {
-    
-    console.log('Form submitted')
+  async onUpdateProduct() {
+    console.log('this.suggestionForm.value', this.productForm.value);      const result = await this.productService.updateProduct(this.productForm.value as any);
+    this.modalController.dismiss();
+  
+    await Toast.show({ 
+      text: 'Mise à jour effectué avec succès!'
+    });
+  }
 
-    if (this.productForm.valid) {
-      let data: IProduct = this.productForm.value
-      this.productService.save(data).subscribe(
-      product => console.log(`My product was saved ${product.id}`)
-      )
-    }
-
-    this.router.navigate(['/product']);
-  }*/
+    //this.router.navigate(['/product']);
 }
+

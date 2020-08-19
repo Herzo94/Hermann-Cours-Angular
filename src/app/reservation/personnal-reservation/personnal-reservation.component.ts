@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
+import { ModalController } from '@ionic/angular';
+import { IPersonalReservation } from '../../models/IPersonalReservation';
 
 
 @Component({
@@ -11,14 +13,17 @@ import { AuthService } from 'src/app/service/auth-service.service';
   styleUrls: ['./personnal-reservation.component.css']
 })
 export class PersonnalReservationComponent implements OnInit {
+  
+  user;
+  personalReservation;
+  personnalReservations: IPersonalReservation[] = [];
 
-  constructor(afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
+  constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
 
   
   ngOnInit() { 
-    
-
-    /*this.afAuth.authState.subscribe((user) => {
+  
+    this.afAuth.authState.subscribe((user) => {
       console.log('user', user);
 
       this.user = user;
@@ -28,10 +33,10 @@ export class PersonnalReservationComponent implements OnInit {
         this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
           (data) => {
             console.log('ngOnInt readPersonnalReservationById / data', data);
-            this.personalSpace = data;
+            this.personalReservation = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-              this.reservationService.createPersonalReservation(this.user);
+              //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
             }
           },
           (err) => {
@@ -39,7 +44,7 @@ export class PersonnalReservationComponent implements OnInit {
           }
         );
       }
-    });*/
+    });
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, from } from 'rxjs';
 import { Router } from '@angular/router';
 import { ReservationService } from './../../service/reservation.service';
 import { Plugins } from '@capacitor/core';
@@ -23,11 +22,11 @@ export class ReservationInsertComponent implements OnInit {
       id: [null], // It is the same as `id: new FormControl(null)`
       name: [
         '', // default value
-        /*[
+        [
           Validators.required, 
           Validators.minLength(3), 
           Validators.maxLength(30)
-         ]*/ // All the validators to run against this field
+         ] // All the validators to run against this field
        ],
     
       type: [
@@ -66,8 +65,7 @@ export class ReservationInsertComponent implements OnInit {
          ]*/ // All the validators to run against this field
        ],
 
-      /*price: [1, Validators.min(1)],
-      starRating: [0, [Validators.min(0), Validators.max(5)]],*/
+      /*price: [1, Validators.min(1)],*/
       
  }) 
    }

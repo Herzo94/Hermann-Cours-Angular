@@ -9,7 +9,7 @@ export class ProductSearchPipe implements PipeTransform  {
   transform(value: IProduct[], term: string = ''): IProduct[] {
     if (Array.isArray(value)) {
       return value.filter(product => {
-        const name = product.name.toLowerCase()
+        const name = product.productName.toLowerCase()
         return name.indexOf(term.toLowerCase()) > -1
       })
     } else {

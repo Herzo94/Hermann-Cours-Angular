@@ -3,75 +3,55 @@
       <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Product</ion-title>
+    <ion-title>Catalogue</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-  <div id="centerElements">
+  <ion-content class="ion-text-center ion-padding">
+  
+    <div *ngIf="products.length === 0; else prodList">
+      <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
+      <ion-icon name="search-sharp"></ion-icon><br>
+      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
+    
+      <p>loading...</p>
+    </div>
 
-<div style="display: flex; justify-content: center;"></div>
+    <ng-template #prodList>
+    <div>
 
-<div>
     <ion-label for="search">Search: </ion-label>
     <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products"></ion-input>
-    <ion-button (click)="toggleImage()">Show/Hide images</ion-button>
-    <ion-button 
-    *ngIf="authService.isAdmin"
-    type="button" [routerLink]="['/product', 'insert']">Insert the product</ion-button> 
+  
+    <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
+  
       
-</div>
-  <!-- <div *ngIf="products$ | async as products">-->
-    <div>
-    <table *ngIf="products.length > 0; else noProductTemplate"  
-        border="1"
-        cellspacing="0"
-        cellpadding="10">
-        <thead>
-            <tr>
-                <td *ngIf="displayImage">Image</td>
-                <td>Name</td>
-                <td>Description</td>
-                <td>Price</td>
-                <td>Rating</td>
-                <td
-                *ngIf="authService.isAdmin"
-                >Supprimer</td>
-            </tr>
-        </thead>
-        <tbody>
-                <tr *ngFor="let product of products | productSearch:searchTerm">
-                <td *ngIf="displayImage">
-                    <img [src]="product.image" width="100px" />
-                </td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.prix }}</td>
-                <td>{{ product.rating }}</td> 
-                <!--<td>
-                     <app-star [(rating)]="product.starRating"></app-star> 
-                </td>-->
-                <td><!-- <a [routerLink]="product.id">#{{ product.id }}</a> -->
-                <!--<button (click)="deleteProduct(product.id)">X</button> -->
-                <!-- <button
-                *ngIf="authService.isAdmin"
-                (click)="deleteProduct(product.id)"
-                >
-                X
-            </button>--> 
-            <ion-icon name="trash-outline"
-        *ngIf="authService.isAdmin"
-        (click)="deleteProduct(product.id)"
-      ></ion-icon>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <ng-template #noProductTemplate>
-        <h4>No product available! You can save money 💵💵💵 ;-)</h4>
-    </ng-template>
-</div>
-<div>
-  <!-- <button (click)="refreshProducts()">Refresh products</button> -->
-</div>
-</div>
+    <div *ngFor="let product of products | productSearch:searchTerm">
+      <ion-card>
+        <img [src]="product.imageUrl" width="300px" />
+
+        <ion-card-header>
+          <ion-card-title>{{ product.productName }}</ion-card-title>
+
+          <ion-icon name="create-outline"
+          *ngIf="authService.isAdmin"
+          (click)="modifProduct(product.id)"
+          ></ion-icon>
+
+          <ion-icon name="trash-outline"
+          *ngIf="authService.isAdmin"
+          (click)="deleteProduct(product.id)"
+          ></ion-icon>
+
+          <ion-card-subtitle>Prix : {{ product.price }} CHF</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ product.description }}        
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+</ng-template>
+
 </ion-content>
+

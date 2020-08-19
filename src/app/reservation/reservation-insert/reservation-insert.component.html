@@ -2,7 +2,7 @@
     <ion-toolbar>
     <ion-title>Insérer une réservation</ion-title>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
   <ion-content class="ion-text-center ion-padding">
     <div>
     <form [formGroup]="reservationForm" (ngSubmit)="onInsertReservation()">         
@@ -24,10 +24,6 @@
              </div>
          </div>
          <p>
-             <!-- <label>
-                Type Prestation : <input id="type" type="text" formControlName="type" /> 
-                <ion-input id="type" placeholder="Entrez un type de prestation" formControlName="type"></ion-input>
-             </label> -->
 
              <ion-label>Prestation</ion-label>
              <ion-select placeholder="Selectionner une prestation" formControlName="type">

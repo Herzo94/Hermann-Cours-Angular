@@ -1,55 +1,40 @@
 <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>Insérer un produit</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-<div>
-    <!--ReponseQues : Quand je quitte la routte des insert problème il ne sait pas ou aller -> c'est du au Subscription regarde les commentaire dans product  -->
-   <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()">      
+  <ion-content class="ion-text-center ion-padding">
+
+    <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()"> 
         
         <p>
-            <label>
-                productName: <input id="name" required type="text" formControlName="name" />
-            </label>
+            <ion-label> Nom Produit : </ion-label>
+            <ion-input id="productName" required type="text" formControlName="productName" placeholder="Entrez votre nom"></ion-input>
         </p>
-        <div *ngIf="productForm.get('name').invalid && (productForm.get('name').dirty || productForm.get('productName').touched)">
-            <div *ngIf="productForm.get('name').errors.required">
+        <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">
+            <div *ngIf="productForm.get('productName').errors.required">
                 The name is required
             </div>
-            <div *ngIf="productForm.get('name').errors.minlength as minlength">
+            <div *ngIf="productForm.get('productName').errors.minlength as minlength">
                 The name should be at least {{ minlength.requiredLength }} (actual: {{ minlength.actualLength }})
             </div>
-            <div *ngIf="productForm.get('name').errors.maxlength as maxlength">
+            <div *ngIf="productForm.get('productName').errors.maxlength as maxlength">
                 The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
             </div>
         </div>
         <p>
-            <label>
-                image: <input id="image" type="text" formControlName="imageUrl" />
-            </label>
+            <ion-label> Description: </ion-label>
+            <ion-input id="description" type="text" formControlName="description"></ion-input>
         </p>
         <p>
-            <label>
-                description: <input id="description" type="text" formControlName="description" />
-            </label>
-        </p>
-      
-        <p>
-            <label>
-                prix: <input id="prix" type="number" formControlName="prix" />
-            </label>
+            <ion-label> Prix : </ion-label>
+            <ion-input id="price" type="number" formControlName="price"></ion-input>    
         </p>
         <p>
-            <label>
-                starRating: <input id="rating" type="number" formControlName="rating" />
-            </label>
+            <ion-label> Image: </ion-label>
+            <ion-input id="imageUrl" type="text" formControlName="imageUrl"></ion-input> <!-- mettre type="file"--> 
         </p>
-     
-        <button type="submit" [disabled]="productForm.invalid">Save the product!</button>
+
+        <ion-button type="submit" [disabled]="productForm.invalid">Enregistrer</ion-button>
     </form>
-</div>
 </ion-content>

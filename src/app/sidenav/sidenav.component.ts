@@ -15,17 +15,19 @@ export class SidenavComponent implements OnInit {
   fillerNav=[
     //{name:"Dashboard", route:"dashboard", icon:"keypad-outline"},
     //{name:"Prestations", route:"prestation", icon:"home-outline"},
-    {name:"Reservations", route:"reservation", icon:"book"},
-    {name:"User", route:"user", icon:"home-outline"},
-    {name:"Commandes", route:"commande", icon:"book-outline"},
-    {name:"Products", route:"product", icon:"category"},
+    {name:"Reservations", route:"reservation", icon:"calendar-outline"},
+    {name:"Personnal Reservation", route:"personnal-reservation", icon:"man-outline"},
+    {name:"Utilisateurs", route:"user", icon:"people-outline"},
+    //{name:"Commandes", route:"commande", icon:"book-outline"},
+    {name:"Catalogue", route:"product", icon:"cart-outline"},
     {name:"Profil", route:"profil", icon:"person-outline"},
     {name:"Contact", route:"contact", icon:"mail-outline"}
   ]
 
-  fillerContent = Array(50).fill(0).map(() => 
+  /*fillerContent = Array(50).fill(0).map(() => 
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco`);
+  */ 
 
   isAuth = false;
 

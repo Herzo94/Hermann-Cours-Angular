@@ -19,13 +19,6 @@ const { Toast } = Plugins;
 })
 export class UserListComponent implements OnInit {
   users$: Observable<any[]>;
-  /*private usersCollection: AngularFirestoreCollection<IUser>;
-  users$: Observable<IUser[]>
-  users: IUser[] = [];
-  sub;
-  public searchTerm: string = '';
-*/
-  //constructor(private userService: UserService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
 
   constructor(private afs: UserService, public authService : AuthService, public modalController: ModalController) { }
 

@@ -8,5 +8,14 @@
 </ion-header>
   <ion-content class="ion-text-center ion-padding">
 
-   
+    <p>En construction</p>
+
+    <div *ngFor="let res of personnalReservations">
+        <div>Nom Client : {{ res.name }}</div>
+        <div>Date : {{ res.date }}</div>
+        <div>Heure : {{ res.heure }}</div>
+        <div>Type Prestation : {{ res.type }}</div>
+        <div>Spécialiste : {{ res.employe }}</div>
+        <br />
+    </div>
 </ion-content>

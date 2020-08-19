@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
 import { IReservation } from '../models/IReservation';
 import { Observable } from 'rxjs';
+import { IPersonalReservation } from '../models/IPersonalReservation';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
+  private personalReservationCollection: AngularFirestoreCollection<IPersonalReservation>;
+  personalReservation: Observable<IPersonalReservation[]>;
 
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore) {
+    this.personalReservationCollection = afs.collection<IPersonalReservation>(
+      'personnal-reservation'
+    );
+    this.personalReservation = this.personalReservationCollection.valueChanges();
+  }
 
   readPersonalReservationByUID(id: string) { /*Question ici comment afficher les réservations d'un utilisateur*/
     return this.afs
@@ -17,13 +26,32 @@ export class ReservationService {
   }
 
   /*createPersonalReservation(user) {
-    return this.personalSpaceCollection.doc(`ps-${user.uid}`).set({
+    return this.personalReservationCollection.doc(`ps-${user.uid}`).set({
       uid: user.uid,
-      displayName: user.displayName,
+      //displayName: user.displayName,
+      name: reservation.name,
+      type : reservation.type,
+      employe: reservation.employe,
+      date: reservation.date,
+      heure: reservation.heure
       createdAt: Date.now(),
+
     });
   }*/
-  
+
+  /*createPersonalReservation(){
+      return this.personalReservationCollection.doc(`ps-${uid}`).set({
+        uid,
+        name,
+        type,
+        employe,
+        date,
+        heure,
+        createdAt
+      });
+  }*/
+
+
   readReservation() {
     return this.afs.collection<IReservation>('table-reservation', (ref) =>
       ref.orderBy('date', 'asc')

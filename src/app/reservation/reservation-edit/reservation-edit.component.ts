@@ -12,7 +12,6 @@ const { Toast } = Plugins;
 @Component({
   selector: 'app-reservation-edit',
   templateUrl: './reservation-edit.component.html',
-  styleUrls: ['./reservation-edit.component.css']
 })
 export class ReservationEditComponent implements OnInit {
 
@@ -68,13 +67,10 @@ export class ReservationEditComponent implements OnInit {
           Validators.maxLength(40)
          ]*/ // All the validators to run against this field
        ],
-
-      /*price: [1, Validators.min(1)],
-      starRating: [0, [Validators.min(0), Validators.max(5)]],*/
       
  }) 
    }
-  /*note*/ 
+
    async presentModal() {
     const modal = await this.modalController.create({
       component: ModalComponent,
@@ -92,10 +88,9 @@ export class ReservationEditComponent implements OnInit {
     const result = await this.reservationService.updateReservation(this.reservationForm.value as any);
     this.modalController.dismiss();
 
-    await Toast.show({ //si problème -> Stackoverflow 
+    await Toast.show({ 
       text: 'Mise à jour effectué avec succès!'
     });
   }
-
   
 }

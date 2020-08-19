@@ -43,7 +43,6 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   searchReservation: string;
 
   public async insertReservation(){
-    //this.router.navigate([`reservation/${id}/edit`])
   
       const modal = await this.modalController.create({
         component: ReservationInsertComponent,
@@ -53,7 +52,6 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   }
 
   public async modifReservation(id){
-    //this.router.navigate([`reservation/${id}/edit`])
   
       const modal = await this.modalController.create({
         component: ReservationEditComponent,
@@ -72,10 +70,6 @@ export class ReservationListComponent implements OnInit, OnDestroy {
       text: 'Suppression effectuée avec succès!'
     });
   }
-  
-  /*public refreshReservations() {
-    //this.reservationService.fetch()
-  }*/
 
   ngOnDestroy() {
     this.sub.unsubscribe();
