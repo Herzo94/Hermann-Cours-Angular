@@ -28,8 +28,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   public searchTerm: string = '';
 
   public productSearch: string = '';
-  public myBorderSize: number = 1;
-  public displayImage: boolean = true;
+  /*public myBorderSize: number = 1;
+  public displayImage: boolean = true;*/
 
   user;
   photo = { file: '', title: '' };
@@ -49,7 +49,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }).subscribe(data => {
       this.products = data;
     })
-    
   }
 
   onFileChange(e) {

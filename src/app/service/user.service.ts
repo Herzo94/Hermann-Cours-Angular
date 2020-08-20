@@ -1,31 +1,42 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { IUser } from '../models/IUser';
 import { Observable } from 'rxjs';
+import { firestore } from 'firebase';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private userCollection: AngularFirestoreCollection<IUser>;
+  users: Observable<IUser[]>;
+
   collectionName = 'table-user';
-  valueAdmin = 'admin';
-  valueSuperAdmin = 'superAdmin';
+  valueAdmin = 'Admin';
+  valueSuperAdmin = 'SuperAdmin';
   
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
-  /*readUser() {
-    //this.afs.collection(`${this.collectionName}`);
-    return this.afs.collection<IUser>('table-user');
-  }*/
+  readUser() {
+    return this.afs.collection(`${this.collectionName}`, (ref) => 
+      ref.orderBy('createdAt', 'asc')
+    );
+  }
+
+  readUserWithUID(uid: string) {
+    return this.afs
+      .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
+      .valueChanges({ idField: 'id' });
+  }
 
   createUser (user) { //créer l'utilisateur dans une collection
     const  newUser = {
       uid: user.uid, //Je prends ici l'id de l'utilisateur
       email: user.email,
       emailVerified: user.emailVerified,
-      type: this.valueAdmin, //Question : C'est ici que je dois récupérer la valeur du champ "type" du formulaire de si c'est un super admin ou un admin simple. Mais je ne vois pas comment faire ?
-      //this.userForm.value.type,
+      type: '',
       createdAt: new Date(),
     }
 
@@ -33,17 +44,16 @@ export class UserService {
     return usersCollection.add(newUser);
   }
 
-  createSuperAdmin (user) { //créer l'utilisateur dans une collection
-    const  newUser = {
-      uid: user.uid, //Je prends ici l'id de l'utilisateur
-      email: user.email,
-      emailVerified: user.emailVerified,
-      type: this.valueAdmin, //Question : C'est ici que je dois récupérer la valeur du champ "type" du formulaire de si c'est un super admin ou un admin simple. Mais je ne vois pas comment faire ?
-      createdAt: new Date(),
-    }
-
-    const usersCollection = this.afs.collection(`${this.collectionName}`); //créer ici le typage pour l'interface <IUser> -> 3:51 à la vidéo
-    return usersCollection.add(newUser);
+  createUsertWithUID(user) {
+    return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({
+      uid: user.uid,
+      displayName: user.displayName,
+      createdAt: Date.now(),
+      imageUrl: '',
+      productName: '',
+      description : '',
+      price: '', 
+    });
   }
 
   getUsers() {
@@ -52,5 +62,18 @@ export class UserService {
 
   getUser(id) {
     return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
+  }
+
+  updateUserWithUID(user) {
+    return this.afs
+      .collection(`${this.collectionName}`)
+      //.doc(`ps-${user.uid}`)
+      .doc(`${this.collectionName}-${user.uid}`)
+  }
+
+  deleteUser(id) { 
+    return this.afs
+      .doc<IUser>(`${this.collectionName}/${id}`)
+      .delete();
   }
 }

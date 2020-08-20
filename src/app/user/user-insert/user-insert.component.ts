@@ -36,25 +36,21 @@ export class UserInsertComponent implements OnInit {
 
   async onInsertUser() { 
     this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.email,this.userForm.value.password); //Création dans authentification
-
-    this.userForm.reset();
+    //Création dans la base de donnée dans la table user
+    //const result = await this.userService.createUser(this.userForm.value.email, this.userForm.value.password, this.userForm.value.type);
+    
     if( this.result && this.result.user) {
-      const userCreated = await this.userService.createUser(this.result.user);
-      console.log('userCreated', userCreated);
+      //console.log('userCreated', result);
       this.result = null;
     }
 
-    /*const result = await this.userService.createUser( //Création dans la base de donnée dans la table user
-      this.userForm.value.email,
-      //this.userForm.value.password,
-      //this.userForm.value.type,
-    );*/
     
+    this.userForm.reset();
+
     await Toast.show({ 
       text: 'Insertion effectué avec succès!'
     });
 
-    this.userForm.reset();
     this.router.navigate(['/user']);
   }
 

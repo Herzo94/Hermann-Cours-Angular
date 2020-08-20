@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { IProduct } from '../models/IProduct';
 import { Observable } from 'rxjs';
 import { firestore } from 'firebase';
 import { Router } from '@angular/router';
-
 
 @Injectable({
   providedIn: 'root'
@@ -13,28 +12,29 @@ export class ProductService {
   private imageProductCollection: AngularFirestoreCollection<IProduct>;
   imagesProducts: Observable<IProduct[]>;
 
+  collectionName = 'table-product';
   constructor(private afs: AngularFirestore, private router: Router ) { }
 
   readProduct() {
-    return this.afs.collection<IProduct>('table-product', (ref) =>
+    return this.afs.collection<IProduct>(`${this.collectionName}`, (ref) =>
       ref.orderBy('createdAt', 'asc')
     );
   }
 
   readImageWithUID(uid: string) {
     return this.afs
-      .collection('table-product', (ref) => ref.where('uid', '==', uid))
+      .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'id' });
   }
 
   createProduct(imageUrl, productName, description, price, createdAt, uid) {
     return this.afs
-      .collection('table-product')
+      .collection(`${this.collectionName}`)
       .add({imageUrl, productName, description, price, createdAt, uid});
   }
 
   createProductWithUID(user) {
-    return this.imageProductCollection.doc(`table-product-${user.uid}`).set({
+    return this.imageProductCollection.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
       createdAt: Date.now(),
@@ -47,7 +47,7 @@ export class ProductService {
 
   //Update product
   updateProduct(product) {
-    return this.afs.doc(`table-product/${product.id}`).update({
+    return this.afs.doc(`${this.collectionName}/${product.id}`).update({
       ...product,
       imageUrl: product.imageUrl,
       name: product.productName,
@@ -59,9 +59,9 @@ export class ProductService {
 
   updateProductsWithUID(user, photoURL) {
     return this.afs
-      .collection('table-product')
+      .collection(`${this.collectionName}`)
       //.doc(`ps-${user.uid}`) //décommenter ce bout de code si ça ne marche pas 
-      .doc(`table-product-${user.uid}`)
+      .doc(`${this.collectionName}-${user.uid}`)
       .update({
         photoURLs: firestore.FieldValue.arrayUnion(photoURL),
       });
@@ -71,7 +71,7 @@ export class ProductService {
   
   deleteProduct(id) {
     return this.afs
-      .doc<IProduct>(`table-product/${id}`)
+      .doc<IProduct>(`${this.collectionName}/${id}`)
       .delete();
   }
 }

@@ -10,29 +10,30 @@ import { Router } from '@angular/router';
 export class ReservationService {
   private reservationCollection: AngularFirestoreCollection<IReservation>;
   reservations: Observable<IReservation[]>;
+  collectionName = 'table-reservation';
 
   constructor(private afs: AngularFirestore, private router: Router) { }
 
   readReservation() {
-    return this.afs.collection<IReservation>('table-reservation', (ref) =>
+    return this.afs.collection<IReservation>(`${this.collectionName}`, (ref) =>
       ref.orderBy('date', 'asc')
     );
   }
 
   readPersonalReservationByUID(uid: string) { /*Question ici comment afficher les réservations d'un utilisateur en faisant une requête ?*/
     return this.afs
-    .collection('table-reservation', (ref) => ref.where('uid', '==', uid))
+    .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
     .valueChanges({ idField: 'id' });
 }
 
   createReservation(name, type, employe, date, heure, uid) {
     return this.afs
-      .collection('table-reservation')
+      .collection(`${this.collectionName}`)
       .add({ name, type, employe, date, heure, uid });
   }
 
   createReservationWithUID(user) {
-    return this.reservationCollection.doc(`table-reservation-${user.uid}`).set({
+    return this.reservationCollection.doc(`${this.collectionName}-${user.uid}`).set({
       name: '',
       type: '',
       employe : '',
@@ -44,12 +45,12 @@ export class ReservationService {
   }
 
   getByIdReservation(id): Observable<IReservation> { //je retourne un observable
-    return this.afs.doc<IReservation>(`table-reservation/${id}`).valueChanges();
+    return this.afs.doc<IReservation>(`${this.collectionName}/${id}`).valueChanges();
   }
 
   //Update reservation
   updateReservation(reservation) {
-    return this.afs.doc(`table-reservation/${reservation.id}`).update({
+    return this.afs.doc(`${this.collectionName}/${reservation.id}`).update({
       ...reservation,
       name: reservation.name,
       type : reservation.type,
@@ -61,14 +62,14 @@ export class ReservationService {
 
   updateReservationWithUID(user) {
     return this.afs
-      .collection('table-reservation')
+      .collection(`${this.collectionName}`)
       //.doc(`ps-${user.uid}`)
-      .doc(`table-reservation-${user.uid}`)
+      .doc(`${this.collectionName}-${user.uid}`)
   }
 
   deleteReservation(id) { 
     return this.afs
-      .doc<IReservation>(`table-reservation/${id}`)
+      .doc<IReservation>(`${this.collectionName}/${id}`)
       .delete();
   }
 }

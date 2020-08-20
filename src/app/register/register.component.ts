@@ -48,19 +48,20 @@ async register() {
   if (!this.registerForm.valid) {
     return;
   } 
-  //this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
-  this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
+  this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
+  
+  //this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
 
-  await Toast.show({ //si problème -> Stackoverflow 
-    text: 'Enregistrement du compte effectué avec succès!'
-  });
-
-  this.registerForm.reset();
-  if( this.result && this.result.user) {
+  if(this.result) {
     const userCreated = await this.userService.createUser(this.result.user);
     console.log('userCreated', userCreated);
     this.result = null;
   }
+  this.registerForm.reset();
+
+  await Toast.show({ //si problème -> Stackoverflow 
+    text: 'Enregistrement du compte effectué avec succès!'
+  });
 }
 
 onActif(){

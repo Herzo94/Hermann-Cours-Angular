@@ -7,70 +7,51 @@
     </ion-toolbar>
 </ion-header>
   <ion-content class="ion-text-center ion-padding">
+    
+      <div *ngIf="users.length === 0; else userList">
+        <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>    
+          <p>loading...</p>
+      </div>
 
-    <div *ngIf="(users$ | async)">
+    <ng-template #userList>
+      <div>
+        <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
+          <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
+        </ion-input>
+        <br>
+      
         <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
- 
-        <div *ngFor="let user of users$ | async">
-            
-            <div>
+     </div> 
+        <div *ngFor="let user of users | userSearch:searchTerm">
+           
               <ion-list>
                 <ion-item class="ion-text-center" style="border-bottom: 1px solid gray; margin-bottom:15px;">
-                  <!-- <ion-avatar>
+                  <ion-avatar>
                     <img src="https://ionicframework.com/docs/demos/api/list/avatar-ben.png">
-                  </ion-avatar>-->
+                  </ion-avatar>
                   <ion-label>
                     <a [routerLink]="['/user-detail', user.id]">{{user.email}}</a>
+                    <!-- <p>{{user.email}}</p> -->
                     <p>Info1</p>
                     <p>Info2</p>
                     <!-- Afficher les privilège de l'utilisateur -->
                     
+                  <ion-icon 
+                    name="create-outline"
+                    *ngIf="authService.isAdmin"
+                    (click)="updateUserWithUID(user.id)"
+                  >
+                  </ion-icon>
+              
+                  <ion-icon name="trash-outline"
+                    *ngIf="authService.isAdmin"
+                    (click)="deleteUser(user.id)"
+                  ></ion-icon>
+                    
                   </ion-label>
                 </ion-item>
               </ion-list>
-            </div>
-
         </div>
-    </div>
-    
-    <div *ngIf="!(users$ | async)">
-        loading...
-    </div>
+</ng-template>
 
-<!-- <div *ngIf="users.length === 0; else userList">
-  loading...
-</div>
-
-<ng-template #userList>-->
-
-<!-- <div>
-  <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-  <ion-icon name="search-sharp"></ion-icon><br>
-
-  <ion-icon *ngIf="authService.isSuperAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
-</div> 
-<p>Cool</p>
-<br>-->
-<!-- <div *ngFor="let user of users"> -->
-
-
-  <!-- <div *ngFor="let user of users | userSearch:searchTerm"> -->
-    <!-- <div>User : {{ user.name }}
-
-   <ion-icon name="create-outline"
-      *ngIf="authService.isSuperAdmin"
-      (click)="modifUser(user.id)"
-    ></ion-icon>
-
-    <ion-icon name="trash-outline"
-      *ngIf="authService.isSuperAdmin"
-      (click)="deleteUser(user.id)"
-    ></ion-icon>
-
-    </div>
-    <div>User : {{ user ? }}</div> -->
-  
-   <!--  <br />
-  </div>
-</ng-template>-->
 </ion-content>
