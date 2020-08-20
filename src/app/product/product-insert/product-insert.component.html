@@ -7,38 +7,48 @@
 
     <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()"> 
         
-        <p>
+         <p>
             <ion-label> Nom Produit : </ion-label>
-            <ion-input id="productName" required type="text" formControlName="productName" placeholder="Entrez votre nom"></ion-input>
+            <ion-input id="productName" required type="text" formControlName="productName" placeholder="Entrez votre nom" required></ion-input>
         </p>
         <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">
-            <div *ngIf="productForm.get('productName').errors.required">
+           <div *ngIf="productForm.get('productName').errors.required">
                 The name is required
             </div>
-            <div *ngIf="productForm.get('productName').errors.minlength as minlength">
+           <div *ngIf="productForm.get('productName').errors.minlength as minlength">
                 The name should be at least {{ minlength.requiredLength }} (actual: {{ minlength.actualLength }})
-            </div>
+            </div> 
             <div *ngIf="productForm.get('productName').errors.maxlength as maxlength">
                 The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
             </div>
         </div>
         <p>
             <ion-label> Description: </ion-label>
-            <ion-input id="description" type="text" formControlName="description"></ion-input>
+            <ion-input id="description" type="text" formControlName="description" placeholder="Entrez votre description" required></ion-input>
         </p>
         <p>
             <ion-label> Prix : </ion-label>
-            <ion-input id="price" type="number" formControlName="price"></ion-input>    
+            <ion-input id="price" type="number" formControlName="price" required></ion-input>    
         </p>
         <p>
             <ion-label> Image: </ion-label>
-            <ion-input id="imageUrl" type="file" formControlName="imageUrl"></ion-input>
+
+            <ion-input 
+            id="imageUrl" 
+            name="imageUrl" 
+            type="file" 
+            formControlName="imageUrl"
+            (change)="onFileChange($event)"
+            required
+            
+            ></ion-input>
         </p>
 
-        <!-- <div>
+        <div>
             <img [src]="uploadedImgURL" alt="" style="width: 150px;" />
-        </div> -->
-
+        </div> 
+        
+        <!-- <ion-button type="submit">Enregistrer</ion-button> -->
         <ion-button type="submit" [disabled]="productForm.invalid">Enregistrer</ion-button>
     </form>
 </ion-content>

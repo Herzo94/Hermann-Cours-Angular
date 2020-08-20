@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
 import { IProduct } from '../models/IProduct';
 
 import { map, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+import { firestore } from 'firebase';
 import { Router } from '@angular/router';
 
 
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ProductService {
+  private imageProductCollection: AngularFirestoreCollection<IProduct>;
+  imagesProducts: Observable<IProduct[]>;
 
   constructor(private afs: AngularFirestore, private router: Router ) { }
 
@@ -21,10 +23,29 @@ export class ProductService {
     );
   }
 
-  createProduct(imageUrl, productName, description, price, createdAt) {
+  readImageWithUID(uid: string) {
+    return this.afs
+      .collection('table-product', (ref) => ref.where('uid', '==', uid))
+      .valueChanges({ idField: 'id' });
+  }
+
+  createProduct(imageUrl, productName, description, price, createdAt, uid) {
     return this.afs
       .collection('table-product')
-      .add({imageUrl, productName, description, price, createdAt});
+      .add({imageUrl, productName, description, price, createdAt, uid});
+  }
+
+  createProductWithUID(user) {
+    return this.imageProductCollection.doc(`table-product-${user.uid}`).set({
+      uid: user.uid,
+      displayName: user.displayName,
+      createdAt: Date.now(),
+      imageUrl: '',
+      productName: '',
+      description : '',
+      price: '',
+      
+    });
   }
 
   //Update product
@@ -37,6 +58,15 @@ export class ProductService {
       price: product.price,
       //createdAt: Date.now(),
     });
+  }
+
+  updateProductsWithUID(user, photoURL) {
+    return this.afs
+      .collection('table-product')
+      .doc(`ps-${user.uid}`)
+      .update({
+        photoURLs: firestore.FieldValue.arrayUnion(photoURL),
+      });
   }
 
   //Suppression avec modal ou juste en cliquant sur la croix

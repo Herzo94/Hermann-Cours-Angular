@@ -98,7 +98,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public async insertProduct(){
-  
       const modal = await this.modalController.create({
         component: ProductInsertComponent,
         cssClass: 'my-custom-class',
