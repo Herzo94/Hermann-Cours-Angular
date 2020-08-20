@@ -65,7 +65,6 @@ export class ProductInsertComponent implements OnInit {
 
   async onInsertProduct() {
     console.log('photo: ',this.photo);
-    console.log('uid : ');
     console.log('uid : ',this.user.uid);
    
     const uid = this.user.uid;
@@ -95,7 +94,8 @@ export class ProductInsertComponent implements OnInit {
             console.log('data >>> ', data);
             console.log('photoServerURL >>> ', this.photoServerURL);
             this.uploadedImgURL = data;
-
+            
+            console.log('uploadedImgURL', this.uploadedImgURL);
             const result = this.productService.createProduct(
               this.productForm.value.imageUrl,
               this.productForm.value.productName,
