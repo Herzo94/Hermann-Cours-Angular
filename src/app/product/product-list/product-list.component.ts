@@ -60,7 +60,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   postPhoto() {
     console.log(this.photo);
     const uid = this.user.uid;
-    const photoPathOnServer = `personal-space/${uid}/${this.photo.title}`;
+    const photoPathOnServer = `image-producs/${uid}/${this.photo.title}`;
     const photoRef = this.afStorage.ref(photoPathOnServer);
     this.photoServerURL = '';
 

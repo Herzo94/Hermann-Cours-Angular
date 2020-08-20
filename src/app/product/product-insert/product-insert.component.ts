@@ -6,7 +6,7 @@ import { ProductService } from './../../service/product.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { DbService } from '../../service/db.service';
+
 
 import { Plugins } from '@capacitor/core';
 const { Toast } = Plugins;
@@ -26,8 +26,8 @@ export class ProductInsertComponent implements OnInit {
   uploadedImgURL = '';
   personalSpace;
 
-  constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router, private afAuth: AngularFireAuth, private afStorage: AngularFireStorage, /*private db: DbService*/ private prodService : ProductService) { }
-
+  constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router, private afAuth: AngularFireAuth, private afStorage: AngularFireStorage) { }
+  //ENLEVER LA VARIABLE prodService, car c'est répétitif
   ngOnInit() {
   //ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -44,13 +44,13 @@ export class ProductInsertComponent implements OnInit {
       if (this.user) {
         // console.log(this.db.readPersonalSpaceByUID(user.uid));
 
-        this.prodService.readImageWithUID(user.uid).subscribe(
+        this.productService.readImageWithUID(user.uid).subscribe(
           (data) => {
             console.log('ngOnInt readPersonnalSpaceById / data', data);
             this.personalSpace = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-              this.prodService.createProductWithUID(this.user);
+              this.productService.createProductWithUID(this.user);
             }
           },
           (err) => {
@@ -60,8 +60,6 @@ export class ProductInsertComponent implements OnInit {
       }
     });
   }
-
- 
 
   async onInsertProduct() {
     console.log('photo: ',this.photo);
@@ -74,7 +72,6 @@ export class ProductInsertComponent implements OnInit {
     this.photoServerURL = '';
 
     console.log('photoPathOnServer', photoPathOnServer);
-    //console.log('uid', uid);
     console.log('this.photo.file', this.photo.file);
     console.log('this.photo.title', this.photo.title);
 
@@ -110,9 +107,15 @@ export class ProductInsertComponent implements OnInit {
             if ((result as any)) {
               this.message = `Product créé avec l'id ${(result as any).id}`;
             }
+
+            Toast.show({ //à tester si ok
+              text: 'Insertion effectué avec succès!'
+            });
+
             this.productForm.reset();
             this.router.navigate(['/product']);
-
+            
+            //Question à voir avec Nico : à décommenter plus tard ou même effacer 
             /*this.prodService.updateProductsWithUID(
               this.user,
               this.uploadedImgURL
@@ -120,9 +123,7 @@ export class ProductInsertComponent implements OnInit {
           });
         })
       )
-      .subscribe();
-
-    
+      .subscribe();   
   }
 
   

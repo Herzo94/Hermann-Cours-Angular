@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
 import { IProduct } from '../models/IProduct';
-
-import { map, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { firestore } from 'firebase';
 import { Router } from '@angular/router';
 
@@ -19,7 +17,7 @@ export class ProductService {
 
   readProduct() {
     return this.afs.collection<IProduct>('table-product', (ref) =>
-      ref.orderBy('createdAt', 'desc')
+      ref.orderBy('createdAt', 'asc')
     );
   }
 
@@ -43,8 +41,7 @@ export class ProductService {
       imageUrl: '',
       productName: '',
       description : '',
-      price: '',
-      
+      price: '', 
     });
   }
 
@@ -63,7 +60,8 @@ export class ProductService {
   updateProductsWithUID(user, photoURL) {
     return this.afs
       .collection('table-product')
-      .doc(`ps-${user.uid}`)
+      //.doc(`ps-${user.uid}`) //décommenter ce bout de code si ça ne marche pas 
+      .doc(`table-product-${user.uid}`)
       .update({
         photoURLs: firestore.FieldValue.arrayUnion(photoURL),
       });

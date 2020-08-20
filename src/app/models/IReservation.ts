@@ -5,4 +5,5 @@ export interface IReservation {
     employe: string;
     date: string;
     heure: string;
+    uid: string;
   }

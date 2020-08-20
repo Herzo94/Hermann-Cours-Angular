@@ -51,7 +51,6 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserInsertComponent } from './user/user-insert/user-insert.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
-import { PersonnalReservationComponent } from './reservation/personnal-reservation/personnal-reservation.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +84,6 @@ import { PersonnalReservationComponent } from './reservation/personnal-reservati
     UserInsertComponent,
     UserEditComponent,
     UserListComponent,
-    PersonnalReservationComponent,
   
   ],
   imports: [
