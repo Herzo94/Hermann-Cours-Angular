@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ReservationService } from 'src/app/service/reservation.service';
+import { PersonalReservationService } from 'src/app/service/personal-reservation.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { ModalController } from '@ionic/angular';
 import { IPersonalReservation } from '../../models/IPersonalReservation';
+import { InsertPersonalReservationComponent } from '../insert-personal-reservation/insert-personal-reservation.component';
+import { UserService } from '../../service/user.service';
+import { Observable } from 'rxjs';
+import { IUser } from 'src/app/models/IUser';
 
 
 @Component({
@@ -17,26 +21,36 @@ export class PersonnalReservationComponent implements OnInit {
   user;
   personalReservation;
   personnalReservations: IPersonalReservation[] = [];
+  public searchTerm: string = '';
+  users$: Observable<any[]>;
+  
   
 
-  constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
+  constructor(private afAuth: AngularFireAuth, private personalReservationService: PersonalReservationService, private router : Router, public authService : AuthService, public modalController: ModalController, private userService: UserService) 
+  
+  {
+    this.users$ = this.userService.getUsers() as Observable<unknown[]>;
+  }
 
   
-  ngOnInit() { 
+  ngOnInit(): void { 
   
-    this.afAuth.authState.subscribe((user) => {
+    //this.users$ = this.userService.getUsers(); //initialisation à l'observable du getUsers() sans id
+    
+
+    /*this.afAuth.authState.subscribe((user) => {
       console.log('user', user);
 
       this.user = user;
       if (this.user) {
-         console.log(this.reservationService.readPersonalReservationByUID(user.uid));
+         console.log(this.personalReservationService.readPersonalSpaceByUID(user.uid));
 
-        this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
+        this.personalReservationService.readPersonalSpaceByUID(user.uid).subscribe(
           (data) => {
             console.log('ngOnInt readPersonnalReservationById / data', data);
             this.personalReservation = data;
             if (!data || data.length === 0) {
-              console.log(`Creating a new space for ${user.displayName}`);
+              console.log(`Creating a personnal reservation space for ${user.displayName}`);
               //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
               //lié l'élément ici à une collection par exemple
             }
@@ -46,7 +60,15 @@ export class PersonnalReservationComponent implements OnInit {
           }
         );
       }
-    });
+    });*/
   }
 
+    public async insertPersonalReservation(){
+    
+      const modal = await this.modalController.create({
+        component: InsertPersonalReservationComponent,
+        cssClass: 'my-custom-class',
+      });
+      return await modal.present();  
+  }
 }

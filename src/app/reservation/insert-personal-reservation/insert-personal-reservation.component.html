@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar>
+    <ion-title>Insérer une réservation personnelle</ion-title>
+    </ion-toolbar>
+</ion-header>
+  <ion-content class="ion-text-center ion-padding">
+    <div>
+    <form [formGroup]="reservationPersonalForm" (ngSubmit)="onInsertPersonalReservation()">         
+         <p>
+             <label>
+                 Nom Client:
+                 <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
+             </label>
+         </p>
+         <div *ngIf="reservationPersonalForm.get('name').invalid && (reservationPersonalForm.get('name').dirty || reservationPersonalForm.get('name').touched)">
+             <div *ngIf="reservationPersonalForm.get('name').errors.required">
+                 The name is required
+             </div>
+             <div *ngIf="reservationPersonalForm.get('name').errors.minlength as minlength">
+                 The name should be at least {{ minlength.requiredLength }} (actual: {{ minlength.actualLength }})
+             </div>
+             <div *ngIf="reservationPersonalForm.get('name').errors.maxlength as maxlength">
+                 The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
+             </div>
+         </div>
+         <p>
+
+             <ion-label>Prestation</ion-label>
+             <ion-select placeholder="Selectionner une prestation" formControlName="type">
+                <ion-select-option value="Pose complète gel">Pose complète gel</ion-select-option>
+                <ion-select-option value="Remplissage naturel">Remplissage naturel</ion-select-option>
+                <ion-select-option value="Remplissage gel vernis semi-permanent">Remplissage gel vernis semi-permanent</ion-select-option>
+                <ion-select-option value="Suppplement ongles cassés">Supplément ongles cassés</ion-select-option>
+                <ion-select-option value="Reparation ongle cassé">Réparation ongle cassé (hors remplissage)	</ion-select-option>
+                <ion-select-option value="Depose gel">Dépose gel</ion-select-option>
+                <ion-select-option value="Nail art/déco">Nail art/déco</ion-select-option>
+              </ion-select>
+         </p>
+         
+         <p>
+            <ion-item>
+                <ion-label>Spécialiste</ion-label>
+                <ion-select placeholder="Selectionner une spécialiste" formControlName="employe">
+                  <ion-select-option value="Giliane">Giliane</ion-select-option>
+                  <ion-select-option value="Christelle">Christelle</ion-select-option>
+                  <ion-select-option value="Stephanie">Stéphanie</ion-select-option>
+                  <ion-select-option value="Carmen">Carmen</ion-select-option>
+                </ion-select>
+              </ion-item>
+         </p>
+       
+         <p>
+             <ion-label>Date :</ion-label>
+             <ion-input id="date" formControlName="date" type="date"></ion-input>
+         </p>
+         <p>
+           
+             <ion-label>Heure :</ion-label>
+             <ion-input id="heure" formControlName="heure" type="time"></ion-input>
+         </p>
+         <ion-button type="submit" [disabled]="reservationPersonalForm.invalid">Enregistrer</ion-button>
+     </form>
+ </div>
+</ion-content>
