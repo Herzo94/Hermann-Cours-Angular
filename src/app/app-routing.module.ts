@@ -24,7 +24,7 @@ import { UserComponent } from './user/user.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserInsertComponent } from './user/user-insert/user-insert.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
-import { PersonnalReservationComponent } from './reservation/personnal-reservation/personnal-reservation.component';
+import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 
 const routes: Routes = [
  
@@ -39,7 +39,7 @@ const routes: Routes = [
   ]},
   { path: 'user-detail/:id', component: UserDetailComponent },
   { path: 'dashboard', canActivate: [AuthGuardService] , component: DashboardComponent },
-  { path: 'personnal-reservation', canActivate: [AuthGuardService] , component: PersonnalReservationComponent },
+  { path: 'mes-reservations', canActivate: [AuthGuardService] , component: MesReservationsComponent },
 
   { path: 'product', canActivate: [AuthGuardService] , component: ProductListComponent, children: [
     { path: 'insert', component: ProductInsertComponent},

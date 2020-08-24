@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
 import { IReservation } from '../models/IReservation';
 import { Observable } from 'rxjs';
-import { IPersonalReservation } from '../models/IPersonalReservation';
+import { IMesReservations } from '../models/IReservation';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private personalReservationCollection: AngularFirestoreCollection<IPersonalReservation>;
-  personalReservation: Observable<IPersonalReservation[]>;
+  private personalReservationCollection: AngularFirestoreCollection<IMesReservations>;
+  personalReservation: Observable<IMesReservations[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.personalReservationCollection = afs.collection<IPersonalReservation>(
+    this.personalReservationCollection = afs.collection<IMesReservations>(
       'personnal-reservation'
     );
     this.personalReservation = this.personalReservationCollection.valueChanges();
@@ -21,7 +21,7 @@ export class ReservationService {
 
   readPersonalReservationByUID(id: string) { /*Question ici comment afficher les réservations d'un utilisateur*/
     return this.afs
-      .collection('personnal-reservation', (ref) => ref.where('id', '==', id))
+      .collection('table-reservation', (ref) => ref.where('id', '==', id))
       .valueChanges({ idField: 'id' });
   }
 

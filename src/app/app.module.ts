@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 //Components
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
@@ -51,7 +50,7 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserInsertComponent } from './user/user-insert/user-insert.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
-import { PersonnalReservationComponent } from './reservation/personnal-reservation/personnal-reservation.component';
+import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +84,7 @@ import { PersonnalReservationComponent } from './reservation/personnal-reservati
     UserInsertComponent,
     UserEditComponent,
     UserListComponent,
-    PersonnalReservationComponent,
+    MesReservationsComponent,
   
   ],
   imports: [
