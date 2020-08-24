@@ -28,8 +28,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   public searchTerm: string = '';
 
   public productSearch: string = '';
-  public myBorderSize: number = 1;
-  public displayImage: boolean = true;
+  /*public myBorderSize: number = 1;
+  public displayImage: boolean = true;*/
 
   user;
   photo = { file: '', title: '' };
@@ -49,7 +49,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }).subscribe(data => {
       this.products = data;
     })
-    
   }
 
   onFileChange(e) {
@@ -60,7 +59,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   postPhoto() {
     console.log(this.photo);
     const uid = this.user.uid;
-    const photoPathOnServer = `personal-space/${uid}/${this.photo.title}`;
+    const photoPathOnServer = `image-producs/${uid}/${this.photo.title}`;
     const photoRef = this.afStorage.ref(photoPathOnServer);
     this.photoServerURL = '';
 
@@ -98,7 +97,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public async insertProduct(){
-  
       const modal = await this.modalController.create({
         component: ProductInsertComponent,
         cssClass: 'my-custom-class',

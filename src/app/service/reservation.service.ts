@@ -2,26 +2,49 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IReservation } from '../models/IReservation';
+import { Router } from '@angular/router';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private personalReservationCollection: AngularFirestoreCollection<IReservation>;
+  private reservationCollection: AngularFirestoreCollection<IReservation>;
   personalReservation: Observable<IReservation[]>;
+  collectionName = 'table-reservation'
 
-  constructor(private afs: AngularFirestore) {
-    this.personalReservationCollection = afs.collection<IReservation>(
-      'personnal-reservation'
+
+
+  constructor(private afs: AngularFirestore, private router: Router) { }
+
+  readReservation() {
+    return this.afs.collection<IReservation>(`${this.collectionName}`, (ref) =>
+      ref.orderBy('date', 'asc')
     );
-    this.personalReservation = this.personalReservationCollection.valueChanges();
   }
 
-  readPersonalReservationByUID(id: string) { /*Question ici comment afficher les réservations d'un utilisateur*/
+  readPersonalReservationByUID(uid: string) { /*Question ici comment afficher les réservations d'un utilisateur en faisant une requête ?*/
     return this.afs
-      .collection('table-reservation', (ref) => ref.where('id', '==', id))
-      .valueChanges({ idField: 'id' });
+    .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
+    .valueChanges({ idField: 'id' });
+}
+
+  createReservation(name, type, employe, date, heure, uid) {
+    return this.afs
+      .collection(`${this.collectionName}`)
+      .add({ name, type, employe, date, heure, uid });
+  }
+
+  createReservationWithUID(user) {
+    return this.reservationCollection.doc(`${this.collectionName}-${user.uid}`).set({
+      name: '',
+      type: '',
+      employe : '',
+      date: '', 
+      heure: '',
+      uid: user.uid, 
+      //createdAt: Date.now(),
+    });
   }
 
   /*createPersonalReservation(user) {
@@ -50,38 +73,13 @@ export class ReservationService {
       });
   }*/
 
-
-  readReservation() {
-    return this.afs.collection<IReservation>('table-reservation', (ref) =>
-      ref.orderBy('date', 'asc')
-      
-    );
-  }
-
-  createReservation( name, type, employe, date, heure) {
-    return this.afs
-      .collection('table-reservation')
-      .add({ name, type, employe, date, heure });
-  }
-
   getByIdReservation(id): Observable<IReservation> { //je retourne un observable
-    return this.afs.doc<IReservation>(`table-reservation/${id}`).valueChanges();
+    return this.afs.doc<IReservation>(`${this.collectionName}/${id}`).valueChanges();
   }
-
-  /*async getByIdReservation(){
-    const datas = await this.afs.collection<IReservation>('table-reservation', (ref) =>
-      ref.orderBy('date', 'desc')
-    );
-    datas.
-  }*/
-
-  /*getByIdReservation(id) { // ici je ne retournais pas d'observable, c'est pour ça que j'avais eu le problème lors du support avec Nico, le problème est que je ne pouvais pas typé en IPreservation
-    return this.afs.doc(`table-reservation/${id}`).valueChanges();
-  }*/
 
   //Update reservation
   updateReservation(reservation) {
-    return this.afs.doc(`table-reservation/${reservation.id}`).update({
+    return this.afs.doc(`${this.collectionName}/${reservation.id}`).update({
       ...reservation,
       name: reservation.name,
       type : reservation.type,
@@ -91,9 +89,16 @@ export class ReservationService {
     });
   }
 
+  updateReservationWithUID(user) {
+    return this.afs
+      .collection(`${this.collectionName}`)
+      //.doc(`ps-${user.uid}`)
+      .doc(`${this.collectionName}-${user.uid}`)
+  }
+
   deleteReservation(id) { 
     return this.afs
-      .doc<IReservation>(`table-reservation/${id}`)
+      .doc<IReservation>(`${this.collectionName}/${id}`)
       .delete();
   }
 }

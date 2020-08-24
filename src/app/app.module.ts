@@ -20,6 +20,7 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductSearchPipe } from './product/product-search.pipe';
 import { ReservationSearchPipe } from './reservation/reservation-search.pipe';
+import { UserSearchPipe } from './user/user-search.pipe';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommandeComponent } from './commande/commande.component';
@@ -84,6 +85,7 @@ import { MesReservationsComponent } from './mes-reservations/mes-reservations.co
     UserInsertComponent,
     UserEditComponent,
     UserListComponent,
+    UserSearchPipe,
     MesReservationsComponent,
   
   ],

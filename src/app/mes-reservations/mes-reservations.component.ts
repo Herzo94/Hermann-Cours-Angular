@@ -4,7 +4,7 @@ import { ReservationService } from 'src/app/service/reservation.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { ModalController } from '@ionic/angular';
-import { IMesReservations } from '../models/IReservation'
+import { IReservation } from '../models/IReservation'
 
 @Component({
   selector: 'app-mes-reservations',
@@ -15,7 +15,7 @@ export class MesReservationsComponent implements OnInit {
 
   user;
   reservation;
-  mesReservations: IMesReservations[] = [];
+  mesReservations: IReservation[] = [];
 
   constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
 

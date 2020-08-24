@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   isAdmin = false;
  
 
-  constructor(private afAuth: AngularFireAuth, public router : Router) { }
+  constructor(private afAuth: AngularFireAuth, public router : Router, userService : UserService) { }
 
  async signIn(email, password) {
     const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
@@ -22,17 +23,7 @@ export class AuthService {
       this.isAuth = false;
     }
     return result;
-    /*return new Promise(
-      (resolve, reject) => {
-        setTimeout(
-          () => {
-            this.isAuth = true;
-            console.log(" valeur is Auth : ",this.isAuth);
-            resolve(true);
-          }, 2000
-        );
-      }
-    );*/
+    
   }
 
   async login(email, password){
@@ -44,8 +35,18 @@ export class AuthService {
       if(email === 'admin@gmail.com'){ 
          this.isAdmin = true;
       }
-     
+ 
+      /*else if(user.type === 'isAdmin'){ 
+         this.isAdmin = true;
+         this.isSuperAdmin = false;
+      }
+
+      else if(user.type === 'isSuperAdmin'){ 
+         this.isSuperAdmin = true;
+         this.isAdmin = false;
+      }*/
     } 
+
     else{
       this.isAuth = false;
       this.isAdmin = false;
