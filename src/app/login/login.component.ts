@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       this.user = await this.authService.login(email, password); //appel à la méthode
       if (this.user){
         //this.router.navigate(['dashboard']);  
-        this.router.navigate(['reservation']);   
+        this.router.navigate(['reservation']);  
       }
     } catch (error) {
       this.message = error.message;

@@ -44,7 +44,7 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
       
     }).subscribe(data => {
       console.log('Code à décomenter : //this.users = data ')
-      //this.users = data;
+      //this.users = data; //Questions pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
     })
     
   }

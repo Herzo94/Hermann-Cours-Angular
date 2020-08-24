@@ -34,6 +34,7 @@ export class UserService {
   createUser (user) { //créer l'utilisateur dans une collection
     const  newUser = {
       uid: user.uid, //Je prends ici l'id de l'utilisateur
+      //name: '',
       email: user.email,
       emailVerified: user.emailVerified,
       type: '',
@@ -49,10 +50,6 @@ export class UserService {
       uid: user.uid,
       displayName: user.displayName,
       createdAt: Date.now(),
-      imageUrl: '',
-      productName: '',
-      description : '',
-      price: '', 
     });
   }
 

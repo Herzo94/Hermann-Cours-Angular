@@ -22,19 +22,22 @@ export class AuthService {
     else{
       this.isAuth = false;
     }
-    return result;
-    
+    return result;  
   }
 
   async login(email, password){
     const user:any = await this.afAuth.signInWithEmailAndPassword(email, password); //dans le resultat, on met le await et sans oublier de mettre le async à côté de la fonction
-    if (user){
+    if (user){ //Si l'utilisateur existe
    
       this.isAuth = true;
      
+      console.log('this.isAuth : ', this.isAuth )
+      
       if(email === 'admin@gmail.com'){ 
-         this.isAdmin = true;
-      }
+        this.isAdmin = true;
+        console.log('email ADMIN : ', email)
+        console.log('STATE ADMIN : ', this.isAdmin)
+     }
  
       /*else if(user.type === 'isAdmin'){ 
          this.isAdmin = true;
@@ -48,14 +51,20 @@ export class AuthService {
     } 
 
     else{
+      console.log('ok pas de user donc go else ')
       this.isAuth = false;
       this.isAdmin = false;
+      console.log('isAuth et isAdmin : ',this.isAuth, this.isAdmin);
+      
     }
     return user;
   }
 
   signOut() {
     this.isAuth = false;
+    this.isAdmin = false;
+    console.log('SignOut :', this.isAuth)
+    console.log('SignOut + isAdmin :', this.isAdmin)
     this.router.navigate(['/login'])
   }
 }
