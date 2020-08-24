@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { IUser } from '../models/IUser';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { firestore } from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -15,9 +17,11 @@ export class UserService {
   collectionName = 'table-user';
   valueAdmin = 'Admin';
   valueSuperAdmin = 'SuperAdmin';
+  result;
+  registerForm: FormGroup;
   
 
-  constructor(private afs: AngularFirestore, private router: Router) { }
+  constructor(private afs: AngularFirestore, private router: Router, private afAuth: AngularFireAuth) { }
 
   readUser() {
     return this.afs.collection(`${this.collectionName}`, (ref) => 
@@ -34,9 +38,11 @@ export class UserService {
   createUser (user) { //créer l'utilisateur dans une collection
     const  newUser = {
       uid: user.uid, //Je prends ici l'id de l'utilisateur
-      //name: '',
+      //name: this.registerForm.value.name, 
+      name: '', //Comment récupérer le nom inséré dans le formualaire ? car "this.registerForm.value.name" ça ne joue pas
       email: user.email,
       emailVerified: user.emailVerified,
+      //type: 'normal',
       type: '',
       createdAt: new Date(),
     }
@@ -45,13 +51,30 @@ export class UserService {
     return usersCollection.add(newUser);
   }
 
-  createUsertWithUID(user) {
+  /*createUsertWithUID(user) {
     return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
-      createdAt: Date.now(),
+      createdAt: new Date,
     });
+  }*/
+
+  createAdminUser(email, name, type, createdAt) {
+    return this.afs
+      .collection(`${this.collectionName}`)
+      .add({ email, name, type, createdAt });
   }
+
+  /*createAdminUsertWithUID(user) {
+    return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({ //Question : problème ici avec le .set
+      uid: user.uid,
+      email: user.email,
+      type: '',
+      createdAt: new Date,
+      //createdAt: Date.now(),
+    });
+  }*/
+
 
   getUsers() {
     return this.afs.collection(`${this.collectionName}`).valueChanges({ idField: 'id'});

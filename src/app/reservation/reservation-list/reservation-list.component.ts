@@ -66,7 +66,7 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   async  deleteReservation(id){
     this.reservationService.deleteReservation(id)
 
-    await Toast.show({ //si problème -> Stackoverflow 
+    await Toast.show({
       text: 'Suppression effectuée avec succès!'
     });
   }

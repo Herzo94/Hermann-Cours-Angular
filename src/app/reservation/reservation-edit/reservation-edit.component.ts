@@ -56,7 +56,7 @@ export class ReservationEditComponent implements OnInit {
     return await modal.present();
   }
 
-  async onUpdateReservation() {
+  async onUpdateMesReservations() {
     console.log('this.suggestionForm.value', this.reservationForm.value);
     const result = await this.reservationService.updateReservation(this.reservationForm.value as any);
     this.modalController.dismiss();

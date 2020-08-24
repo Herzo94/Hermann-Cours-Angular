@@ -54,8 +54,7 @@ export class AuthService {
       console.log('ok pas de user donc go else ')
       this.isAuth = false;
       this.isAdmin = false;
-      console.log('isAuth et isAdmin : ',this.isAuth, this.isAdmin);
-      
+      console.log('isAuth et isAdmin : ',this.isAuth, this.isAdmin);  
     }
     return user;
   }

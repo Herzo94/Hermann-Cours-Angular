@@ -39,7 +39,7 @@ const routes: Routes = [
   ]},
   { path: 'user-detail/:id', component: UserDetailComponent },
   { path: 'dashboard', canActivate: [AuthGuardService] , component: DashboardComponent },
-  { path: 'mes-reservations', canActivate: [AuthGuardService] , component: MesReservationsComponent },
+  { path: 'reservations_personnal', canActivate: [AuthGuardService] , component: MesReservationsComponent },
 
   { path: 'product', canActivate: [AuthGuardService] , component: ProductListComponent, children: [
     { path: 'insert', component: ProductInsertComponent},

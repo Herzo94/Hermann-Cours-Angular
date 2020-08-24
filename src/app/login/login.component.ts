@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   userProfil: User;
   authStatus: boolean;
   isAuth: boolean;
+  isAdmin: boolean;
 
   constructor(private authService: AuthService, private fb: FormBuilder, private afAuth: AngularFireAuth, private userService: UserService, private router: Router) { }
 
@@ -53,15 +54,19 @@ export class LoginComponent implements OnInit {
       this.user = await this.authService.login(email, password); //appel à la méthode
       if (this.user){
         //this.router.navigate(['dashboard']);  
-        this.router.navigate(['reservation']);  
+        this.router.navigate(['reservations_personnal']);  
+      }
+
+      if (this.isAdmin){
+        console.log('CoucouAdmin');
       }
     } catch (error) {
       this.message = error.message;
     }
   }
-  onActif(){
+  /*onActif(){
     this.isAuth = true;
-  }
+  }*/
   onSignOut() {
     this.isAuth = false;
   }

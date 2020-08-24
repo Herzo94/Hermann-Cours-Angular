@@ -1,22 +1,56 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Mes reservation</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Mes réservations</ion-title>
+  </ion-toolbar>
 </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+<ion-content class="ion-text-center ion-padding">
 
-    <p>En construction</p>
+<div *ngIf="reservation.length === 0; else resaList">
+<ion-icon type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+<p>Aucune réservation</p>
+</div>
 
-    <!-- <div *ngFor="let res of mesReservations">
-        <div>Nom Client : {{ res.name }}</div>
-        <div>Date : {{ res.date }}</div>
-        <div>Heure : {{ res.heure }}</div>
-        <div>Type Prestation : {{ res.type }}</div>
-        <div>Spécialiste : {{ res.employe }}</div>
-        <br />
-    </div> -->
+<ng-template #resaList>
+<div>
+<ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
+  <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
+</ion-input>
+<br>
 
+<ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+</div> 
+
+<br>
+<ion-grid>
+<ion-row *ngFor="let res of reservation | reservationSearch:searchTerm" class="ion-text-center" style="border-bottom: 1px solid gray; margin-bottom:15px;">
+  <ion-col>
+    <div>Nom Client : {{ res.name }}</div>
+  </ion-col>
+  <ion-col>
+    <div>Date : {{ res.date }} à {{ res.heure }}</div>
+  </ion-col>
+  <ion-col>
+    <div>Type Prestation : {{ res.type }}</div>
+  </ion-col>
+  <ion-col>
+    <div>Spécialiste : {{ res.employe }}</div>
+  </ion-col>
+
+  <ion-col>
+    <div>
+          <ion-icon 
+            name="trash-outline"
+            *ngIf="authService.isAdmin"
+            (click)="deleteReservation(res.id)"
+          >
+          </ion-icon> 
+    </div>
+  </ion-col>
+</ion-row>
+<tr></tr>
+</ion-grid>
+</ng-template>
 </ion-content>

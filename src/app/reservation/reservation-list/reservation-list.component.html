@@ -9,8 +9,8 @@
     <ion-content class="ion-text-center ion-padding">
 
 <div *ngIf="reservations.length === 0; else resaList">
-  <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
-    <p>loading...</p>
+  <ion-icon type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+    <p>Aucune réservation</p>
 </div>
 
 <ng-template #resaList>

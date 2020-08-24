@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
 import { ModalController } from '@ionic/angular';
-import { IReservation } from '../models/IReservation'
+import { IReservation } from '../models/IReservation';
+import { InsertMesReservationComponent } from '../mes-reservations/insert-mes-reservation/insert-mes-reservation.component';
+import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins;
 
 @Component({
   selector: 'app-mes-reservations',
@@ -12,13 +17,15 @@ import { IReservation } from '../models/IReservation'
   styleUrls: ['./mes-reservations.component.css']
 })
 export class MesReservationsComponent implements OnInit {
-
+  private mesReservationsCollection: AngularFirestoreCollection<IReservation>;
   user;
   reservation;
   mesReservations: IReservation[] = [];
+  mesReservations$: Observable<IReservation[]>
+  sub;
+  public searchTerm: string = '';
 
   constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
-
   
   ngOnInit() { 
   
@@ -33,8 +40,11 @@ export class MesReservationsComponent implements OnInit {
           (data) => {
             console.log('ngOnInt readPersonnalReservationById / data', data);
             this.reservation = data;
+            console.log('mes reservations data : -> ', this.reservation);
+            console.log('mes reservations$  OBSERVABLE : -> ', this.mesReservations$);
+      
             if (!data || data.length === 0) {
-              console.log(`Creating a new space for ${user.displayName}`);
+              console.log(`Creating a new personal reservation for ${user.displayName}`);
               //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
               //lié l'élément ici à une collection par exemple
             }
@@ -45,6 +55,28 @@ export class MesReservationsComponent implements OnInit {
         );
       }
     });
+  }
+  searchReservation: string;
+
+  public async insertReservation(){
+  
+      const modal = await this.modalController.create({
+        component: InsertMesReservationComponent,
+        cssClass: 'my-custom-class',
+      });
+      return await modal.present();  
+  }
+
+  async  deleteReservation(id){
+    this.reservationService.deleteReservation(id)
+
+    await Toast.show({
+      text: 'Suppression effectuée avec succès!'
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

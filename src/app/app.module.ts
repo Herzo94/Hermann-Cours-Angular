@@ -52,6 +52,7 @@ import { UserInsertComponent } from './user/user-insert/user-insert.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
+import { InsertMesReservationComponent } from './mes-reservations/insert-mes-reservation/insert-mes-reservation.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { MesReservationsComponent } from './mes-reservations/mes-reservations.co
     UserListComponent,
     UserSearchPipe,
     MesReservationsComponent,
+    InsertMesReservationComponent,
   
   ],
   imports: [

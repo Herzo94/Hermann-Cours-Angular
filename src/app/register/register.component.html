@@ -4,11 +4,14 @@
   <br>
   <br>
  <form [formGroup]="registerForm" class="example-form" (ngSubmit)="register()">
+      <ion-label>Nom : </ion-label>
+      <ion-input formControlName="name" placeholder="Entrez votre nom"></ion-input>
+      <br>
       <ion-label>Email</ion-label>
-      <ion-input formControlName="email" placeholder="email"></ion-input>
-    <br>
+      <ion-input formControlName="email" placeholder="Entrez votre email"></ion-input>
+      <br>    
       <ion-label>Mot de passe</ion-label>
-      <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
+      <ion-input type="password" formControlName="password" placeholder="Entrez votre mot de passe"></ion-input>
       <br>
       <ion-button type="submit">Créer un compte</ion-button>
       <br>

@@ -21,7 +21,8 @@ const { Toast } = Plugins;
 })
 export class UserListComponent implements OnInit/*, OnDestroy*/ {
   private usersCollection: AngularFirestoreCollection<unknown>;
-  users$: Observable<IUser[]>;
+  users$: Observable<any>;
+  //users$: Observable<IUser[]>;
   users: IUser[] = [];
   sub;
   public searchTerm: string = '';
@@ -33,9 +34,16 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
   uploadedImgURL = '';
   personalSpace;
 
-  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
+  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) {
+    
+   }
 
-  async ngOnInit() {
+   ngOnInit(): void {
+    this.users$ = this.userService.getUsers();
+    console.log('this.users$', this.users$);
+    console.log('usersCollection : ', this.usersCollection);
+   }
+  /*async ngOnInit() {
 
     this.usersCollection = await this.userService.readUser();
     console.log("UsersCollection : ", this.usersCollection);
@@ -47,7 +55,7 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
       //this.users = data; //Questions pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
     })
     
-  }
+  }*/
 
   onFileChange(e) {
     console.log(e.target.files[0]);

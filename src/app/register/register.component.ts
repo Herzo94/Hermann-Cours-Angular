@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   this.registerForm = this.fb.group({
       email: ['', Validators.email],
+      name: ['', Validators.required],
       password: ['',[Validators.required, Validators.minLength(6)]]
     });
 
@@ -50,6 +51,7 @@ async register() {
   } 
   this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
   
+  console.log('name : ', this.registerForm.value.name);
   //this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
 
   if(this.result) {
@@ -64,9 +66,9 @@ async register() {
   });
 }
 
-onActif(){
+/*onActif(){
   this.isAuth = true;
-}
+}*/
 onSignOut() {
   this.isAuth = false;
 }

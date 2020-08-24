@@ -9,10 +9,10 @@ const { Toast } = Plugins;
 
 @Component({
   selector: 'app-reservation-insert',
-  templateUrl: './reservation-insert.component.html',
-  styleUrls: ['./reservation-insert.component.css']
+  templateUrl: './insert-mes-reservation.component.html',
+  styleUrls: ['./insert-mes-reservation.component.css']
 })
-export class ReservationInsertComponent implements OnInit {
+export class InsertMesReservationComponent implements OnInit {
 
   public reservationForm: FormGroup;
   message = '';
@@ -64,11 +64,6 @@ export class ReservationInsertComponent implements OnInit {
       this.reservationForm.value.heure,
       this.user.uid
       
-      /*if( this.result && this.result.user) {
-        const userCreated = await this.userService.createUser(this.result.user);
-        console.log('userCreated', userCreated);
-        this.result = null;
-      }*/
     );
 
     console.log('result', result);
@@ -78,7 +73,7 @@ export class ReservationInsertComponent implements OnInit {
     });
 
     this.reservationForm.reset();
-    this.router.navigate(['/reservation']);
+    this.router.navigate(['/reservations_personnal']);
   }
 
    // This methods run when Angular destroy a component (cf component life cycle)
