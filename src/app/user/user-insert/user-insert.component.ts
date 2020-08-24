@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, from } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from './../../service/user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -32,7 +32,6 @@ export class UserInsertComponent implements OnInit {
       type: ['', Validators.required],
     });
 
-    
       this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
       console.log('user', user);
 

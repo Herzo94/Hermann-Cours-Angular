@@ -13,22 +13,15 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 // Search Module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-import { ProfilComponent } from './profil/profil.component';
-import { ContactComponent } from './contact/contact.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductSearchPipe } from './product/product-search.pipe';
 import { ReservationSearchPipe } from './reservation/reservation-search.pipe';
 import { UserSearchPipe } from './user/user-search.pipe';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { CommandeComponent } from './commande/commande.component';
 import { FourOhFourComponent } from './four-oh-four-component/four-oh-four-component.component'
-import { ReservationDetailComponent } from './reservation/reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
-import { CommandeViewComponent } from './commande/commande-view/commande-view.component';
-import { CommandeEditComponent } from './commande/commande-edit/commande-edit.component';
 import { AuthService } from './service/auth-service.service';
 import { ProductInsertComponent } from './product/product-insert/product-insert.component';
 import { IonicModule } from '@ionic/angular';
@@ -43,7 +36,6 @@ import { environment } from 'src/environments/environment';
 import { ModalComponent } from './modal/modal.component';
 import { ReservationInsertComponent } from './reservation/reservation-insert/reservation-insert.component';
 import { ReservationListComponent } from './reservation/reservation-list/reservation-list.component';
-import { PrestationComponent } from './prestation/prestation.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
@@ -59,26 +51,18 @@ import { InsertMesReservationComponent } from './mes-reservations/insert-mes-res
     AppComponent,
     ProductComponent,
     SidenavComponent,
-    ProfilComponent,
-    ContactComponent,
     ProductSearchPipe,
     ProductEditComponent,
     ProductListComponent,
     ProductDetailComponent,
-    DashboardComponent,
     ReservationComponent,
     ReservationSearchPipe,
-    CommandeComponent,
     FourOhFourComponent,
-    ReservationDetailComponent,
     ReservationEditComponent,
-    CommandeViewComponent,
-    CommandeEditComponent,
     ProductInsertComponent,
     ModalComponent,
     ReservationInsertComponent,
     ReservationListComponent,
-    PrestationComponent,
     RegisterComponent,
     LoginComponent,
     UserComponent,

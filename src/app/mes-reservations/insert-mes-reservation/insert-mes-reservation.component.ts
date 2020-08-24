@@ -73,7 +73,7 @@ export class InsertMesReservationComponent implements OnInit {
     });
 
     this.reservationForm.reset();
-    this.router.navigate(['/reservations_personnal']);
+    this.router.navigate(['/resa']);
   }
 
    // This methods run when Angular destroy a component (cf component life cycle)

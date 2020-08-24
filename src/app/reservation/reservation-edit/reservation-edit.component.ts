@@ -12,6 +12,7 @@ const { Toast } = Plugins;
 @Component({
   selector: 'app-reservation-edit',
   templateUrl: './reservation-edit.component.html',
+  styleUrls: ['./reservation-edit.component.css']
 })
 export class ReservationEditComponent implements OnInit {
 
@@ -56,7 +57,7 @@ export class ReservationEditComponent implements OnInit {
     return await modal.present();
   }
 
-  async onUpdateMesReservations() {
+  async onUpdateReservation() {
     console.log('this.suggestionForm.value', this.reservationForm.value);
     const result = await this.reservationService.updateReservation(this.reservationForm.value as any);
     this.modalController.dismiss();

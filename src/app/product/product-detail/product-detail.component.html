@@ -8,37 +8,3 @@
 </ion-header>
 <ion-content>
 </ion-content>
-<!-- <div *ngIf="product$ | async as product; else noProduct">
-
-  <div>
-    ID: {{ product.id }}
-  </div>
-  <div>
-    Name: {{ product.productName }}
-  </div>
-  <div>
-    Description: {{ product.description }}
-  </div>
-  <div>
-    <a [href]="product.imageUrl" target="_blank">
-      <img [src]="product.imageUrl" width="90px">
-  </a>
-  </div>
-
-
-  <p>
-      <button type="button" (click)="goToProducts()">Go back to product</button> -->
-      <!-- Here we cannot yet reach next product as we didn't retrieve the product based on url id :D -->
-      <!-- <button type="button" [routerLink]="['/product', product.id + 1]">Go to next product!</button>
-  </p>
-
-  <p>
-    <button type="button" [routerLink]="['/product', product.id, 'edit']">Edit the product</button>    
-  </p>
-
-</div>
-<ng-template #noProduct>
-  <h4>YOU FAIL THIS PRODUCT! 💥</h4>
-
-  <button [routerLink]="['..']">So the only choice is to go back 😎</button>
-</ng-template> -->

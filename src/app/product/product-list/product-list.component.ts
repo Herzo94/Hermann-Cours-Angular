@@ -18,6 +18,7 @@ const { Toast } = Plugins;
 @Component({
   selector: 'app-product-list',
   templateUrl: 'product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
 
 export class ProductListComponent implements OnInit, OnDestroy {
@@ -105,7 +106,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public async modifProduct(id){
-    //this.router.navigate([`reservation/${id}/edit`])
   
       const modal = await this.modalController.create({
         component: ProductEditComponent,

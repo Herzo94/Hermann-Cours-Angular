@@ -18,6 +18,7 @@ const { Toast } = Plugins;
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit/*, OnDestroy*/ {
   private usersCollection: AngularFirestoreCollection<unknown>;
@@ -34,9 +35,7 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
   uploadedImgURL = '';
   personalSpace;
 
-  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) {
-    
-   }
+  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
 
    ngOnInit(): void {
     this.users$ = this.userService.getUsers();
@@ -103,8 +102,6 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
     this.photo = { file: '', title: '' };
   }
   */
-
-
 
   public async insertUser(){
   

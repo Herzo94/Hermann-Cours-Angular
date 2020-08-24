@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
       const { email, password} = this.loginForm.value;
       this.user = await this.authService.login(email, password); //appel à la méthode
       if (this.user){
-        //this.router.navigate(['dashboard']);  
-        this.router.navigate(['reservations_personnal']);  
+        //this.router.navigate(['product']);  
+        this.router.navigate(['reservations']);  
       }
 
       if (this.isAdmin){

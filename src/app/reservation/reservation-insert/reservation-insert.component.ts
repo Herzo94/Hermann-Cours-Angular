@@ -81,7 +81,7 @@ export class ReservationInsertComponent implements OnInit {
     this.router.navigate(['/reservation']);
   }
 
-   // This methods run when Angular destroy a component (cf component life cycle)
+   // Question NGDestroy ? supprimer ou pas ? This methods run when Angular destroy a component (cf component life cycle)
   /*ngOnDestroy(): void {
     this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
   }*/
