@@ -24,7 +24,7 @@
              </div>
          </div>
          <p>
-            <ion-label>Prestation</ion-label>
+            <ion-label>Prestation:</ion-label>
             <ion-select placeholder="Selectionner une prestation" formControlName="type">
               <ion-select-option value="Pose complète gel">Pose complète gel</ion-select-option>
               <ion-select-option value="Remplissage naturel">Remplissage naturel</ion-select-option>
@@ -36,29 +36,27 @@
             </ion-select>
          </p>
          <p>
-            <ion-item>
-                <ion-label>Spécialiste</ion-label>
+                <ion-label>Spécialiste:</ion-label>
                 <ion-select placeholder="Selectionner une spécialiste" formControlName="employe">
                   <ion-select-option value="Giliane">Giliane</ion-select-option>
                   <ion-select-option value="Christelle">Christelle</ion-select-option>
                   <ion-select-option value="Stephanie">Stéphanie</ion-select-option>
                   <ion-select-option value="Carmen">Carmen</ion-select-option>
                 </ion-select>
-              </ion-item>
          </p>
        
          <p>
-            <ion-label>Date :</ion-label>
+            <ion-label>Date:</ion-label>
             <ion-input id="date" formControlName="date" type="date"></ion-input>
          </p>
          <p>
-            <ion-label>Heure :</ion-label>
+            <ion-label>Heure:</ion-label>
             <ion-input id="heure" formControlName="heure" type="time"></ion-input>
          </p>
         
          <ion-button type="submit" [disabled]="reservationForm.invalid">Enregistrer</ion-button>
          
     </form>
-         <!-- Question pourquoi le bouton n'est plus disabled quel attribut de validation utilisé -->
+         <!--  (pourquoi le bouton n'est plus disabled quel attribut de validation utilisé) -->
          
   </ion-content>

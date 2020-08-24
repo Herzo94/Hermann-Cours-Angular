@@ -19,7 +19,6 @@ export class SidenavComponent implements OnInit {
     {name:"Utilisateurs", route:"user", icon:"people-outline"},
     {name:"Reservations", route:"reservations", icon:"calendar-outline"},
     {name:"Mes reservations", route:"resa", icon:"man-outline"},
-    {name:"Profil", route:"profil", icon:"person-outline"},
   ]
 
   /*fillerContent = Array(50).fill(0).map(() => 
@@ -27,7 +26,7 @@ export class SidenavComponent implements OnInit {
        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco`);
   */ 
 
-  //isAuth = false;
+  isAuth = false;
 
   private _mobileQueryListener: () => void;
 
@@ -35,8 +34,8 @@ export class SidenavComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges(); //listener qui déctect les changements
     this.mobileQuery.addListener(this._mobileQueryListener);
-    //this.isAuth = this.authService.isAuth;
-    //console.log('Sidenav is auth:', this.isAuth );
+    this.isAuth = this.authService.isAuth;
+    console.log('Sidenav is auth:', this.isAuth );
   }
 
   ngOnDestroy(): void {

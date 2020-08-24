@@ -8,7 +8,7 @@
     <form [formGroup]="productForm" (ngSubmit)="onUpdateProduct()"> 
         
         <p>
-            <ion-label> Nom Produit : </ion-label>
+            <ion-label> Nom Produit: </ion-label>
             <ion-input id="productName" required type="text" formControlName="productName"></ion-input>
         </p>
         <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">

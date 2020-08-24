@@ -3,7 +3,7 @@
 	  <ion-toolbar color="primary">
 		<ion-title>Menu
 	   <span class="example-app-name"
-	   {{ userProfil.email }}
+	  
 	  *ngIf="authService.isAdmin"
 	  >[COMPTE ADMIN]  
 	</span>
@@ -14,20 +14,20 @@
 	<ion-content>
 	  <ion-list>
 		  <!-- Question ICI sur ce que j'ai mis en commentaire par rapport à mon beug -->
-		<!-- <ion-item 
+		<ion-item 
 				[hidden]="!authService.isAuth && nav.route !== 'register' || authService.isAuth && nav.route === 'register' " 
 				[routerLink]="nav.route" 
 				*ngFor="let nav of fillerNav">
 			<ion-icon [name]="nav.icon"></ion-icon> 
 			 {{nav.name}}
-		</ion-item>-->
+		</ion-item>
 
-		<ion-item 
+		<!-- <ion-item 
 				[routerLink]="nav.route" 
 				*ngFor="let nav of fillerNav">
 			<ion-icon [name]="nav.icon"></ion-icon> 
 			 {{nav.name}}
-		</ion-item>
+		</ion-item>-->
 		<!-- <ion-item (click)="authService.signOut()" [hidden]="!authService.isAuth">-->
 		<ion-item (click)="authService.signOut()" [hidden]="!authService.isAuth">
 			Sign Out
@@ -37,4 +37,5 @@
 	  </ion-list>
 	</ion-content>
   </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 
