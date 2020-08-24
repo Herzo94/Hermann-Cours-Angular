@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, } from '@angular/fire/firestore';
-import { IReservation } from '../models/IReservation';
 import { Observable } from 'rxjs';
-import { IMesReservations } from '../models/IReservation';
+import { IReservation } from '../models/IReservation';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private personalReservationCollection: AngularFirestoreCollection<IMesReservations>;
-  personalReservation: Observable<IMesReservations[]>;
+  private personalReservationCollection: AngularFirestoreCollection<IReservation>;
+  personalReservation: Observable<IReservation[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.personalReservationCollection = afs.collection<IMesReservations>(
+    this.personalReservationCollection = afs.collection<IReservation>(
       'personnal-reservation'
     );
     this.personalReservation = this.personalReservationCollection.valueChanges();

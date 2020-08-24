@@ -1,7 +1,7 @@
-export interface IMesReservations {
+export interface IReservation {
   id?: string;
   uid: string;
-  //displayName: string;
+  name: string; //displayName: string;
   type: string; 
   employe: string;
   date: string;
