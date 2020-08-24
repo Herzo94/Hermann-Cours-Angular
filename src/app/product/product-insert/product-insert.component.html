@@ -6,7 +6,6 @@
   <ion-content class="ion-text-center ion-padding">
 
     <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()"> 
-        
          <p>
             <ion-label> Nom Produit: </ion-label>
             <ion-input id="productName" required type="text" formControlName="productName" placeholder="Entrez votre nom" required></ion-input>
@@ -30,17 +29,15 @@
             <ion-label> Prix: </ion-label>
             <ion-input id="price" type="number" formControlName="price" required></ion-input>    
         </p>
-        <p>
+        <p class="ion-text-center">
             <ion-label> Image: </ion-label>
-
             <ion-input 
-            id="imageUrl" 
-            name="imageUrl" 
-            type="file" 
-            formControlName="imageUrl"
-            (change)="onFileChange($event)"
-            required
-            
+                id="imageUrl" 
+                name="imageUrl" 
+                type="file" 
+                formControlName="imageUrl"
+                (change)="onFileChange($event)"
+                required
             ></ion-input>
         </p>
 

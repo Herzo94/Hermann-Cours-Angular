@@ -17,14 +17,8 @@ export class ProductService {
 
   readProduct() {
     return this.afs.collection<IProduct>(`${this.collectionName}`, (ref) =>
-      ref.orderBy('createdAt', 'asc')
+      ref.orderBy('createdAt', 'desc')
     );
-  }
-
-  readImageWithUID(uid: string) {
-    return this.afs
-      .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
-      .valueChanges({ idField: 'id' });
   }
 
   createProduct(imageUrl, productName, description, price, createdAt, uid) {
@@ -32,6 +26,18 @@ export class ProductService {
       .collection(`${this.collectionName}`)
       .add({imageUrl, productName, description, price, createdAt, uid});
   }
+
+
+  readImageWithUID(uid: string) {
+    return this.afs
+      .collection<IProduct>(`${this.collectionName}`, (ref) => 
+      ref.orderBy('createdAt', 'desc').where('uid', '==', uid,
+      
+      ))
+
+      .valueChanges({ idField: 'id' });
+  }
+  
 
   createProductWithUID(user) {
     return this.imageProductCollection.doc(`${this.collectionName}-${user.uid}`).set({

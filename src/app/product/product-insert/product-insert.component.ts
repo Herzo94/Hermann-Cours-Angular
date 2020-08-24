@@ -31,10 +31,10 @@ export class ProductInsertComponent implements OnInit {
   ngOnInit() {
   //ngOnInit(): void {
     this.productForm = this.fb.group({
-      imageUrl: [''/*, Validators.required, Validators.minLength(4)*/],
-      productName: [''/*, Validators.required*/],
-      description: [''/*, Validators.required*/, Validators.minLength(4)],
-      price: [''/*, Validators.required*/]
+      imageUrl: [''/*, Validators.required*/],
+      productName: ['', Validators.required],
+      description: ['', Validators.required, Validators.minLength(4)],
+      price: ['', Validators.required]
     });
 
     this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
@@ -42,7 +42,7 @@ export class ProductInsertComponent implements OnInit {
 
       this.user = user;
       if (this.user) {
-        // console.log(this.db.readPersonalSpaceByUID(user.uid));
+         console.log(this.productService.readImageWithUID(user.uid));
 
         this.productService.readImageWithUID(user.uid).subscribe(
           (data) => {
@@ -67,7 +67,8 @@ export class ProductInsertComponent implements OnInit {
    
     const uid = this.user.uid;
     console.log('uid: ',this.user.uid);
-    const photoPathOnServer = `image-products/${uid}/${this.photo.title}`;
+    //const photoPathOnServer = `image-products/${uid}/${this.photo.title}`;
+    const photoPathOnServer = `image-products/${this.photo.title}`; //Pas utile d'enregistrer avec un id
     const photoRef = this.afStorage.ref(photoPathOnServer);
     this.photoServerURL = '';
 
@@ -93,8 +94,10 @@ export class ProductInsertComponent implements OnInit {
             this.uploadedImgURL = data;
             
             console.log('uploadedImgURL', this.uploadedImgURL);
+
             const result = this.productService.createProduct(
-              this.productForm.value.imageUrl,
+              //this.productForm.value.imageUrl,
+              this.uploadedImgURL,
               this.productForm.value.productName,
               this.productForm.value.description,
               this.productForm.value.price,
@@ -116,10 +119,10 @@ export class ProductInsertComponent implements OnInit {
             this.router.navigate(['/product']);
             
             //Question à voir avec Nico : à décommenter plus tard ou même effacer 
-            /*this.prodService.updateProductsWithUID(
+            this.productService.updateProductsWithUID(
               this.user,
               this.uploadedImgURL
-            );*/
+            );
           });
         })
       )

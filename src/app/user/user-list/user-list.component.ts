@@ -20,7 +20,7 @@ const { Toast } = Plugins;
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit/*, OnDestroy*/ {
+export class UserListComponent implements OnInit, OnDestroy {
   private usersCollection: AngularFirestoreCollection<unknown>;
   users$: Observable<any>;
   //users$: Observable<IUser[]>;
@@ -51,7 +51,7 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
       
     }).subscribe(data => {
       console.log('Code à décomenter : //this.users = data ')
-      //this.users = data; //Questions pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
+      //this.users = data; //Question : pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
     })
     
   }*/
@@ -111,7 +111,6 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
     });
     return await modal.present();  
   }
-
 
   public async updateUserWithUID(id){
   

@@ -29,8 +29,10 @@ export class AuthService {
     const user:any = await this.afAuth.signInWithEmailAndPassword(email, password); //dans le resultat, on met le await et sans oublier de mettre le async à côté de la fonction
     if (user){ //Si l'utilisateur existe
    
-      this.isAuth = true;
+      
+    this.isAuth = true;
       console.log('this.isAuth : ', this.isAuth )
+      
       
       if(email === 'admin@gmail.com'){ 
         //if(this.isAdmin===admin || superAdmin){  //pas top c'est mieux -> if(this.isAdmin || superAdmin) // genre si c'est égal true
@@ -49,16 +51,19 @@ export class AuthService {
          this.isSuperAdmin = true;
          this.isAdmin = false;
       }*/
-    } 
+    
 
     else{
       console.log('ok pas de user donc go else ')
       this.isAuth = false;
       this.isAdmin = false;
       console.log('isAuth et isAdmin : ',this.isAuth, this.isAdmin);  
+      console.log('email ADMIN : ', email)
+      console.log('STATE ADMIN : ', this.isAdmin)
     }
     return user;
   }
+}
 
   signOut() {
     this.isAuth = false;

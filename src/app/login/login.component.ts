@@ -46,13 +46,41 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    try {
+    
+    this.message = '';
+
+
+    console.log('Admin ?');
+    this.message = '';
+    console.log('login', this.loginForm.value);
+
+    const { email, password} = this.loginForm.value;
+    this.user = await this.authService.login(email, password); //appel à la méthode
+      
+
+    if (this.user){ //Question : Gérer ici si c'est un admin ?
+        //this.router.navigate(['product']);  
+        
+        if(this.user.email === 'admin@gmail.com'){
+          this.router.navigate(['product']); 
+        }
+
+        else{
+          this.router.navigate(['reservations']); 
+        }
+      }
+
+    /*try {
       this.message = '';
       console.log('login', this.loginForm.value);
 
       const { email, password} = this.loginForm.value;
       this.user = await this.authService.login(email, password); //appel à la méthode
-      if (this.user){
+
+      if(this.user.email === 'admin@gmail.com'){
+        console.log('Admin ? - this.user.email', this.user.email);
+      }
+      if (this.user){ //Question : Gérer ici si c'est un admin ?
         //this.router.navigate(['product']);  
         this.router.navigate(['reservations']);  
       }
@@ -62,8 +90,9 @@ export class LoginComponent implements OnInit {
       }
     } catch (error) {
       this.message = error.message;
-    }
+    }*/
   }
+
   /*onActif(){
     this.isAuth = true;
   }*/
