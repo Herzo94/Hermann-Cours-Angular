@@ -36,7 +36,11 @@ export class UserListComponent implements OnInit, OnDestroy {
   personalSpace;
 
   constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
-
+ /*ngOnInit(): void {
+    this.users$ = this.userService.getUsers();
+    console.log('this.users$', this.users$);
+    console.log('usersCollection : ', this.usersCollection);
+   }*/
   async ngOnInit() {
 
     this.usersCollection = await this.userService.readUser();

@@ -8,7 +8,7 @@
 </ion-header>
   <ion-content class="ion-text-center ion-padding">
     
-      <div *ngIf="users.length === 0; else userList">
+      <div *ngIf="users?.length === 0; else userList">
         <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>    
           <p>Aucun utilisateur...</p>
       </div>
