@@ -23,8 +23,8 @@ import { MesReservationsComponent } from './mes-reservations/mes-reservations.co
 import { HoraireDispoReservationComponent } from './horaire-dispo-reservation/horaire-dispo-reservation.component';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuardGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuardGuard] },
+  { path: 'register', component: RegisterComponent, /*canActivate: [NoAuthGuardGuard]*/ },
+  { path: 'login', component: LoginComponent/*, canActivate: [NoAuthGuardGuard]*/ },
   { path: 'product', canActivate: [AuthGuardService] , component: ProductListComponent, children: [
     { path: 'insert', component: ProductInsertComponent},
     /*{ path: ':id', component: ProductDetailComponent },

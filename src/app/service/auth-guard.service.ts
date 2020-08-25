@@ -15,12 +15,12 @@ export class AuthGuardService implements CanActivate {
   constructor(private router: Router, private auth: AuthService) { }
  //Laisse que passer sur les pages qui ne sont pas login
   async canActivate():  Promise<boolean>  {
-    await this.auth.checkAuth();
+    /*await this.auth.checkAuth();
     
     (this.auth.isAuth)
     ? null
     : this.router.navigate(['/login']);
-    console.log(this.auth.isAuth);
+    console.log(this.auth.isAuth);*/
     return this.auth.isAuth;
 //     return new Promise(
 //       (resolve, reject) => {

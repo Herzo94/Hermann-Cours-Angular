@@ -14,11 +14,11 @@ export class NoAuthGuardGuard implements CanActivate {
   constructor(private router: Router, private auth: AuthService) { }
  //Laisse que passer sur les pages qui ne sont pas login
   async canActivate():  Promise<boolean>  {
-    await this.auth.checkAuth();
+   /* await this.auth.checkAuth();
     
     (this.auth.isAuth)
     ? this.router.navigate(['/reservations'])
-    : null;
+    : null;*/
     return !this.auth.isAuth;
   }
 
