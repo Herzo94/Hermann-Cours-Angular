@@ -23,6 +23,7 @@ export class SidenavComponent implements OnInit {
     {name:"Utilisateurs", route:"user", icon:"people-outline"},
     {name:"Reservations", route:"reservations", icon:"calendar-outline"},
     {name:"Mes reservations", route:"resa", icon:"man-outline"},
+    {name:"Horaire reservation", route:"horaire-resa", icon:"time-outline"},
   ]
 
   /*fillerContent = Array(50).fill(0).map(() => 
@@ -36,8 +37,8 @@ export class SidenavComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges(); //listener qui déctect les changements
     this.mobileQuery.addListener(this._mobileQueryListener);
-    //this.isAuth = this.authService.isAuth;
-    this.isAuth = true; //Provisoire, pas top mais juste pour tester
+    //this.isAuth = this.authService.isAuth; //Question : initilisé this.isAuth ici ?
+    this.isAuth = true; // Question - Provisoire, pas top mais juste pour tester
     console.log('Sidenav is auth:', this.isAuth);
   }
 
@@ -45,7 +46,7 @@ export class SidenavComponent implements OnInit {
 
   }
   
-  /*{ //Question pour récupérer le nom du user connecté
+  /*{ //Question 2 pour récupérer le nom du user connecté
     this.afAuth.authState.subscribe((user) => {
       this.user = user
       if (this.user){

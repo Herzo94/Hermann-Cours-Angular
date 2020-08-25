@@ -119,10 +119,10 @@ export class ProductInsertComponent implements OnInit {
             this.router.navigate(['/product']);
             
             //Question à voir avec Nico : à décommenter plus tard ou même effacer 
-            this.productService.updateProductsWithUID(
+            /*this.productService.updateProductsWithUID(
               this.user,
               this.uploadedImgURL
-            );
+            );*/
           });
         })
       )

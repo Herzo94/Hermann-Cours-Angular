@@ -52,7 +52,7 @@ export class ProductEditComponent implements OnInit {
 
       description: [''],
       price: [0, Validators.min(0)],
-      imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)] //Question : Modifier ici pour le chargement d'un fichier concernant l'image car ce ne sera plus un URL
+      imageUrl: ['', Validators.pattern(HTTP_URL_PATTERN)]
  })  
 
     this.productForm.patchValue(this.data); //met le contenu dans le formulaire

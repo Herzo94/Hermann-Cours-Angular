@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 
 import { auth, User } from 'firebase';
 
+import * as firebase from 'firebase';
+import { resolve } from 'path';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -40,6 +43,8 @@ export class LoginComponent implements OnInit {
       this.afAuth.authState.subscribe((userProfil) => {
         this.userProfil = userProfil;
       });  
+
+
   }
 
   async login() {
@@ -55,10 +60,26 @@ export class LoginComponent implements OnInit {
     console.log('login', this.loginForm.value);
 
     const { email, password} = this.loginForm.value;
-    this.user = await this.authService.login(email, password); //appel à la méthode
+    //const user = await this.authService.login(email, password).catch(err => err); //appel à la méthode
+    return new Promise (
+      (resolve, reject) =>{
+        const user = firebase.auth().signInWithEmailAndPassword(email, password).then(
+          
+      ()  => {
+          resolve();
+      },
+      (error) => {
+        reject(error);
+      }
+    )
+      }
+    )
+    
       
-
-    if (this.user){ //Question : Gérer ici si c'est un admin ?
+   // console.log('us', user);
+    //this.user = user;
+    
+    /*if (this.user){ //Question : Gérer ici si c'est un admin ?
         //this.router.navigate(['product']);  
         
         if(this.user.email === 'admin@gmail.com'){
@@ -68,7 +89,7 @@ export class LoginComponent implements OnInit {
         else{
           this.router.navigate(['reservations']); 
         }
-      }
+      }*/
 
     /*try {
       this.message = '';

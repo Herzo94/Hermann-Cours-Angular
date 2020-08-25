@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Horaire insert réservation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-text-center ion-padding">
+
+<!-- <div *ngIf="reservations.length === 0; else resaList"  class="ion-text-center">-->
+
+<div  class="ion-text-center">
+<ion-icon type="button" (click)="insertHoraireReservation()" name="add-circle-outline"></ion-icon>
+ 
+</div>
+<ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm>
+       <div>9h00</div> 
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <div>10h00</div>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <div>11h00</div>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <div>12h00</div>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col size="12" size-sm>
+        <div>13h00</div>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <div>14h00</div>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <div>15h00</div>
+      </ion-col>
+      <ion-col size="12" size-sm>
+        <div>16h00</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col size="12" size-sm>
+            <div>17h00</div>
+        </ion-col>
+        <ion-col size="12" size-sm>
+            <div>18h00</div>
+        </ion-col>
+        <ion-col size="12" size-sm>
+            <div>19h00</div>
+        </ion-col>
+        <ion-col size="12" size-sm>
+            <div>20h00</div>
+        </ion-col>
+      </ion-row>
+      <ion-button type="submit">Enregistrer</ion-button>
+      <!-- <ion-button type="submit" [disabled]="horaireReservationForm">Enregistrer</ion-button>-->
+  </ion-grid>
+</ion-content>

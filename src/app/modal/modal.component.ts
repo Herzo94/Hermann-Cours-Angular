@@ -9,7 +9,6 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-// Question comment faire si je veux utiliser le modal pour les réservations et pas que pour les produits ?
 @Input() data: IReservation;  
 constructor(
     private ps: ProductService,

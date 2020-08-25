@@ -72,7 +72,7 @@ export class UserInsertComponent implements OnInit {
       this.userForm.value.name,
       this.userForm.value.type,
       this.dateCreation, // Question données provisoire
-      // Question Comment récupérer le nouvel id du user qui vient d'être crée ?
+      // Question 4 Comment récupérer le nouvel id du user qui vient d'être crée ?
     );
      
     console.log('resultRes : ', resultRes);

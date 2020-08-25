@@ -29,7 +29,7 @@ export class MesReservationsComponent implements OnInit {
   
   ngOnInit() { 
   
-    this.afAuth.authState.subscribe((user) => {
+    this.sub = this.afAuth.authState.subscribe((user) => {
       console.log('user', user);
 
       this.user = user;
@@ -75,7 +75,7 @@ export class MesReservationsComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() {//obliger pour que ça soit perdormant //pas bloquer ressource système
     this.sub.unsubscribe();
   }
 

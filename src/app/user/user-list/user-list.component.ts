@@ -37,71 +37,25 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
 
-   ngOnInit(): void {
+   /*ngOnInit(): void {
     this.users$ = this.userService.getUsers();
     console.log('this.users$', this.users$);
     console.log('usersCollection : ', this.usersCollection);
-   }
-  /*async ngOnInit() {
+   }*/
+  async ngOnInit() {
 
     this.usersCollection = await this.userService.readUser();
     console.log("UsersCollection : ", this.usersCollection);
     this.sub = this.usersCollection.valueChanges({
       idField: 'id',
       
-    }).subscribe(data => {
+    }).subscribe((data) => {
       console.log('Code à décomenter : //this.users = data ')
-      //this.users = data; //Question : pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
+      this.users = data as IUser[]; //Question : pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
     })
     
-  }*/
-
-  onFileChange(e) {
-    console.log(e.target.files[0]);
-    this.photo.file = e.target.files[0];
   }
 
-  /*
-    postPhoto() {
-    console.log(this.photo);
-    const uid = this.user.uid;
-    const photoPathOnServer = `image-producs/${uid}/${this.photo.title}`;
-    const photoRef = this.afStorage.ref(photoPathOnServer);
-    this.photoServerURL = '';
-
-    console.log('photoPathOnServer', photoPathOnServer);
-    console.log('uid', uid);
-    console.log('this.photo.file', this.photo.file);
-    console.log('this.photo.title', this.photo.title);
-
-    const currentUpload = this.afStorage.upload(
-      photoPathOnServer,
-      this.photo.file
-    );
-
-    currentUpload.catch((err) => console.error(err));
-
-    currentUpload
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.photoServerURL = photoRef.getDownloadURL();
-          this.photoServerURL.subscribe((data) => {
-            console.log('data >>> ', data);
-            this.uploadedImgURL = data;
-            this.db.updatePersonalSpacePhotoURLs(
-              this.user,
-              this.uploadedImgURL
-            );
-          });
-        })
-      )
-      .subscribe();
-
-    // clear form
-    this.photo = { file: '', title: '' };
-  }
-  */
 
   public async insertUser(){
   

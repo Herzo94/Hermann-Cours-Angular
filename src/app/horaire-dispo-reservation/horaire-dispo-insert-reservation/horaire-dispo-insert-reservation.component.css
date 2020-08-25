@@ -1,0 +1,6 @@
+ion-col > div{
+    border : 1px solid gray;
+    color: black;
+    width: 50%;
+    margin: auto;
+}
