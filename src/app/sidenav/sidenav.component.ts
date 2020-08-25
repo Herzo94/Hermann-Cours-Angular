@@ -22,8 +22,13 @@ export class SidenavComponent implements OnInit {
     {name:"Catalogue des produits", route:"product", icon:"cart-outline"},
     {name:"Utilisateurs", route:"user", icon:"people-outline"},
     {name:"Reservations", route:"reservations", icon:"calendar-outline"},
-    {name:"Mes reservations", route:"resa", icon:"man-outline"},
-    {name:"Horaire reservation", route:"horaire-resa", icon:"time-outline"},
+    {name:"Mes reservations", route:"personalreservation", icon:"man-outline"},
+    //{name:"Horaire reservation", route:"horaire-resa", icon:"time-outline"},
+  ]
+
+  fillerNavUserNormal=[
+    {name:"Catalogue des produits", route:"product", icon:"cart-outline"},
+    {name:"Mes reservations", route:"personalreservation", icon:"man-outline"},
   ]
 
   /*fillerContent = Array(50).fill(0).map(() => 

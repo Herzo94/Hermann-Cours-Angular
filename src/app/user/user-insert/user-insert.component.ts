@@ -32,6 +32,50 @@ export class UserInsertComponent implements OnInit {
       type: ['', Validators.required],
     });
 
+    /*
+    async ngOnInit() {
+
+    this.usersCollection = await this.userService.readUser();
+    console.log("UsersCollection : ", this.usersCollection);
+    this.sub = this.usersCollection.valueChanges({
+      idField: 'id',
+      
+    }).subscribe((data) => {
+      this.users = data as IUser[]; 
+    })
+   
+  }*/
+
+  /*
+  this.sub = this.afAuth.authState.subscribe((user) => {
+      console.log('user', user);
+
+      this.user = user;
+      if (this.user) {
+         console.log(this.reservationService.readPersonalReservationByUID(user.uid));
+
+        this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
+          (data) => {
+            console.log('ngOnInt readPersonnalReservationById / data', data);
+            this.reservation = data;
+            console.log('mes reservations data : -> ', this.reservation);
+           
+            console.log('mes reservations$  OBSERVABLE : -> ', this.mesReservations$);
+      
+            if (!data || data.length === 0) {
+              console.log(`Creating a new personal reservation for ${user.displayName}`);
+              //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
+              //lié l'élément ici à une collection par exemple
+            }
+          },
+          (err) => {
+            console.error('readPersonalSpaceById error', err);
+          }
+        );
+      }
+    });*/
+
+
       this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
       console.log('user', user);
 
@@ -46,7 +90,8 @@ export class UserInsertComponent implements OnInit {
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
   
-              this.userService.createAdminUser;
+              //this.userService.createAdminUser;
+              //pas utile de laisser ce bout de code ici
             }
           },
           (err) => {
@@ -58,10 +103,7 @@ export class UserInsertComponent implements OnInit {
     
   }
 
-  // This methods run when Angular destroy a component (cf component life cycle)
-  /*ngOnDestroy(): void {
-    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
-  }*/
+  
 
   async onInsertUser() { //Création dans la base de donnée dans la table user
       
@@ -76,8 +118,10 @@ export class UserInsertComponent implements OnInit {
     );
      
     console.log('resultRes : ', resultRes);
+    console.log('this.userForm.value.name : ',  this.userForm.value.name);
+    console.log('this.userForm.value.displayName : ',  this.userForm.value.displayName);
+    console.log('this.userForm.value.type : ',  this.userForm.value.type);
     
-   
     if( this.result && this.result.user) {
       console.log('userCreated', this.result);
       this.result = null;
@@ -91,5 +135,10 @@ export class UserInsertComponent implements OnInit {
 
     this.router.navigate(['/user']);
   }
+
+  // This methods run when Angular destroy a component (cf component life cycle)
+  /*ngOnDestroy(): void {
+    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
+  }*/
 
 }

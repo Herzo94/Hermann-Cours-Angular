@@ -37,11 +37,6 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
 
-   /*ngOnInit(): void {
-    this.users$ = this.userService.getUsers();
-    console.log('this.users$', this.users$);
-    console.log('usersCollection : ', this.usersCollection);
-   }*/
   async ngOnInit() {
 
     this.usersCollection = await this.userService.readUser();
@@ -50,10 +45,9 @@ export class UserListComponent implements OnInit, OnDestroy {
       idField: 'id',
       
     }).subscribe((data) => {
-      console.log('Code à décomenter : //this.users = data ')
-      this.users = data as IUser[]; //Question : pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
+      this.users = data as IUser[]; 
     })
-    
+   
   }
 
 

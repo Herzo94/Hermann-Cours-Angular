@@ -25,7 +25,7 @@ export class UserService {
 
   readUser() {
     return this.afs.collection(`${this.collectionName}`, (ref) => 
-      ref.orderBy('createdAt', 'asc')
+      ref.orderBy('createdAt', 'desc')
     );
   }
 
@@ -33,7 +33,8 @@ export class UserService {
     return this.afs
       .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'id' });
-  }
+      
+    }
 
   createUser (user) { //créer l'utilisateur dans une collection
     const  newUser = {
@@ -42,21 +43,26 @@ export class UserService {
       name: '', //Comment récupérer le nom inséré dans le formualaire ? car "this.registerForm.value.name" ça ne joue pas
       email: user.email,
       emailVerified: user.emailVerified,
-      //type: 'normal',
-      type: '',
+      type: 'Normal',
       createdAt: new Date(),
     }
 
-    const usersCollection = this.afs.collection(`${this.collectionName}`); //créer ici le typage pour l'interface <IUser> -> 3:51 à la vidéo
+    const usersCollection = this.afs.collection(`${this.collectionName}`);
     return usersCollection.add(newUser);
   }
 
-  /*createUsertWithUID(user) {
+    /*createUsertWithUID(user) {
     return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
       createdAt: new Date,
     });
+  }*/
+  
+  /*createUser(email, name, type, createdAt) {
+    return this.afs
+      .collection(`${this.collectionName}`)
+      .add({ email, name, type, createdAt });
   }*/
 
   createAdminUser(email, name, type, createdAt) {
@@ -65,7 +71,7 @@ export class UserService {
       .add({ email, name, type, createdAt });
   }
 
-  /*createAdminUsertWithUID(user) {
+   /*createAdminUsertWithUID(user) {
     return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({ //Question : problème ici avec le .set
       uid: user.uid,
       email: user.email,
@@ -74,8 +80,6 @@ export class UserService {
       //createdAt: Date.now(),
     });
   }*/
-
-
   getUsers() {
     return this.afs.collection(`${this.collectionName}`).valueChanges({ idField: 'id'});
   }

@@ -78,7 +78,7 @@ export class ReservationInsertComponent implements OnInit {
     });
 
     this.reservationForm.reset();
-    this.router.navigate(['/reservation']);
+    this.router.navigate(['/personalreservation']);
   }
 
    // Question NGDestroy ? supprimer ou pas ? This methods run when Angular destroy a component (cf component life cycle)

@@ -25,9 +25,9 @@ export class UserEditComponent implements OnInit {
 
    async ngOnInit(): Promise<void> {
     this.userForm = this.fb.group({
-      email: ['', Validators.required],
+      /*email: ['', Validators.required],
       name: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.required],*/
       type: ['', Validators.required],
     });
     this.userForm.patchValue(this.data); //met le contenu dans le formulaire

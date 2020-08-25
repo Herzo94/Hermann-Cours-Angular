@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import * as firebase from 'firebase';
+import { auth, User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,17 @@ export class AuthService {
 
   isAuth = false;
   isAdmin = false;
+  userProfil: User;
  
 
   constructor(private afAuth: AngularFireAuth, public router : Router, userService : UserService) { }
 
+  ngOnInit(): void{
+    this.afAuth.authState.subscribe((userProfil) => {
+    this.userProfil = userProfil;
+    console.log('User profil auth service -> : ', this.userProfil);
+    });  
+  }
  /*async checkAuth(){
    const user = await this.afAuth.currentUser;
    if (user) {
@@ -28,8 +36,8 @@ export class AuthService {
  async signIn(email, password) {
     const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
     if(result.user){ // Questions : Ces lignes commentées ne sont pas très utiles non ? pas utile 
-      this.isAuth = true;
-    } //pas utile le this.isAuth sachant que c'est juste pour un enregistrement 
+      this.isAuth = true; //pas utile le "this.isAuth=true" sachant que c'est juste pour un enregistrement 
+    }
     else{
       this.isAuth = false;
     }
@@ -42,15 +50,22 @@ export class AuthService {
     if (user){ //Si l'utilisateur existe
     console.log('this.isAuth : ', this.isAuth )
     this.isAuth = true;
+    //console.log('User en question', this.user.type)
 
-        if(email === 'admin@gmail.com'){ 
-          //if(this.isAdmin===admin || superAdmin){  //pas top c'est mieux -> if(this.isAdmin || superAdmin) // genre si c'est égal true
+        if(email === 'admin@gmail.com'){ //Gérer ici la condition de si c'est un admin ou un super admin
           this.isAdmin = true;
           console.log('email ADMIN : ', email)
           console.log('STATE ADMIN : ', this.isAdmin)
-          //this.router.navigate(['/reservation'])
-          }
+          //this.router.navigate(['/reservations']) //pas faire ici la redirection
+        }
 
+        else if(email){ 
+          this.isAuth = true;
+          console.log('email userNormal : ', email)
+          console.log('STATE ADMIN -> : ', this.isAdmin)
+         // this.router.navigate(['/personalreservation']) //pas faire ici la redirection
+        }
+        
         else{
           console.log('ok pas de user donc go else ')
           this.isAuth = false;

@@ -33,7 +33,7 @@ export class HoraireDispoInsertReservationComponent implements OnInit {
     });
 
     this.reservationForm.reset();
-    this.router.navigate(['/reservation']);*/  
+    this.router.navigate(['/personalreservation']);*/  
   }
 
 }

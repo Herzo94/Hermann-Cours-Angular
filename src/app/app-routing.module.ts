@@ -41,7 +41,7 @@ const routes: Routes = [
     { path: '', component: ReservationListComponent },
     { path: 'insert', component: ReservationInsertComponent},
   ]},
-  { path: 'resa', canActivate: [AuthGuardService] , component: MesReservationsComponent },
+  { path: 'personalreservation', canActivate: [AuthGuardService] , component: MesReservationsComponent },
   //{ path: 'horaire-resa', canActivate: [AuthGuardService] , component: HoraireDispoReservationComponent },
 
 

@@ -41,6 +41,7 @@ export class MesReservationsComponent implements OnInit {
             console.log('ngOnInt readPersonnalReservationById / data', data);
             this.reservation = data;
             console.log('mes reservations data : -> ', this.reservation);
+           
             console.log('mes reservations$  OBSERVABLE : -> ', this.mesReservations$);
       
             if (!data || data.length === 0) {

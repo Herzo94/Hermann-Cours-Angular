@@ -8,21 +8,25 @@
 	</ion-header>
 	<ion-content>
 	  <ion-list>
-		  <!-- Question ICI sur ce que j'ai mis en commentaire par rapport à mon beug -->
-		<!-- <ion-item 
-				[hidden]="!authService.isAuth && nav.route !== 'register' || authService.isAuth && nav.route === 'register' " 
-				[routerLink]="nav.route" 
-				*ngFor="let nav of fillerNav">
-			<ion-icon [name]="nav.icon"></ion-icon> 
-			 {{nav.name}}
-		</ion-item> -->
-
-		 <ion-item 
+		  <div *ngIf="authService.isAdmin">
+		  <ion-item 
+				[hidden]="!authService.isAuth && nav.route !== 'register' || authService.isAdmin && nav.route === 'register' " 
 				[routerLink]="nav.route" 
 				*ngFor="let nav of fillerNav">
 			<ion-icon [name]="nav.icon"></ion-icon> 
 			 {{nav.name}}
 		</ion-item>
+	</div>
+
+		<div *ngIf="!authService.isAdmin"> <!-- si c'est pas un admin alors j'entre dans cette condition-->
+		<ion-item 
+				[hidden]="!authService.isAuth && nav.route !== 'register' || !authService.isAdmin && nav.route === 'register' " 
+				[routerLink]="nav.route" 
+				*ngFor="let nav of fillerNavUserNormal">
+			<ion-icon [name]="nav.icon"></ion-icon> 
+			 {{nav.name}}
+		</ion-item>
+	   </div>
 	
 		<ion-item (click)="authService.signOut()" [hidden]="!authService.isAuth">
 			<!-- <ion-item (click)="authService.signOut()" [hidden]="!authService.isAuth"> -->

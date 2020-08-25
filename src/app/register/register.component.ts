@@ -23,6 +23,9 @@ export class RegisterComponent implements OnInit {
   userProfil: User;
   authStatus: boolean;
   isAuth: boolean;
+  type: 'Normal';
+  createdAt;
+  
 
   constructor(private authService: AuthService/*authGuardService: AuthGuardService*/, private fb: FormBuilder, private afAuth: AngularFireAuth, private userService: UserService, private router: Router) { }
 
@@ -55,7 +58,11 @@ async register() {
   //this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
 
   if(this.result) {
+    this.createdAt = new Date();
+    //const userCreated = await this.userService.createUser(this.registerForm.value.email, this.registerForm.value.name, this.type, this.createdAt);
     const userCreated = await this.userService.createUser(this.result.user);
+
+    //this.userService.createProductWithUID(this.user);
     console.log('userCreated', userCreated);
     this.result = null;
   }

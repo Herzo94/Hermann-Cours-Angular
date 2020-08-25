@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
 
     const { email, password} = this.loginForm.value;
     this.user = await this.authService.login(email, password); //appel à la méthode
+    //console.log('firebase.auth().signInWithEmailAndPassword(email, password):', firebase.auth().signInWithEmailAndPassword(email, password))
     //const user = await this.authService.login(email, password).catch(err => err); //appel à la méthode
     /*return new Promise (
       (resolve, reject) =>{
@@ -78,39 +79,45 @@ export class LoginComponent implements OnInit {
    // console.log('us', user);
     //this.user = user;
     
-    if (this.user){ //Question : Gérer ici si c'est un admin ?
+    /*if (this.user){ //Question : Gérer ici si c'est un admin ?
         //this.router.navigate(['product']);  
         
         if(this.user.email === 'admin@gmail.com'){
-          this.router.navigate(['product']); 
+          this.router.navigate(['reservations']); 
         }
 
         else{
-          this.router.navigate(['reservations']); 
+          this.router.navigate(['product']); 
         }
-      }
+      }*/
 
-    /*try {
+    try {
       this.message = '';
       console.log('login', this.loginForm.value);
 
-      const { email, password} = this.loginForm.value;
-      this.user = await this.authService.login(email, password); //appel à la méthode
+      //const { email, password} = this.loginForm.value;
+      //this.user = await this.authService.login(email, password); //appel à la méthode
 
-      if(this.user.email === 'admin@gmail.com'){
-        console.log('Admin ? - this.user.email', this.user.email);
-      }
+      /*if(this.user.email === 'admin@gmail.com'){
+        console.log('Admin ? ou pas ???????? - this.user.email', this.user.email);
+      }*/
+
       if (this.user){ //Question : Gérer ici si c'est un admin ?
         //this.router.navigate(['product']);  
-        this.router.navigate(['reservations']);  
-      }
+        /*if(this.user.email === 'admin@gmail.com'){ //PAS UTILE
+          this.router.navigate(['reservations']); 
+        }*/
+        /*else{
+          this.router.navigate(['product']); 
+        }*/
 
-      if (this.isAdmin){
-        console.log('CoucouAdmin');
+        this.router.navigate(['product']); 
+
       }
+     
     } catch (error) {
       this.message = error.message;
-    }*/
+    }
   }
 
   /*onActif(){
