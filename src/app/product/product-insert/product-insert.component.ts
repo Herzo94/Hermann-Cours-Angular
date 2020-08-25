@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ const { Toast } = Plugins;
   templateUrl: './product-insert.component.html',
   styleUrls: ['./product-insert.component.css']
 })
-export class ProductInsertComponent implements OnInit {
+export class ProductInsertComponent implements OnInit, OnDestroy {
 
   productForm: FormGroup;
   message = '';
@@ -25,6 +25,7 @@ export class ProductInsertComponent implements OnInit {
   photoServerURL;
   uploadedImgURL = '';
   personalSpace;
+  sub;
 
   constructor(private fb: FormBuilder, route: ActivatedRoute, private productService: ProductService, private router: Router, private afAuth: AngularFireAuth, private afStorage: AngularFireStorage) { }
   //ENLEVER LA VARIABLE prodService, car c'est répétitif
@@ -37,7 +38,7 @@ export class ProductInsertComponent implements OnInit {
       price: ['', Validators.required]
     });
 
-    this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
+    this.sub = this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
       console.log('user', user);
 
       this.user = user;
@@ -51,6 +52,8 @@ export class ProductInsertComponent implements OnInit {
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
               this.productService.createProductWithUID(this.user);
+              //Question check ici 
+              //this.productService.createProductWithUID(this.personalSpace);
             }
           },
           (err) => {
@@ -133,5 +136,9 @@ export class ProductInsertComponent implements OnInit {
   onFileChange(e) {
     console.log(e.target.files[0]);
     this.photo.file = e.target.files[0];
+  }
+
+  ngOnDestroy() {//obliger pour que ça soit perdormant //pas bloquer ressource système
+    this.sub.unsubscribe();
   }
 }

@@ -65,12 +65,21 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   }   
 
   async  deleteReservation(id){
-    this.reservationService.deleteReservation(id)
+    
 
-    await Toast.show({
-      text: 'Suppression effectuée avec succès!'
-    });
+
+    if(confirm('Etes-vous sûr de vouloir supprimer cette reservation ?')) {
+
+      this.reservationService.deleteReservation(id)
+      
+      await Toast.show({
+        text: 'Suppression effectuée avec succès!'
+      });
+    }
+   else {
+    return null;
   }
+}
 
   ngOnDestroy() {
     this.sub.unsubscribe();

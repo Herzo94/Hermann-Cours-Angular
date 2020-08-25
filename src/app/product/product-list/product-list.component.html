@@ -17,7 +17,7 @@
 
     <ng-template #prodList>
       <div class="ion-text-center">
-      <ion-label for="search">Search: </ion-label>
+      <!-- <ion-label for="search">Search: </ion-label> -->
       <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products"></ion-input>
       <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
       </div>   
@@ -28,9 +28,6 @@
 
         <ion-card-header>
           <ion-card-title>{{ product.productName }}</ion-card-title>
-
-          
-
           <ion-card-subtitle>Prix : {{ product.price }} CHF</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AuthService } from '../service/auth-service.service';
 import { MenuController } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { UserService } from './../service/user.service';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy {
   user;
   mobileQuery: MediaQueryList; //mobileQuery c'est un lister qui est capable d'écouter la taille qu'a ma page, reconnaitre les dimensions de l'interface graphique
   isAuth = false;

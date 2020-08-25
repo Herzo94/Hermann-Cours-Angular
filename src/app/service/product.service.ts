@@ -43,7 +43,7 @@ export class ProductService {
     return this.imageProductCollection.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
-      createdAt: Date.now(),
+      createdAt: new Date(),
       imageUrl: '',
       productName: '',
       description : '',
@@ -59,7 +59,6 @@ export class ProductService {
       name: product.productName,
       description : product.description,
       price: product.price,
-      //createdAt: Date.now(),
     });
   }
 

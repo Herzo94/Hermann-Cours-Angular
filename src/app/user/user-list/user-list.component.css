@@ -1,0 +1,10 @@
+ion-item{
+    width: 25%;
+    margin: auto;
+}
+
+ion-input{
+    width: 12%;
+    margin: auto;
+    border: 1px solid gray;
+}

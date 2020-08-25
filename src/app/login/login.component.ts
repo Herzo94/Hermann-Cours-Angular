@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../service/auth-service.service';
 
@@ -16,7 +16,7 @@ import * as firebase from 'firebase';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   loginForm: FormGroup;
   result;
@@ -26,23 +26,30 @@ export class LoginComponent implements OnInit {
   authStatus: boolean;
   isAuth: boolean;
   isAdmin: boolean;
+  sub;
 
   constructor(private authService: AuthService, private fb: FormBuilder, private afAuth: AngularFireAuth, private userService: UserService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.registerForm = this.fb.group({
-        email: ['', Validators.email],
-        password: ['',[Validators.required, Validators.minLength(6)]]
-      });
-  
+  ngOnInit() {
       this.loginForm = this.fb.group({
         email: ['', Validators.email],
         password: ['',[Validators.required, Validators.minLength(6)]]
       });
   
-      this.afAuth.authState.subscribe((userProfil) => {
+     /*this.sub = this.afAuth.authState.subscribe((userProfil) => {
         this.userProfil = userProfil;
-      });  
+      }); */
+      this.sub = firebase.auth().onAuthStateChanged( //currentUSer ?
+        (user) => {
+          if(user){
+            this.isAuth = true; //connecté
+          }
+          else{
+            this.isAuth = false; //pas connecté
+          }
+          
+        }
+      )
   }
 
   async login() {
@@ -125,6 +132,11 @@ export class LoginComponent implements OnInit {
   }*/
   onSignOut() {
     this.isAuth = false;
+    this.authService.signOut;
+  }
+
+  ngOnDestroy() {//obliger pour que ça soit perdormant //pas bloquer ressource système
+    this.sub.unsubscribe();
   }
 
 }

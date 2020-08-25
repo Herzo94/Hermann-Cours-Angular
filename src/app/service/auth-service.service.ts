@@ -92,6 +92,7 @@ export class AuthService {
 }
 
   signOut() {
+    firebase.auth().signOut();
     this.isAuth = false;
     this.isAdmin = false;
     console.log('SignOut :', this.isAuth)

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -12,13 +12,14 @@ const { Toast } = Plugins;
   templateUrl: './reservation-insert.component.html',
   styleUrls: ['./reservation-insert.component.css']
 })
-export class ReservationInsertComponent implements OnInit {
+export class ReservationInsertComponent implements OnInit, OnDestroy {
 
   public reservationForm: FormGroup;
   message = '';
   user;
   result;
   personalSpace;
+  sub;
 
   constructor(private fb: FormBuilder, route: ActivatedRoute, private reservationService : ReservationService, private router: Router, private afAuth: AngularFireAuth) { }
 
@@ -31,7 +32,7 @@ export class ReservationInsertComponent implements OnInit {
       heure: ['', Validators.required],
     });
 
-    this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
+    this.sub = this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
       console.log('user', user);
 
       this.user = user;
@@ -44,7 +45,8 @@ export class ReservationInsertComponent implements OnInit {
             this.personalSpace = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-              this.reservationService.createReservationWithUID(this.user);
+              //this.reservationService.createReservationWithUID(this.user);
+              this.reservationService.createReservationWithUID(this.personalSpace);
             }
           },
           (err) => {
@@ -82,8 +84,8 @@ export class ReservationInsertComponent implements OnInit {
   }
 
    // Question NGDestroy ? supprimer ou pas ? This methods run when Angular destroy a component (cf component life cycle)
-  /*ngOnDestroy(): void {
-    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
-  }*/
+  ngOnDestroy() {
+    this.sub.unsubscribe() // We unsubscribe from the observable
+  }
 
 }

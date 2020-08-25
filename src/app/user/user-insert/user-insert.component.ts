@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ const { Toast } = Plugins;
   templateUrl: './user-insert.component.html',
   styleUrls: ['./user-insert.component.css']
 })
-export class UserInsertComponent implements OnInit {
+export class UserInsertComponent implements OnInit, OnDestroy {
 
   public userForm: FormGroup;
   message = '';
@@ -21,6 +21,7 @@ export class UserInsertComponent implements OnInit {
   user;
   dateCreation = new Date();
   personalSpace;
+  sub;
 
   constructor(private fb: FormBuilder, route: ActivatedRoute, private userService : UserService, private router: Router, private afAuth: AngularFireAuth) { }
 
@@ -76,7 +77,7 @@ export class UserInsertComponent implements OnInit {
     });*/
 
 
-      this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
+    this.sub = this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
       console.log('user', user);
 
       this.user = user;
@@ -89,9 +90,9 @@ export class UserInsertComponent implements OnInit {
             this.personalSpace = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-  
+              this.userService.createUser(this.personalSpace);
               //this.userService.createAdminUser;
-              //pas utile de laisser ce bout de code ici
+              //pas utile de laisser ce bout de code ici ?
             }
           },
           (err) => {
@@ -137,8 +138,8 @@ export class UserInsertComponent implements OnInit {
   }
 
   // This methods run when Angular destroy a component (cf component life cycle)
-  /*ngOnDestroy(): void {
-    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
-  }*/
+  ngOnDestroy(): void {
+    this.sub.unsubscribe() // We unsubscribe from the observable
+  }
 
 }

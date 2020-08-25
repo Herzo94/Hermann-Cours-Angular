@@ -77,12 +77,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   async deleteUser(id){
-    this.userService.deleteUser(id)
-
+    if(confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      this.userService.deleteUser(id)
     await Toast.show({ 
       text: 'Suppression effectuée avec succès!'
     });
   }
+
+  else {
+
+    return null;
+  }
+}
   
  ngOnDestroy() {
     this.sub.unsubscribe();

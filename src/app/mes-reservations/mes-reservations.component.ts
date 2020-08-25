@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -16,13 +16,14 @@ const { Toast } = Plugins;
   templateUrl: './mes-reservations.component.html',
   styleUrls: ['./mes-reservations.component.css']
 })
-export class MesReservationsComponent implements OnInit {
+export class MesReservationsComponent implements OnInit, OnDestroy {
   private mesReservationsCollection: AngularFirestoreCollection<IReservation>;
   user;
   reservation;
   mesReservations: IReservation[] = [];
   mesReservations$: Observable<IReservation[]>
   sub;
+  personalSpace;
   public searchTerm: string = '';
 
   constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
@@ -38,6 +39,10 @@ export class MesReservationsComponent implements OnInit {
 
         this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
           (data) => {
+
+            console.log('ngOnInt readPersonnalSpaceById / data', data);
+            this.personalSpace = data;
+
             console.log('ngOnInt readPersonnalReservationById / data', data);
             this.reservation = data;
             console.log('mes reservations data : -> ', this.reservation);
@@ -46,8 +51,9 @@ export class MesReservationsComponent implements OnInit {
       
             if (!data || data.length === 0) {
               console.log(`Creating a new personal reservation for ${user.displayName}`);
-              //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
+              this.reservationService.createReservationWithUID(this.personalSpace);
               //lié l'élément ici à une collection par exemple
+
             }
           },
           (err) => {
@@ -69,11 +75,17 @@ export class MesReservationsComponent implements OnInit {
   }
 
   async  deleteReservation(id){
-    this.reservationService.deleteReservation(id)
+    if(confirm('Etes-vous sûr de vouloir supprimer cette reservation ?')) {
 
+    this.reservationService.deleteReservation(id)
     await Toast.show({
-      text: 'Suppression effectuée avec succès!'
-    });
+          text: 'Suppression effectuée avec succès!'
+        });
+  } else {
+
+    return null;
+  }
+ 
   }
 
   ngOnDestroy() {//obliger pour que ça soit perdormant //pas bloquer ressource système

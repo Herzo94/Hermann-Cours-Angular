@@ -11,7 +11,8 @@ const { Toast } = Plugins;
 
 
 const HTTP_URL_PATTERN: string =
-  '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$'
+  '^((http[s]?):\\/)\\/?([^:\\/\\s]+)((\\/\\w+)*)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$';
+  
 
 @Component({
   selector: 'app-product-edit',
@@ -24,6 +25,7 @@ export class ProductEditComponent implements OnInit {
   @Input() data: IProduct;  
   public productForm: FormGroup
   message = '';
+  imageUrl;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private productService: ProductService, private router: Router, public modalController: ModalController) {
     // We create our Form for product 
@@ -59,7 +61,8 @@ export class ProductEditComponent implements OnInit {
   }
 
   async onUpdateProduct() {
-    console.log('this.suggestionForm.value', this.productForm.value);      const result = await this.productService.updateProduct(this.productForm.value as any);
+    console.log('this.suggestionForm.value', this.productForm.value);      
+    const result = await this.productService.updateProduct(this.productForm.value as any);
     this.modalController.dismiss();
   
       await Toast.show({ 

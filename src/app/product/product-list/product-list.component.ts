@@ -119,11 +119,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
   } 
 
   async deleteProduct(id){
-    this.productService.deleteProduct(id)
+    if(confirm('Etes-vous sûr de vouloir supprimer ce produit ?')) {
 
-    await Toast.show({ 
+    this.productService.deleteProduct(id);
+
+    await Toast.show({
       text: 'Suppression effectuée avec succès!'
     });
+    }
+    else {
+
+      return null;
+    }
   }
 
   ngOnDestroy() {
