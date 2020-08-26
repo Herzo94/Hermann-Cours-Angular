@@ -43,7 +43,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges(); //listener qui déctect les changements
     this.mobileQuery.addListener(this._mobileQueryListener);
     //this.isAuth = this.authService.isAuth; //Question : initilisé this.isAuth ici ?
-    this.isAuth = true; // Question - Provisoire, pas top mais juste pour tester
     console.log('Sidenav is auth:', this.isAuth);
   }
 

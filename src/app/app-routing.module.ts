@@ -21,15 +21,25 @@ import { UserInsertComponent } from './user/user-insert/user-insert.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 import { HoraireDispoReservationComponent } from './horaire-dispo-reservation/horaire-dispo-reservation.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent, /*canActivate: [NoAuthGuardGuard]*/ },
   { path: 'login', component: LoginComponent/*, canActivate: [NoAuthGuardGuard]*/ },
+  { path: '', canActivate: [AuthGuardService] , /*component: ReservationComponent,*/children: [
+    //{ path: '', canActivate: [AuthGuardService] , component: TabsComponent, children: [ //Question : je ne souhaite pas que les clients pas admin voient les tabs
+
+    { path: 'personalreservation', component: MesReservationsComponent},
+    { path: 'reservations', component: ReservationListComponent },
+    { path: 'insert', component: ReservationInsertComponent},
+  ]},
+
   { path: 'product', canActivate: [AuthGuardService] , component: ProductListComponent, children: [
     { path: 'insert', component: ProductInsertComponent},
     /*{ path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent}*/
   ] },
+ 
   { path: 'user', canActivate: [AuthGuardService] , children: [
     { path: '', component: UserListComponent },
     { path: 'insert', component: UserInsertComponent},
@@ -37,16 +47,38 @@ const routes: Routes = [
     //{ path: 'details/:id', component: UserDetailComponent }
   ]},
 
-  { path: 'reservations', canActivate: [AuthGuardService] , /*component: ReservationComponent,*/ children: [
-    { path: '', component: ReservationListComponent },
-    { path: 'insert', component: ReservationInsertComponent},
-  ]},
-  { path: 'personalreservation', canActivate: [AuthGuardService] , component: MesReservationsComponent },
+  
+ //{ path: 'personalreservation', canActivate: [AuthGuardService] , component: MesReservationsComponent },
   //{ path: 'horaire-resa', canActivate: [AuthGuardService] , component: HoraireDispoReservationComponent },
 
 
   { path: 'user-detail/:id', component: UserDetailComponent , canActivate: [AuthGuardService]},
   
+  //tabs
+  /*{
+    path: 'tabs',
+    component: TabsComponent,
+    children:[
+      { path: 'reservations', canActivate: [AuthGuardService] , children: [
+        { path: '', component: ReservationListComponent },
+        { path: 'insert', component: ReservationInsertComponent},
+      ]},
+      {
+        path: 'personalreservation',
+        component: MesReservationsComponent
+      },
+      {
+        path: '',
+        redirectTo: 'tabs/reservations',
+        pathMatch: 'full'
+      },
+    ]
+  },
+  
+  */
+  //end tabs
+
+
   { path: 'not-found', component: FourOhFourComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: '**', redirectTo: 'not-found' }

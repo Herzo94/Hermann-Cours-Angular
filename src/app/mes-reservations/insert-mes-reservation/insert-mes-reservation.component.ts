@@ -37,20 +37,14 @@ export class InsertMesReservationComponent implements OnInit, OnDestroy {
 
       this.user = user;
       if (this.user) {
-        // console.log(this.db.readPersonalSpaceByUID(user.uid));
-
         this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
           (data) => {
             console.log('ngOnInt readPersonnalSpaceById / data', data);
             this.personalSpace = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-              //this.reservationService.createReservationWithUID(this.user);
               this.reservationService.createReservationWithUID(this.personalSpace);
             }
-            /*else{
-              this.reservationService.createReservationWithUID(this.user)
-            }*/
           },
           (err) => {
             console.error('readPersonalSpaceById error', err);
@@ -73,7 +67,7 @@ export class InsertMesReservationComponent implements OnInit, OnDestroy {
 
     console.log('result', result);
     
-    await Toast.show({ //si problème -> Stackoverflow 
+    await Toast.show({ 
       text: 'Insertion effectué avec succès!'
     });
 

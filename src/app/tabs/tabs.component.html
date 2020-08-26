@@ -1,0 +1,17 @@
+<!-- <app-mes-reservations></app-mes-reservations>-->
+<app-product-list></app-product-list>
+
+<ion-tabs *ngIf="authService.isAdmin">
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="reservations">
+            <ion-icon name="calendar"></ion-icon>
+            <ion-label>Les reservations</ion-label>
+      
+        </ion-tab-button>
+
+        <ion-tab-button tab="personalreservation">
+            <ion-icon name="person-circle"></ion-icon>
+            <ion-label>Mes reservations</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

@@ -6,7 +6,7 @@ import { IReservation } from '../../models/IReservation';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { ReservationInsertComponent } from '../reservation-insert/reservation-insert.component';
 import { ReservationEditComponent } from '../reservation-edit/reservation-edit.component';
@@ -28,7 +28,7 @@ export class ReservationListComponent implements OnInit, OnDestroy {
   sub;
   public searchTerm: string = '';
 
-  constructor(private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
+  constructor(private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController, public alertController : AlertController) { }
 
   async ngOnInit() {
     
@@ -66,19 +66,34 @@ export class ReservationListComponent implements OnInit, OnDestroy {
 
   async  deleteReservation(id){
     
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Supprimer un produit',
+      subHeader: "Voulez-vous vraiment supprimer cette reservation ?",
+      buttons: [
+        {
+         text: 'Oui',
+         role:'delete',
+         handler: () =>{
+           Toast.show({ 
+            text: 'Suppression effectuée avec succès!'
+          });
+          this.reservationService.deleteReservation(id)
+           console.log('delete clicked');
+           
+         }
+        },
+        {
+          text: 'Non',
+          role:'NoDelete',
+          handler: () =>{
+            console.log('Cancel clicked');
+          }
+         },
+      ]
+    });
+  alert.present();
 
-
-    if(confirm('Etes-vous sûr de vouloir supprimer cette reservation ?')) {
-
-      this.reservationService.deleteReservation(id)
-      
-      await Toast.show({
-        text: 'Suppression effectuée avec succès!'
-      });
-    }
-   else {
-    return null;
-  }
 }
 
   ngOnDestroy() {

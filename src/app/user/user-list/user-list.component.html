@@ -4,21 +4,25 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Les utilisateurs</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
+     </ion-buttons>
     </ion-toolbar>
 </ion-header>
   <ion-content class="ion-text-center ion-padding">
     
       <div *ngIf="users?.length === 0; else userList">
-        <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>    
+        <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>  -->  
           <p>Aucun utilisateur...</p>
       </div>
 
     <ng-template #userList>
       <div>
-        <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-        <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
+        <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Recherche">
+          <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
+        </ion-input>
         <br>
-        <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
+        <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>-->
       </div> 
 
 

@@ -52,7 +52,7 @@ export class UserService {
   }
 
     /*createUsertWithUID(user) {
-    return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({
+    return this.userCollection?.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
       createdAt: new Date,
@@ -72,7 +72,7 @@ export class UserService {
   }
 
    /*createAdminUsertWithUID(user) {
-    return this.userCollection.doc(`${this.collectionName}-${user.uid}`).set({ //Question : problème ici avec le .set
+    return this.userCollection?.doc(`${this.collectionName}-${user.uid}`).set({ //Question : problème ici avec le .set
       uid: user.uid,
       email: user.email,
       type: '',
@@ -85,19 +85,19 @@ export class UserService {
   }
 
   getUser(id) {
-    return this.afs.doc(`${this.collectionName}/${id}`).valueChanges();
+    return this.afs?.doc(`${this.collectionName}/${id}`).valueChanges();
   }
 
   updateUserWithUID(user) {
     return this.afs
       .collection(`${this.collectionName}`)
-      //.doc(`ps-${user.uid}`)
-      .doc(`${this.collectionName}-${user.uid}`)
+      //?.doc(`ps-${user.uid}`)
+      ?.doc(`${this.collectionName}-${user.uid}`)
   }
 
   deleteUser(id) { 
     return this.afs
-      .doc<IUser>(`${this.collectionName}/${id}`)
+      ?.doc<IUser>(`${this.collectionName}/${id}`)
       .delete();
   }
 }

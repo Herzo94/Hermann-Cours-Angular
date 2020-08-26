@@ -2,23 +2,28 @@
       <ion-toolbar>
         <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+       </ion-buttons>
       <ion-title>Les réservations</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+       </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-text-center ion-padding">
 
 <div *ngIf="reservations.length === 0; else resaList"  class="ion-text-center">
-  <ion-icon type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
-    <p>Aucune réservation</p>
+  <!-- <ion-icon type="button" (click)="insertReservation()" name="add-circle-outline" (click)="insertReservation()"></ion-icon>-->
+    <p>Aucune réservation...</p>
 </div>
 
 <ng-template #resaList>
   <div class="ion-text-center">
-    <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-    <ion-icon name="search-sharp"></ion-icon>
+    <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Recherche">
+      <ion-icon name="search-sharp"></ion-icon>
+    </ion-input>
+    
     <br>
-    <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+    <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>-->
  </div> 
 
   <br>
@@ -53,11 +58,26 @@
                 (click)="deleteReservation(res.id)"
               >
               </ion-icon> 
-
         </div>
       </ion-col>
     </ion-row>
     <tr></tr>
   </ion-grid>
+
   </ng-template>
+   <!-- <app-tabs  *ngIf="authService.isAdmin"></app-tabs> -->
+   <!-- <ion-tabs *ngIf="authService.isAdmin">
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="reservations">
+            <ion-icon name="calendar"></ion-icon>
+            <ion-label>Les reservations</ion-label>
+            
+        </ion-tab-button>
+
+        <ion-tab-button tab="personalreservation">
+            <ion-icon name="person-circle"></ion-icon>
+            <ion-label>Mes reservations</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>-->
 </ion-content>

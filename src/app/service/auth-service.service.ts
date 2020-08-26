@@ -17,21 +17,23 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth, public router : Router, userService : UserService) { }
 
-  ngOnInit(): void{
-    this.afAuth.authState.subscribe((userProfil) => {
-    this.userProfil = userProfil;
-    console.log('User profil auth service -> : ', this.userProfil);
+  /*ngOnInit() : void{ //Question Pas utile de mettre ce bout de code ici ?
+     this.afAuth.authState.subscribe((data) => { //récupère la valeur du user s'il est co / IL RENTRE PAS DANS CETTE CONDITION DONC PAS CO
+    this.userProfil = data;
+    console.log(' Auth-Service : HALLOOOOO User profil auth service -> : ', this.userProfil);
     });  
-  }
- /*async checkAuth(){
+  }*/
+
+ async checkAuth(){
    const user = await this.afAuth.currentUser;
+   console.log('checkAuth - currentUser : ' + user)
    if (user) {
      this.isAuth = true;
    } else {
      this.isAuth = false;
    }
   return user;
-  }*/
+  }
 
  async signIn(email, password) {
     const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
@@ -48,11 +50,14 @@ export class AuthService {
     const user:any = await this.afAuth.signInWithEmailAndPassword(email, password); //dans le resultat, on met le await et sans oublier de mettre le async à côté de la fonction
     
     if (user){ //Si l'utilisateur existe
-    console.log('this.isAuth : ', this.isAuth )
     this.isAuth = true;
+    console.log('this.isAuth : ', this.isAuth ) //Question : problème ici peut-être ? est-ce util de mettre le resultat à true apres la condition de si un user existe ? 
+    
     //console.log('User en question', this.user.type)
 
         if(email === 'admin@gmail.com'){ //Gérer ici la condition de si c'est un admin ou un super admin
+        //if(user.type === 'admin' || === 'superAdmin' || email === 'admin@gmail.com' ){ //Gérer ici la condition de si c'est un admin ou un super admin
+        
           this.isAdmin = true;
           console.log('email ADMIN : ', email)
           console.log('STATE ADMIN : ', this.isAdmin)
@@ -91,11 +96,12 @@ export class AuthService {
 
 }
 
-  signOut() {
-    firebase.auth().signOut();
+ async signOut() {
+    await firebase.auth().signOut();
     this.isAuth = false;
     this.isAdmin = false;
-    console.log('SignOut :', this.isAuth)
+    console.log('firebase.auth().signOut()' + firebase.auth().signOut())
+    console.log('SignOut - this.isAuth :', this.isAuth)
     console.log('SignOut + isAdmin :', this.isAdmin)
     this.router.navigate(['/login'])
     

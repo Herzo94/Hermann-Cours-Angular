@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { Observable } from 'rxjs';
 
 import { UserService } from 'src/app/service/user.service';
@@ -6,7 +7,7 @@ import { IUser } from '../../models/IUser';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { UserInsertComponent } from '../user-insert/user-insert.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
@@ -35,7 +36,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   uploadedImgURL = '';
   personalSpace;
 
-  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
+  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage, public alertController : AlertController) { }
  /*ngOnInit(): void {
     this.users$ = this.userService.getUsers();
     console.log('this.users$', this.users$);
@@ -77,7 +78,44 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   async deleteUser(id){
-    if(confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+    
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: "Voulez-vous vraiment supprimer cette reservation ?",
+      buttons: [
+        {
+         text: 'Oui',
+         role:'delete',
+         handler: () =>{
+           Toast.show({ 
+            text: 'Suppression effectuée avec succès!'
+          });
+          this.userService.deleteUser(id)
+           console.log('delete clicked');
+           
+         }
+        },
+        {
+          text: 'Non',
+          role:'NoDelete',
+          handler: () =>{
+            console.log('Cancel clicked');
+          }
+         },
+      ]
+    });
+  alert.present();
+
+    /*if(confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      this.userService.deleteUser(id)
+    await Toast.show({ 
+      text: 'Suppression effectuée avec succès!'
+    });
+  }*/
+
+    
+    /*if(confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
       this.userService.deleteUser(id)
     await Toast.show({ 
       text: 'Suppression effectuée avec succès!'
@@ -87,7 +125,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   else {
 
     return null;
-  }
+  }*/
 }
   
  ngOnDestroy() {

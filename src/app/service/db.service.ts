@@ -23,7 +23,7 @@ export class DbService {
   }
 
   createPersonalSpace(user) {
-    return this.personalSpaceCollection.doc(`ps-${user.uid}`).set({
+    return this.personalSpaceCollection?.doc(`ps-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
       createdAt: Date.now(),
@@ -43,7 +43,7 @@ export class DbService {
   updatePersonalSpacePhotoURLs(user, photoURL) {
     return this.afs
       .collection('personal-spaces')
-      .doc(`ps-${user.uid}`)
+      ?.doc(`ps-${user.uid}`)
       .update({
         photoURLs: firestore.FieldValue.arrayUnion(photoURL),
       });

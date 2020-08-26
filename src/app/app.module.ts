@@ -47,6 +47,7 @@ import { MesReservationsComponent } from './mes-reservations/mes-reservations.co
 import { InsertMesReservationComponent } from './mes-reservations/insert-mes-reservation/insert-mes-reservation.component';
 import { HoraireDispoReservationComponent } from './horaire-dispo-reservation/horaire-dispo-reservation.component';
 import { HoraireDispoInsertReservationComponent } from './horaire-dispo-reservation/horaire-dispo-insert-reservation/horaire-dispo-insert-reservation.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { HoraireDispoInsertReservationComponent } from './horaire-dispo-reservat
     InsertMesReservationComponent,
     HoraireDispoReservationComponent,
     HoraireDispoInsertReservationComponent,
+    TabsComponent,
   
   ],
   imports: [

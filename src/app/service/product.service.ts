@@ -40,7 +40,7 @@ export class ProductService {
   
 
   createProductWithUID(user) {
-    return this.imageProductCollection.doc(`${this.collectionName}-${user.uid}`).set({
+    return this.imageProductCollection?.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
       createdAt: new Date(),
@@ -53,7 +53,7 @@ export class ProductService {
 
   //Update product
   updateProduct(product) {
-    return this.afs.doc(`${this.collectionName}/${product.id}`).update({
+    return this.afs?.doc(`${this.collectionName}/${product.id}`).update({
       ...product,
       imageUrl: product.imageUrl,
       name: product.productName,
@@ -66,7 +66,7 @@ export class ProductService {
     return this.afs
       .collection(`${this.collectionName}`)
       //.doc(`ps-${user.uid}`) //décommenter ce bout de code si ça ne marche pas 
-      .doc(`${this.collectionName}-${user.uid}`)
+      ?.doc(`${this.collectionName}-${user.uid}`)
       .update({
         photoURLs: firestore.FieldValue.arrayUnion(photoURL),
       });

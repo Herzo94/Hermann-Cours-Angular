@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   result;
   user;
   message;
-  userProfil: User;
+  //userProfil: User;
+  userProfil;
   authStatus: boolean;
   isAuth: boolean;
   isAdmin: boolean;
@@ -30,16 +31,22 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService, private fb: FormBuilder, private afAuth: AngularFireAuth, private userService: UserService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() : void { //:void je dois laisser ou pas ?
       this.loginForm = this.fb.group({
         email: ['', Validators.email],
         password: ['',[Validators.required, Validators.minLength(6)]]
       });
   
-     /*this.sub = this.afAuth.authState.subscribe((userProfil) => {
+   this.sub = this.afAuth.authState.subscribe((data) => { //récupère la valeur du user s'il est co / IL RENTRE PAS DANS CETTE CONDITION DONC PAS CO
+   this.userProfil = data;
+   console.log('HALLOOOOO User profil auth service -> : ', this.userProfil);
+   });  
+
+    /*this.sub = this.afAuth.authState.subscribe((userProfil) => {
         this.userProfil = userProfil;
       }); */
-      this.sub = firebase.auth().onAuthStateChanged( //currentUSer ?
+
+      /*this.sub = firebase.auth().onAuthStateChanged( //currentUSer ?
         (user) => {
           if(user){
             this.isAuth = true; //connecté
@@ -49,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
           
         }
-      )
+      )*/
   }
 
   async login() {
@@ -58,9 +65,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     
     this.message = '';
-
-
-    console.log('Admin ?');
     this.message = '';
     console.log('login', this.loginForm.value);
 
@@ -82,43 +86,18 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
     )*/
     
-      
-   // console.log('us', user);
-    //this.user = user;
-    
-    /*if (this.user){ //Question : Gérer ici si c'est un admin ?
-        //this.router.navigate(['product']);  
-        
-        if(this.user.email === 'admin@gmail.com'){
-          this.router.navigate(['reservations']); 
-        }
-
-        else{
-          this.router.navigate(['product']); 
-        }
-      }*/
-
     try {
       this.message = '';
       console.log('login', this.loginForm.value);
 
-      //const { email, password} = this.loginForm.value;
-      //this.user = await this.authService.login(email, password); //appel à la méthode
-
-      /*if(this.user.email === 'admin@gmail.com'){
-        console.log('Admin ? ou pas ???????? - this.user.email', this.user.email);
-      }*/
-
       if (this.user){ //Question : Gérer ici si c'est un admin ?
-        //this.router.navigate(['product']);  
-        /*if(this.user.email === 'admin@gmail.com'){ //PAS UTILE
+      console.log('this.loginForm.value ' + this.loginForm.value )
+        if(this.user.email === 'admin@gmail.com'){ // si admin // Question : ne rentre pas dans cette condition
           this.router.navigate(['reservations']); 
-        }*/
-        /*else{
-          this.router.navigate(['product']); 
-        }*/
-
-        this.router.navigate(['product']); 
+        }
+        else{ //si pas admin
+          this.router.navigate(['personalreservation']); //provisoire 
+        }
 
       }
      
@@ -127,16 +106,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  /*onActif(){
-    this.isAuth = true;
-  }*/
   onSignOut() {
     this.isAuth = false;
     this.authService.signOut;
   }
 
-  ngOnDestroy() {//obliger pour que ça soit perdormant //pas bloquer ressource système
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

@@ -4,22 +4,27 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Catalogue des produits</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
+     </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-text-center ion-padding">
   
     <div *ngIf="products.length === 0; else prodList" class="ion-text-center">
-      <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-      <ion-icon name="search-sharp"></ion-icon><br>
-      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
+      <!-- <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>-->
+      <!-- <ion-icon name="search-sharp"></ion-icon><br>-->
+      <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>-->
       <p>Pas de produit...</p>
     </div>
 
     <ng-template #prodList>
       <div class="ion-text-center">
-      <!-- <ion-label for="search">Search: </ion-label> -->
-      <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products"></ion-input>
-      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
+        <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Recherche">
+          <ion-icon name="search-sharp"></ion-icon>
+        </ion-input>
+        <br>
+        <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>-->   
       </div>   
 
     <div *ngFor="let product of products | productSearch:searchTerm">
@@ -45,7 +50,6 @@
       </ion-card>
     </div>
 
- 
 </ng-template>
 
 </ion-content>

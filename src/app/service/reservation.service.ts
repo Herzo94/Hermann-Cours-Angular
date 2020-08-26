@@ -36,7 +36,7 @@ export class ReservationService {
   }
 
   createReservationWithUID(user) {
-    return this.reservationCollection.doc(`${this.collectionName}-${user.uid}`).set({
+    return this.reservationCollection?.doc(`${this.collectionName}-${user.uid}`).set({
       name: '',
       type: '',
       employe : '',
@@ -48,7 +48,7 @@ export class ReservationService {
   }
 
   /*createPersonalReservation(user) {
-    return this.personalReservationCollection.doc(`ps-${user.uid}`).set({
+    return this.personalReservationCollection?.doc(`ps-${user.uid}`).set({
       uid: user.uid,
       //displayName: user.displayName,
       name: reservation.name,
@@ -62,7 +62,7 @@ export class ReservationService {
   }*/
 
   /*createPersonalReservation(){
-      return this.personalReservationCollection.doc(`ps-${uid}`).set({
+      return this.personalReservationCollection?.doc(`ps-${uid}`).set({
         uid,
         name,
         type,
@@ -74,7 +74,7 @@ export class ReservationService {
   }*/
 
   getByIdReservation(id): Observable<IReservation> { //je retourne un observable
-    return this.afs.doc<IReservation>(`${this.collectionName}/${id}`).valueChanges();
+    return this.afs?.doc<IReservation>(`${this.collectionName}/${id}`).valueChanges();
   }
 
   //Update reservation
@@ -98,7 +98,7 @@ export class ReservationService {
 
   deleteReservation(id) { 
     return this.afs
-      .doc<IReservation>(`${this.collectionName}/${id}`)
+      ?.doc<IReservation>(`${this.collectionName}/${id}`)
       .delete();
   }
 }
