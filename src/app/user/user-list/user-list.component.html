@@ -9,7 +9,7 @@
      </ion-buttons>
     </ion-toolbar>
 </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+  <ion-content color="light" class="ion-text-center ion-padding">
     
       <div *ngIf="users?.length === 0; else userList">
         <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>  -->  
@@ -18,7 +18,7 @@
 
     <ng-template #userList>
       <div>
-        <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Recherche">
+        <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
           <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
         </ion-input>
         <br>
@@ -28,17 +28,16 @@
 
         <div *ngFor="let user of users | userSearch:searchTerm">
            
-              <ion-list>
-                <ion-item class="ion-text-center" style="border-bottom: 1px solid gray; margin-bottom:15px;">
-                  <!-- <div class="ion-text-center">
-                    <ion-avatar >
-                      <img src="https://ionicframework.com/docs/demos/api/list/avatar-ben.png">
+              <!-- <ion-list class="ion-text-center">
+                <ion-item>
+                  
+                    <ion-avatar>
+                      <img src="https://cdn1.iconfinder.com/data/icons/user-interface-1-glyph/32/ui_avatar_profil_user_circle-512.png" width="300px">
                     </ion-avatar>
-                  </div> -->
 
                   <ion-label>
                     <a [routerLink]="['/user-detail', user.id]">{{user.email}}</a>
-                  <p>{{user.email}}</p> 
+              
                     <p>Info1</p>
                     <p>Info2</p>
                    
@@ -57,8 +56,31 @@
                     
                   </ion-label>
                 </ion-item>
-              </ion-list>
+              </ion-list>-->
+
+              <ion-card>
+                <img src="https://cdn1.iconfinder.com/data/icons/user-interface-1-glyph/32/ui_avatar_profil_user_circle-512.png" width="150px" />
+                <ion-card-header>
+                  <ion-card-title><a [routerLink]="['/user-detail', user.id]">{{user.email}}</a></ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <p>Nom : {{ user.name}} </p>
+                  <p>Droit : {{ user.type }} </p>
+                  <!-- <p>N° tél :  </p> -->
+                  <br>
+                  <ion-icon 
+                    name="create-outline"
+                    *ngIf="authService.isAdmin"
+                    (click)="updateUserWithUID(user.id)"
+                  >
+                  </ion-icon>
               
+                  <ion-icon name="trash-outline"
+                    *ngIf="authService.isAdmin"
+                    (click)="deleteUser(user.id)"
+                  ></ion-icon>
+                </ion-card-content>
+              </ion-card>   
         </div>
 </ng-template>
 

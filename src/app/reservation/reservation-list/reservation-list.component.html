@@ -1,5 +1,5 @@
 <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="light">
         <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
        </ion-buttons>
@@ -9,7 +9,7 @@
        </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-text-center ion-padding">
+    <ion-content color="light" class="ion-text-center ion-padding">
 
 <div *ngIf="reservations.length === 0; else resaList"  class="ion-text-center">
   <!-- <ion-icon type="button" (click)="insertReservation()" name="add-circle-outline" (click)="insertReservation()"></ion-icon>-->
@@ -18,7 +18,7 @@
 
 <ng-template #resaList>
   <div class="ion-text-center">
-    <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Recherche">
+    <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
       <ion-icon name="search-sharp"></ion-icon>
     </ion-input>
     

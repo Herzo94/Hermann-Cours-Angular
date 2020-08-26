@@ -4,3 +4,7 @@ ion-col > div{
     width: 50%;
     margin: auto;
 }
+
+ion-icon {
+    font-size: 25px;
+  }

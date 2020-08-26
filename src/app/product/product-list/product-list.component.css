@@ -1,15 +1,17 @@
-#centerElements {
-    text-align: center;
-}
-
 ion-card{
-    width: 25%;
+    width: 40%;
     margin: auto;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 ion-input{
     width: 20%;
     margin: auto;
     border: 1px solid gray;
+}
+
+ion-icon {
+    font-size: 25px;
 }

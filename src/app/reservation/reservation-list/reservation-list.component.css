@@ -13,3 +13,7 @@ ion-input{
     margin: auto;
     border: 1px solid gray;
 }
+
+ion-icon {
+  font-size: 25px;
+}

@@ -9,7 +9,7 @@
      </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+  <ion-content color="light" class="ion-text-center ion-padding">
   
     <div *ngIf="products.length === 0; else prodList" class="ion-text-center">
       <!-- <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>-->
@@ -20,15 +20,15 @@
 
     <ng-template #prodList>
       <div class="ion-text-center">
-        <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Recherche">
+        <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
           <ion-icon name="search-sharp"></ion-icon>
         </ion-input>
         <br>
         <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>-->   
       </div>   
 
-    <div *ngFor="let product of products | productSearch:searchTerm">
-      <ion-card>
+    <!-- <div> -->
+      <ion-card *ngFor="let product of products | productSearch:searchTerm">
         <img [src]="product.imageUrl" width="300px" />
 
         <ion-card-header>
@@ -48,7 +48,7 @@
           (click)="deleteProduct(product.id)"
           ></ion-icon>
       </ion-card>
-    </div>
+   <!--</div>--> 
 
 </ng-template>
 

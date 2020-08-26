@@ -48,3 +48,8 @@ h2.example-app-name {
 mat-sidenav{
   width: 25%;
 }
+
+ion-icon{
+  margin-right: 10px;
+  
+}
