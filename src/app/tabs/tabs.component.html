@@ -1,8 +1,7 @@
-<!-- <app-mes-reservations></app-mes-reservations>-->
-<app-product-list></app-product-list>
-
-<ion-tabs *ngIf="authService.isAdmin">
-    <ion-tab-bar slot="bottom">
+<!-- <app-mes-reservations></app-mes-reservations> -->
+    <ion-tabs>
+    <!-- <ion-tab-bar [hidden]="!authService.isAdmin" slot="bottom">-->
+        <ion-tab-bar  *ngIf="authService.isAdmin" slot="bottom"> <!-- pas implenter-->
         <ion-tab-button tab="reservations">
             <ion-icon name="calendar"></ion-icon>
             <ion-label>Les reservations</ion-label>

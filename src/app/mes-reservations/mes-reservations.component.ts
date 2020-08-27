@@ -38,7 +38,7 @@ export class MesReservationsComponent implements OnInit, OnDestroy {
       if (this.user) {
          console.log(this.reservationService.readPersonalReservationByUID(user.uid));
 
-        this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
+        this.sub = this.reservationService.readPersonalReservationByUID(user.uid).subscribe( //Question : à propos de this.sub que j'ai écrit 2 fois
           (data) => {
 
             console.log('ngOnInt readPersonnalSpaceById / data', data);

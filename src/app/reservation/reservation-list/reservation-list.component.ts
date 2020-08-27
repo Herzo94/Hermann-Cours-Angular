@@ -68,7 +68,7 @@ export class ReservationListComponent implements OnInit, OnDestroy {
     
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Supprimer un produit',
+      header: 'Supprimer une reservation',
       subHeader: "Voulez-vous vraiment supprimer cette reservation ?",
       buttons: [
         {

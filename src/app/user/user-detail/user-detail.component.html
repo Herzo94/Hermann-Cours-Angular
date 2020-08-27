@@ -15,13 +15,6 @@
 <div *ngIf="(user$ |async)">
     
     <p>{{ user$ | async | json}}</p>
-    
-    <br>
-
-    <!-- <p>Date : {{ (user$ | async)?.createdAt.toDate() | date }}</p>-->
-
-    <!-- Comment afficher l'email de l'utilisateur : {{user.email}} <-- comment ça ça ne marche pas-->
-
 
 </div>
 

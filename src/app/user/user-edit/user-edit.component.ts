@@ -25,9 +25,9 @@ export class UserEditComponent implements OnInit {
 
    async ngOnInit(): Promise<void> {
     this.userForm = this.fb.group({
-      /*email: ['', Validators.required],
+      email: ['', Validators.required],
       name: ['', Validators.required],
-      password: ['', Validators.required],*/
+      password: ['', Validators.required],
       type: ['', Validators.required],
     });
     this.userForm.patchValue(this.data); //met le contenu dans le formulaire
@@ -41,7 +41,7 @@ export class UserEditComponent implements OnInit {
     return await modal.present();
   }
 
-  async onUpdateReservation() {
+  async onUpdateUser() {
     console.log('this.suggestionForm.value', this.userForm.value);
     const result = await this.userService.updateUserWithUID(this.userForm.value as any);
     this.modalController.dismiss();

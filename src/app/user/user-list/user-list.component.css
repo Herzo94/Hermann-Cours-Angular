@@ -6,12 +6,14 @@ ion-card
     margin-bottom: 20px;
 }
 
-ion-input{
-    width: 20%;
-    margin: auto;
-    border: 1px gray solid;
-}
-
 ion-icon {
     font-size: 25px;
+}
+
+ion-item{
+    font-size: 2rem;
+    --background: transparent;
+    max-width: 600px;
+    margin: auto;
+    --color: var(--ion-color-light)!important;
 }

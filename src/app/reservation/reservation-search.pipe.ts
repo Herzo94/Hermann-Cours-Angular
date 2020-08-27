@@ -11,8 +11,8 @@ export class ReservationSearchPipe implements PipeTransform {
     if (!value) return;
     if (Array.isArray(value)) {
       return value.filter(reservation => {
-       const name = reservation.name.toLowerCase()
-        return name.indexOf(term.toLowerCase()) > -1
+       const name = reservation.name?.toLowerCase()
+        return name?.indexOf(term.toLowerCase()) > -1
       })
     } else {
       console.error('Given value must be an array! 💥')

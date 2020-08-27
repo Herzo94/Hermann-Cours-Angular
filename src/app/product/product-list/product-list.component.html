@@ -12,22 +12,19 @@
   <ion-content color="light" class="ion-text-center ion-padding">
   
     <div *ngIf="products.length === 0; else prodList" class="ion-text-center">
-      <!-- <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>-->
-      <!-- <ion-icon name="search-sharp"></ion-icon><br>-->
-      <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>-->
       <p>Pas de produit...</p>
     </div>
 
     <ng-template #prodList>
       <div class="ion-text-center">
-        <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
-          <ion-icon name="search-sharp"></ion-icon>
-        </ion-input>
+        <ion-item>
+          <ion-input type="search" name="search" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
+          </ion-input>
+          <ion-icon name="search-sharp" slot="end"></ion-icon>
+        </ion-item>
         <br>
-        <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>-->   
       </div>   
 
-    <!-- <div> -->
       <ion-card *ngFor="let product of products | productSearch:searchTerm">
         <img [src]="product.imageUrl" width="300px" />
 
@@ -38,17 +35,16 @@
         <ion-card-content>
           {{ product.description }}     
         </ion-card-content>
-        <ion-icon name="create-outline"
+        <!-- <ion-icon name="create-outline"
           *ngIf="authService.isAdmin"
           (click)="modifProduct(product.id)"
-          ></ion-icon>
+          ></ion-icon>-->
 
           <ion-icon name="trash-outline"
           *ngIf="authService.isAdmin"
           (click)="deleteProduct(product.id)"
           ></ion-icon>
       </ion-card>
-   <!--</div>--> 
 
 </ng-template>
 

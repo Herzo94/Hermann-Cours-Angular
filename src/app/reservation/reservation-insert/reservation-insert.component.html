@@ -6,9 +6,9 @@
   <ion-content color="light" class="ion-text-center ion-padding">
     <div>
     <form [formGroup]="reservationForm" (ngSubmit)="onInsertReservation()">         
-         <p>
+         <!-- <p>
              <label>
-                 Nom Client: <!-- <input id="name" required type="text" formControlName="name" /> -->
+                 Nom Client:
                  <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
              </label>
          </p>
@@ -22,9 +22,9 @@
              <div *ngIf="reservationForm.get('name').errors.maxlength as maxlength">
                  The name should be {{ maxlength.requiredLength }} max length (actual: {{ maxlength.actualLength }})
              </div>
-         </div>
+         </div>-->
+         
          <p>
-
              <ion-label>Prestation:</ion-label>
              <ion-select placeholder="Selectionner une prestation" formControlName="type">
                 <ion-select-option value="Pose complète gel">Pose complète gel</ion-select-option>

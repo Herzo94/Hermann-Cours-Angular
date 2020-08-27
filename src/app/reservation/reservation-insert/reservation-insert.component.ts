@@ -25,7 +25,7 @@ export class ReservationInsertComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.reservationForm = this.fb.group({
-      name: ['', Validators.required],
+      /*name: ['', Validators.required],*/
       type: ['', Validators.required],
       employe: ['', Validators.required],
       date: ['', Validators.required],
@@ -58,8 +58,10 @@ export class ReservationInsertComponent implements OnInit, OnDestroy {
   }
 
   async onInsertReservation() { 
+    console.log('Coucou :', this.user.displayName);
     const result = await this.reservationService.createReservation(
-      this.reservationForm.value.name,
+      //this.reservationForm.value.name,
+      this.user.displayName,
       this.reservationForm.value.type,
       this.reservationForm.value.employe,
       this.reservationForm.value.date,

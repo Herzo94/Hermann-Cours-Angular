@@ -34,7 +34,7 @@ export class ProductInsertComponent implements OnInit, OnDestroy {
     this.productForm = this.fb.group({
       imageUrl: [''/*, Validators.required*/],
       productName: ['', Validators.required],
-      description: ['', Validators.required, Validators.minLength(4)],
+      description: ['', Validators.required],
       price: ['', Validators.required]
     });
 

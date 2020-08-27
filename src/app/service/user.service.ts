@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-  private userCollection: AngularFirestoreCollection<IUser>;
+  private usersCollection: AngularFirestoreCollection<IUser>;
   users: Observable<IUser[]>;
 
   collectionName = 'table-user';
@@ -37,20 +37,36 @@ export class UserService {
     }
 
   createUser (user) { //créer l'utilisateur dans une collection
+    
     const  newUser = {
       uid: user.uid, //Je prends ici l'id de l'utilisateur
-      //name: this.registerForm.value.name, 
-      name: '', //Comment récupérer le nom inséré dans le formualaire ? car "this.registerForm.value.name" ça ne joue pas
+      displayName: user.displayName,
       email: user.email,
       emailVerified: user.emailVerified,
       type: 'Normal',
       createdAt: new Date(),
+      tel: user.tel,
     }
 
     const usersCollection = this.afs.collection(`${this.collectionName}`);
     return usersCollection.add(newUser);
   }
 
+  createAdminUser (user) { //créer l'utilisateur dans une collection
+ 
+  const  newUser = {
+    uid: user.uid, //Je prends ici l'id de l'utilisateur
+    displayName: user.displayName,
+    email: user.email,
+    emailVerified: user.emailVerified,
+    type: '',
+    createdAt: new Date(),
+    tel: user.tel,
+  }
+
+  const usersCollection = this.afs.collection(`${this.collectionName}`);
+  return usersCollection.add(newUser);
+}
     /*createUsertWithUID(user) {
     return this.userCollection?.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
@@ -58,18 +74,12 @@ export class UserService {
       createdAt: new Date,
     });
   }*/
-  
-  /*createUser(email, name, type, createdAt) {
-    return this.afs
-      .collection(`${this.collectionName}`)
-      .add({ email, name, type, createdAt });
-  }*/
 
-  createAdminUser(email, name, type, createdAt) {
+  /*createAdminUser(email, name, type, createdAt, tel) {
     return this.afs
       .collection(`${this.collectionName}`)
-      .add({ email, name, type, createdAt });
-  }
+      .add({ email, name, type, createdAt, tel });
+  }*/
 
    /*createAdminUsertWithUID(user) {
     return this.userCollection?.doc(`${this.collectionName}-${user.uid}`).set({ //Question : problème ici avec le .set
@@ -91,7 +101,6 @@ export class UserService {
   updateUserWithUID(user) {
     return this.afs
       .collection(`${this.collectionName}`)
-      //?.doc(`ps-${user.uid}`)
       ?.doc(`${this.collectionName}-${user.uid}`)
   }
 

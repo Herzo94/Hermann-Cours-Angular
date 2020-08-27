@@ -55,7 +55,6 @@ export class UserListComponent implements OnInit, OnDestroy {
    
   }
 
-
   public async insertUser(){
   
     const modal = await this.modalController.create({
@@ -82,7 +81,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Alert',
-      subHeader: "Voulez-vous vraiment supprimer cette reservation ?",
+      subHeader: "Voulez-vous vraiment supprimer cet utilisateur ?",
       buttons: [
         {
          text: 'Oui',
@@ -107,25 +106,6 @@ export class UserListComponent implements OnInit, OnDestroy {
     });
   alert.present();
 
-    /*if(confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
-      this.userService.deleteUser(id)
-    await Toast.show({ 
-      text: 'Suppression effectuée avec succès!'
-    });
-  }*/
-
-    
-    /*if(confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')) {
-      this.userService.deleteUser(id)
-    await Toast.show({ 
-      text: 'Suppression effectuée avec succès!'
-    });
-  }
-
-  else {
-
-    return null;
-  }*/
 }
   
  ngOnDestroy() {

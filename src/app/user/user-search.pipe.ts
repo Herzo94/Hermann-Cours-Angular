@@ -10,8 +10,9 @@ export class UserSearchPipe implements PipeTransform {
   transform(value: IUser[], term: string = ''): IUser[] {
     if (Array.isArray(value)) {
       return value.filter(user => {
-       const name = user.name.toLowerCase()
-        return name.indexOf(term.toLowerCase()) > -1
+       //const name = user.displayName.toLowerCase()
+       const name = user.displayName?.toLowerCase()
+        return name?.indexOf(term.toLowerCase()) > -1
       })
     } else {
       console.error('Given value must be an array! 💥')

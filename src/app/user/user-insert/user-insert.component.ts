@@ -31,6 +31,7 @@ export class UserInsertComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       password: ['', Validators.required],
       type: ['', Validators.required],
+      tel: ['', Validators.required],
     });
 
     /*
@@ -110,21 +111,31 @@ export class UserInsertComponent implements OnInit, OnDestroy {
       
     this.result = await this.afAuth.createUserWithEmailAndPassword(this.userForm.value.email,this.userForm.value.password); //Création dans authentification
     
-    const resultRes = await this.userService.createAdminUser(
+    /*const resultRes = await this.userService.createAdminUser(
       this.userForm.value.email,
       this.userForm.value.name,
       this.userForm.value.type,
       this.dateCreation, // Question données provisoire
-      // Question 4 Comment récupérer le nouvel id du user qui vient d'être crée ?
-    );
+      this.userForm.value.tel,
+    );*/
      
-    console.log('resultRes : ', resultRes);
-    console.log('this.userForm.value.name : ',  this.userForm.value.name);
+   // console.log('resultRes : ', resultRes);
+    console.log('this.userForm.value.email : ',  this.userForm.value.email);
     console.log('this.userForm.value.displayName : ',  this.userForm.value.displayName);
     console.log('this.userForm.value.type : ',  this.userForm.value.type);
+    console.log('this.userForm.value.tel : ',  this.userForm.value.tel);
     
-    if( this.result && this.result.user) {
-      console.log('userCreated', this.result);
+    if( this.result) {
+      const userCreated = await this.userService.createAdminUser({ //spread operator.. 
+       // ...this.result.user,
+        email: this.userForm.value.email,
+        displayName: this.userForm.value.displayName,
+        type: this.userForm.value.type,
+        tel: this.userForm.value.tel, 
+      });
+
+      console.log('this.result', this.result);
+      console.log('user created', userCreated);
       this.result = null;
     }
     
@@ -138,7 +149,7 @@ export class UserInsertComponent implements OnInit, OnDestroy {
   }
 
   // This methods run when Angular destroy a component (cf component life cycle)
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.sub.unsubscribe() // We unsubscribe from the observable
   }
 

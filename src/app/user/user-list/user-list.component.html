@@ -4,71 +4,41 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Les utilisateurs</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>
-     </ion-buttons>
+     </ion-buttons> -->
     </ion-toolbar>
 </ion-header>
   <ion-content color="light" class="ion-text-center ion-padding">
     
       <div *ngIf="users?.length === 0; else userList">
-        <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>  -->  
           <p>Aucun utilisateur...</p>
       </div>
 
     <ng-template #userList>
       <div>
-        <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
-          <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
-        </ion-input>
+         <ion-item>
+          <ion-input type="search" name="search" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
+          </ion-input>
+          <ion-icon name="search-sharp" slot="end"></ion-icon>
+        </ion-item>
         <br>
-        <!-- <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertUser()" name="add-circle-outline"></ion-icon>-->
       </div> 
 
 
         <div *ngFor="let user of users | userSearch:searchTerm">
            
-              <!-- <ion-list class="ion-text-center">
-                <ion-item>
-                  
-                    <ion-avatar>
-                      <img src="https://cdn1.iconfinder.com/data/icons/user-interface-1-glyph/32/ui_avatar_profil_user_circle-512.png" width="300px">
-                    </ion-avatar>
-
-                  <ion-label>
-                    <a [routerLink]="['/user-detail', user.id]">{{user.email}}</a>
-              
-                    <p>Info1</p>
-                    <p>Info2</p>
-                   
-                    
-                  <ion-icon 
-                    name="create-outline"
-                    *ngIf="authService.isAdmin"
-                    (click)="updateUserWithUID(user.id)"
-                  >
-                  </ion-icon>
-              
-                  <ion-icon name="trash-outline"
-                    *ngIf="authService.isAdmin"
-                    (click)="deleteUser(user.id)"
-                  ></ion-icon>
-                    
-                  </ion-label>
-                </ion-item>
-              </ion-list>-->
-
               <ion-card>
                 <img src="https://cdn1.iconfinder.com/data/icons/user-interface-1-glyph/32/ui_avatar_profil_user_circle-512.png" width="150px" />
                 <ion-card-header>
                   <ion-card-title><a [routerLink]="['/user-detail', user.id]">{{user.email}}</a></ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
-                  <p>Nom : {{ user.name}} </p>
-                  <p>Droit : {{ user.type }} </p>
-                  <!-- <p>N° tél :  </p> -->
+                  <p>Nom : {{ user.displayName}} </p>
+                  <p>Privilège : {{ user.type }} </p>
+                  <p>N° tél : {{ user.tel }} </p> 
                   <br>
-                  <ion-icon 
+                  <!-- <ion-icon 
                     name="create-outline"
                     *ngIf="authService.isAdmin"
                     (click)="updateUserWithUID(user.id)"
@@ -78,48 +48,10 @@
                   <ion-icon name="trash-outline"
                     *ngIf="authService.isAdmin"
                     (click)="deleteUser(user.id)"
-                  ></ion-icon>
+                  ></ion-icon>-->
                 </ion-card-content>
               </ion-card>   
         </div>
 </ng-template>
 
- <!-- <ion-grid>
-
-              <ion-row>
-                <ion-col>
-                  <div> 
-                    <ion-avatar>
-                       <img src="https://ionicframework.com/docs/demos/api/list/avatar-ben.png">
-                    </ion-avatar>
-                  </div>
-                </ion-col>
-
-                <ion-col>
-                  <div><a [routerLink]="['/user-detail', user.id]">{{user.email}}</a></div>
-                </ion-col>
-
-                <ion-col>
-                  <div>
-                    <p>Info1</p>
-                    <p>Info2</p>
-                  </div>
-                </ion-col>
-
-                <ion-col>
-                  <div> 
-                    <ion-icon 
-                    name="create-outline"
-                    *ngIf="authService.isAdmin"
-                    (click)="updateUserWithUID(user.id)">
-                    </ion-icon>
-
-                  <ion-icon name="trash-outline"
-                    *ngIf="authService.isAdmin"
-                    (click)="deleteUser(user.id)">
-                 </ion-icon>
-                </div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>-->
 </ion-content>

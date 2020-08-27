@@ -32,8 +32,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   this.registerForm = this.fb.group({
       email: ['', Validators.email],
-      name: ['', Validators.required],
-      password: ['',[Validators.required, Validators.minLength(6)]]
+      displayName: ['', Validators.required],
+      password: ['',[Validators.required, Validators.minLength(6)]],
+      tel: ['', Validators.required],
     });
 
     this.afAuth.authState.subscribe((userProfil) => {
@@ -49,14 +50,13 @@ async register() {
   } 
   this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
   
-  console.log('name : ', this.registerForm.value.name);
-  //this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
-
   if(this.result) {
     this.createdAt = new Date();
-    //const userCreated = await this.userService.createUser(this.registerForm.value.email, this.registerForm.value.name, this.type, this.createdAt);
-    const userCreated = await this.userService.createUser(this.result.user);
-
+    const userCreated = await this.userService.createUser({ //spread operator.. 
+      ...this.result.user,
+      displayName: this.registerForm.value.displayName,
+      tel: this.registerForm.value.tel, 
+    });
     //this.userService.createProductWithUID(this.user);
     console.log('userCreated', userCreated);
     this.result = null;
@@ -68,9 +68,6 @@ async register() {
   });
 }
 
-/*onActif(){
-  this.isAuth = true;
-}*/
 onSignOut() {
   this.isAuth = false;
 }

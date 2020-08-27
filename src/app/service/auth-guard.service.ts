@@ -25,26 +25,27 @@ export class AuthGuardService implements CanActivate {
     console.log(this.auth.isAuth);
     console.log('this.auth.isAuth : ' + this.auth.isAuth);
     
-    if (this.auth.isAuth)//si authentifié
+    if (this.auth.isAuth)//si authentifié //petit test // // à enlever
     {
-      console.log('Hallo -> this.auth.isAuth : '+ this.auth.isAuth)
+      this.auth.isAuth = true
+      console.log('Info :  -> this.auth.isAuth : '+ this.auth.isAuth)
     }
     else{
-      console.log('Hallo ELSE -> this.auth.isAuth : '+ this.auth.isAuth)
+      this.auth.isAuth = false
+      console.log('Info : ELSE -> this.auth.isAuth : '+ this.auth.isAuth)
     }
 
-    if (this.auth.checkAuth())//si authentifié
+    if (this.auth.checkAuth())//si authentifié //petit test // à enlever
     {
-      console.log('Hallo -> this.auth.checkAuth() : '+ this.auth.checkAuth())
+      
+      console.log('Info : -> this.auth.checkAuth() : '+ this.auth.checkAuth())
       
     }
     else{
-      console.log('Hallo ELSE -> this.auth.checkAuth() : '+ this.auth.checkAuth())
+      console.log('Info :  -> this.auth.checkAuth() : '+ this.auth.checkAuth())
     }
 
     return this.auth.isAuth;
-
-
 
 
      /*return new Promise(
