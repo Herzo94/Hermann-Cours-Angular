@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-product',
-  template: `<router-outlet></router-outlet>`,
+  template: `<ion-router-outlet></ion-router-outlet>`,
   //templateUrl: './product.component.ts',
   styleUrls: ['./product.component.css']
 })

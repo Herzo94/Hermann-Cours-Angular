@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { Observable } from 'rxjs';
 
 import { UserService } from 'src/app/service/user.service';
@@ -6,7 +7,7 @@ import { IUser } from '../../models/IUser';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { UserInsertComponent } from '../user-insert/user-insert.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
@@ -20,7 +21,7 @@ const { Toast } = Plugins;
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit/*, OnDestroy*/ {
+export class UserListComponent implements OnInit, OnDestroy {
   private usersCollection: AngularFirestoreCollection<unknown>;
   users$: Observable<any>;
   //users$: Observable<IUser[]>;
@@ -35,73 +36,24 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
   uploadedImgURL = '';
   personalSpace;
 
-  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage) { }
-
-   ngOnInit(): void {
+  constructor (private userService: UserService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage, public alertController : AlertController) { }
+ /*ngOnInit(): void {
     this.users$ = this.userService.getUsers();
     console.log('this.users$', this.users$);
     console.log('usersCollection : ', this.usersCollection);
-   }
-  /*async ngOnInit() {
+   }*/
+  async ngOnInit() {
 
     this.usersCollection = await this.userService.readUser();
     console.log("UsersCollection : ", this.usersCollection);
     this.sub = this.usersCollection.valueChanges({
       idField: 'id',
       
-    }).subscribe(data => {
-      console.log('Code à décomenter : //this.users = data ')
-      //this.users = data; //Questions pourquoi il y a une erreur ici ?? Apparement il y a qqch de manquant
+    }).subscribe((data) => {
+      this.users = data as IUser[]; 
     })
-    
-  }*/
-
-  onFileChange(e) {
-    console.log(e.target.files[0]);
-    this.photo.file = e.target.files[0];
+   
   }
-
-  /*
-    postPhoto() {
-    console.log(this.photo);
-    const uid = this.user.uid;
-    const photoPathOnServer = `image-producs/${uid}/${this.photo.title}`;
-    const photoRef = this.afStorage.ref(photoPathOnServer);
-    this.photoServerURL = '';
-
-    console.log('photoPathOnServer', photoPathOnServer);
-    console.log('uid', uid);
-    console.log('this.photo.file', this.photo.file);
-    console.log('this.photo.title', this.photo.title);
-
-    const currentUpload = this.afStorage.upload(
-      photoPathOnServer,
-      this.photo.file
-    );
-
-    currentUpload.catch((err) => console.error(err));
-
-    currentUpload
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.photoServerURL = photoRef.getDownloadURL();
-          this.photoServerURL.subscribe((data) => {
-            console.log('data >>> ', data);
-            this.uploadedImgURL = data;
-            this.db.updatePersonalSpacePhotoURLs(
-              this.user,
-              this.uploadedImgURL
-            );
-          });
-        })
-      )
-      .subscribe();
-
-    // clear form
-    this.photo = { file: '', title: '' };
-  }
-  */
 
   public async insertUser(){
   
@@ -111,7 +63,6 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
     });
     return await modal.present();  
   }
-
 
   public async updateUserWithUID(id){
   
@@ -126,12 +77,36 @@ export class UserListComponent implements OnInit/*, OnDestroy*/ {
   }
 
   async deleteUser(id){
-    this.userService.deleteUser(id)
-
-    await Toast.show({ 
-      text: 'Suppression effectuée avec succès!'
+    
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: "Voulez-vous vraiment supprimer cet utilisateur ?",
+      buttons: [
+        {
+         text: 'Oui',
+         role:'delete',
+         handler: () =>{
+           Toast.show({ 
+            text: 'Suppression effectuée avec succès!'
+          });
+          this.userService.deleteUser(id)
+           console.log('delete clicked');
+           
+         }
+        },
+        {
+          text: 'Non',
+          role:'NoDelete',
+          handler: () =>{
+            console.log('Cancel clicked');
+          }
+         },
+      ]
     });
-  }
+  alert.present();
+
+}
   
  ngOnDestroy() {
     this.sub.unsubscribe();

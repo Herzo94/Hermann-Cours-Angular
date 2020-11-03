@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ReservationService } from 'src/app/service/reservation.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { IReservation } from '../models/IReservation';
 import { InsertMesReservationComponent } from '../mes-reservations/insert-mes-reservation/insert-mes-reservation.component';
 import { Plugins } from '@capacitor/core';
@@ -16,37 +16,43 @@ const { Toast } = Plugins;
   templateUrl: './mes-reservations.component.html',
   styleUrls: ['./mes-reservations.component.css']
 })
-export class MesReservationsComponent implements OnInit {
+export class MesReservationsComponent implements OnInit, OnDestroy {
   private mesReservationsCollection: AngularFirestoreCollection<IReservation>;
   user;
   reservation;
   mesReservations: IReservation[] = [];
   mesReservations$: Observable<IReservation[]>
   sub;
+  personalSpace;
   public searchTerm: string = '';
+  searchReservation: string;
 
-  constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController) { }
+  constructor(private afAuth: AngularFireAuth, private reservationService: ReservationService, private router : Router, public authService : AuthService, public modalController: ModalController, public alertController : AlertController) { }
   
   ngOnInit() { 
   
-    this.afAuth.authState.subscribe((user) => {
+    this.sub = this.afAuth.authState.subscribe((user) => {
       console.log('user', user);
 
       this.user = user;
       if (this.user) {
          console.log(this.reservationService.readPersonalReservationByUID(user.uid));
 
-        this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
+        this.sub = this.reservationService.readPersonalReservationByUID(user.uid).subscribe( //Question : à propos de this.sub que j'ai écrit 2 fois
           (data) => {
+
+            console.log('ngOnInt readPersonnalSpaceById / data', data);
+            this.personalSpace = data;
+
             console.log('ngOnInt readPersonnalReservationById / data', data);
             this.reservation = data;
             console.log('mes reservations data : -> ', this.reservation);
+           
             console.log('mes reservations$  OBSERVABLE : -> ', this.mesReservations$);
       
             if (!data || data.length === 0) {
               console.log(`Creating a new personal reservation for ${user.displayName}`);
-              //this.reservationService.createPersonalReservation(this.uid, this.name, this.type);
-              //lié l'élément ici à une collection par exemple
+              this.reservationService.createReservationWithUID(this.personalSpace);
             }
           },
           (err) => {
@@ -56,7 +62,7 @@ export class MesReservationsComponent implements OnInit {
       }
     });
   }
-  searchReservation: string;
+  
 
   public async insertReservation(){
   
@@ -68,14 +74,38 @@ export class MesReservationsComponent implements OnInit {
   }
 
   async  deleteReservation(id){
-    this.reservationService.deleteReservation(id)
 
-    await Toast.show({
-      text: 'Suppression effectuée avec succès!'
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Supprimer une reservation',
+      subHeader: "Voulez-vous vraiment supprimer cette reservation ?",
+      buttons: [
+        {
+         text: 'Oui',
+         role:'delete',
+         handler: () =>{
+           Toast.show({ 
+            text: 'Suppression effectuée avec succès!'
+          });
+          this.reservationService.deleteReservation(id)
+           console.log('delete clicked');
+           
+         }
+        },
+        {
+          text: 'Non',
+          role:'NoDelete',
+          handler: () =>{
+            console.log('Cancel clicked');
+          }
+         },
+      ]
     });
+  alert.present();
+ 
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() { //Obliger pour que ça soit performant //dans le but de pas bloquer les ressources système
     this.sub.unsubscribe();
   }
 

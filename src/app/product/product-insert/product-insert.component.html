@@ -6,9 +6,8 @@
   <ion-content class="ion-text-center ion-padding">
 
     <form [formGroup]="productForm" (ngSubmit)="onInsertProduct()"> 
-        
          <p>
-            <ion-label> Nom Produit : </ion-label>
+            <ion-label> Nom Produit: </ion-label>
             <ion-input id="productName" required type="text" formControlName="productName" placeholder="Entrez votre nom" required></ion-input>
         </p>
         <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">
@@ -27,20 +26,19 @@
             <ion-input id="description" type="text" formControlName="description" placeholder="Entrez votre description" required></ion-input>
         </p>
         <p>
-            <ion-label> Prix : </ion-label>
-            <ion-input id="price" type="number" formControlName="price" required></ion-input>    
+            <ion-label> Prix: </ion-label>
+            <ion-input id="price" type="number" formControlName="price" placeholder="Entrez un prix" required></ion-input>    
         </p>
-        <p>
+        <p class="ion-text-center">
             <ion-label> Image: </ion-label>
-
             <ion-input 
-            id="imageUrl" 
-            name="imageUrl" 
-            type="file" 
-            formControlName="imageUrl"
-            (change)="onFileChange($event)"
-            required
-            
+                id="imageUrl" 
+                name="imageUrl" 
+                type="file" 
+                formControlName="imageUrl"
+                (change)="onFileChange($event)"
+                accept="image/*"
+                required
             ></ion-input>
         </p>
 
@@ -48,7 +46,6 @@
             <img [src]="uploadedImgURL" alt="" style="width: 150px;" />
         </div> 
         
-        <!-- <ion-button type="submit">Enregistrer</ion-button> -->
         <ion-button type="submit" [disabled]="productForm.invalid">Enregistrer</ion-button>
     </form>
 </ion-content>

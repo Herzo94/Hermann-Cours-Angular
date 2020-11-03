@@ -3,7 +3,7 @@
     <ion-title>Insérer un admin</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+  <ion-content color="light" class="ion-text-center ion-padding">
     <div>
     <form [formGroup]="userForm" (ngSubmit)="onInsertUser()">   
          <p>
@@ -24,10 +24,15 @@
          <p>
              <ion-label>Type de privilège</ion-label>
              <ion-select placeholder="Selectionner un type de privilège" formControlName="type">
+               <ion-select-option value="normal">Normal</ion-select-option>
                 <ion-select-option value="admin">Admin</ion-select-option>
                 <ion-select-option value="superAdmin">SuperAdmin</ion-select-option>
             </ion-select>
          </p> 
+         <p>
+            <ion-label>Tel : </ion-label>
+            <ion-input formControlName="tel" placeholder="Entrez votre numéro"></ion-input>
+         </p>
          <!-- <p>
             <ion-label>Image Profil : </ion-label>
             <ion-input formControlName="imageUrl"></ion-input>

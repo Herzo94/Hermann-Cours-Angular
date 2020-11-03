@@ -23,19 +23,18 @@ export class RegisterComponent implements OnInit {
   userProfil: User;
   authStatus: boolean;
   isAuth: boolean;
+  type: 'Normal';
+  createdAt;
+  
 
   constructor(private authService: AuthService/*authGuardService: AuthGuardService*/, private fb: FormBuilder, private afAuth: AngularFireAuth, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   this.registerForm = this.fb.group({
       email: ['', Validators.email],
-      name: ['', Validators.required],
-      password: ['',[Validators.required, Validators.minLength(6)]]
-    });
-
-    this.loginForm = this.fb.group({
-      email: ['', Validators.email],
-      password: ['',[Validators.required, Validators.minLength(6)]]
+      displayName: ['', Validators.required],
+      password: ['',[Validators.required, Validators.minLength(6)]],
+      tel: ['', Validators.required],
     });
 
     this.afAuth.authState.subscribe((userProfil) => {
@@ -51,11 +50,14 @@ async register() {
   } 
   this.result = await this.afAuth.createUserWithEmailAndPassword(this.registerForm.value.email,this.registerForm.value.password);
   
-  console.log('name : ', this.registerForm.value.name);
-  //this.result = await this.authService.signIn(this.registerForm.value.email,this.registerForm.value.password);
-
   if(this.result) {
-    const userCreated = await this.userService.createUser(this.result.user);
+    this.createdAt = new Date();
+    const userCreated = await this.userService.createUser({ //spread operator.. 
+      ...this.result.user,
+      displayName: this.registerForm.value.displayName,
+      tel: this.registerForm.value.tel, 
+    });
+    //this.userService.createProductWithUID(this.user);
     console.log('userCreated', userCreated);
     this.result = null;
   }
@@ -66,9 +68,6 @@ async register() {
   });
 }
 
-/*onActif(){
-  this.isAuth = true;
-}*/
 onSignOut() {
   this.isAuth = false;
 }

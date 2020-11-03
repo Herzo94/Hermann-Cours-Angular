@@ -3,10 +3,10 @@
       <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Utilisateur</ion-title>
+    <ion-title>Détail utilisateur</ion-title>
     </ion-toolbar>
 </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+  <ion-content color="light" class="ion-text-center ion-padding">
 
 <div *ngIf="!(user$ |async)">
     loading...
@@ -15,13 +15,6 @@
 <div *ngIf="(user$ |async)">
     
     <p>{{ user$ | async | json}}</p>
-    
-    <br>
-
-    <p>Date : {{ (user$ | async)?.createdAt.toDate() | date }}</p>
-
-    <!-- Comment afficher l'email de l'utilisateur : {{user.email}} <-- comment ça ça ne marche pas-->
-
 
 </div>
 

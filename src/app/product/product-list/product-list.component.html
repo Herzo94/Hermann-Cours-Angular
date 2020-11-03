@@ -3,54 +3,55 @@
       <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Catalogue</ion-title>
+    <ion-title>Catalogue des produits</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
+     </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+  <ion-content color="light" class="ion-text-center ion-padding">
   
-    <div *ngIf="products.length === 0; else prodList">
-      <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching"></ion-input>
-      <ion-icon name="search-sharp"></ion-icon><br>
-      <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
-    
-      <p>loading...</p>
+    <div *ngIf="products?.length <= 0">
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+   </div>
+
+    <div *ngIf="products.length === 0; else prodList" class="ion-text-center">
+      <p>Pas de produit...</p>
     </div>
 
     <ng-template #prodList>
-    <div>
+      <div class="ion-text-center">
+        <ion-item>
+          <ion-input type="search" name="search" [(ngModel)]="searchTerm" placeholder="Filtrer la liste">
+          </ion-input>
+          <ion-icon name="search-sharp" slot="end"></ion-icon>
+        </ion-item>
+        <br>
+      </div>   
 
-    <ion-label for="search">Search: </ion-label>
-    <ion-input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Filter products"></ion-input>
-  
-    <ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertProduct()" name="add-circle-outline"></ion-icon>
-  
-      
-    <div *ngFor="let product of products | productSearch:searchTerm">
-      <ion-card>
+      <ion-card *ngFor="let product of products | productSearch:searchTerm">
         <img [src]="product.imageUrl" width="300px" />
 
         <ion-card-header>
           <ion-card-title>{{ product.productName }}</ion-card-title>
-
-          <ion-icon name="create-outline"
-          *ngIf="authService.isAdmin"
-          (click)="modifProduct(product.id)"
-          ></ion-icon>
-
-          <ion-icon name="trash-outline"
-          *ngIf="authService.isAdmin"
-          (click)="deleteProduct(product.id)"
-          ></ion-icon>
-
           <ion-card-subtitle>Prix : {{ product.price }} CHF</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           {{ product.description }}     
         </ion-card-content>
-      </ion-card>
-    </div>
+        <!-- <ion-icon name="create-outline"
+          *ngIf="authService.isAdmin"
+          (click)="modifProduct(product.id)"
+          ></ion-icon>-->
 
-  </div>
+          <ion-icon name="trash-outline"
+          *ngIf="authService.isAdmin"
+          (click)="deleteProduct(product.id)"
+          ></ion-icon>
+      </ion-card>
+
 </ng-template>
 
 </ion-content>

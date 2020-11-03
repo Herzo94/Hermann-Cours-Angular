@@ -45,6 +45,9 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 import { InsertMesReservationComponent } from './mes-reservations/insert-mes-reservation/insert-mes-reservation.component';
+import { HoraireDispoReservationComponent } from './horaire-dispo-reservation/horaire-dispo-reservation.component';
+import { HoraireDispoInsertReservationComponent } from './horaire-dispo-reservation/horaire-dispo-insert-reservation/horaire-dispo-insert-reservation.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import { InsertMesReservationComponent } from './mes-reservations/insert-mes-res
     UserSearchPipe,
     MesReservationsComponent,
     InsertMesReservationComponent,
+    HoraireDispoReservationComponent,
+    HoraireDispoInsertReservationComponent,
+    TabsComponent,
   
   ],
   imports: [

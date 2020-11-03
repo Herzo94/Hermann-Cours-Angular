@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -12,13 +12,14 @@ const { Toast } = Plugins;
   templateUrl: './insert-mes-reservation.component.html',
   styleUrls: ['./insert-mes-reservation.component.css']
 })
-export class InsertMesReservationComponent implements OnInit {
+export class InsertMesReservationComponent implements OnInit, OnDestroy {
 
   public reservationForm: FormGroup;
   message = '';
   user;
   result;
   personalSpace;
+  sub;
 
   constructor(private fb: FormBuilder, route: ActivatedRoute, private reservationService : ReservationService, private router: Router, private afAuth: AngularFireAuth) { }
 
@@ -31,20 +32,18 @@ export class InsertMesReservationComponent implements OnInit {
       heure: ['', Validators.required],
     });
 
-    this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
+    this.sub = this.afAuth.authState.subscribe((user) => { //etat actuel utilisateur connecté
       console.log('user', user);
 
       this.user = user;
       if (this.user) {
-        // console.log(this.db.readPersonalSpaceByUID(user.uid));
-
         this.reservationService.readPersonalReservationByUID(user.uid).subscribe(
           (data) => {
             console.log('ngOnInt readPersonnalSpaceById / data', data);
             this.personalSpace = data;
             if (!data || data.length === 0) {
               console.log(`Creating a new space for ${user.displayName}`);
-              this.reservationService.createReservationWithUID(this.user);
+              this.reservationService.createReservationWithUID(this.personalSpace);
             }
           },
           (err) => {
@@ -68,17 +67,17 @@ export class InsertMesReservationComponent implements OnInit {
 
     console.log('result', result);
     
-    await Toast.show({ //si problème -> Stackoverflow 
+    await Toast.show({ 
       text: 'Insertion effectué avec succès!'
     });
 
     this.reservationForm.reset();
-    this.router.navigate(['/resa']);
+    this.router.navigate(['/personalreservation']);
   }
 
    // This methods run when Angular destroy a component (cf component life cycle)
-  /*ngOnDestroy(): void {
-    this.reservationSubscription.unsubscribe() // We unsubscribe from the observable
-  }*/
+  ngOnDestroy(): void {
+    this.sub.unsubscribe() // We unsubscribe from the observable
+  }
 
 }

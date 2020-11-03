@@ -3,12 +3,12 @@
     <ion-title>Insérer une réservation</ion-title>
     </ion-toolbar>
 </ion-header>
-  <ion-content class="ion-text-center ion-padding">
+  <ion-content color="light" class="ion-text-center ion-padding">
     <div>
     <form [formGroup]="reservationForm" (ngSubmit)="onInsertReservation()">         
          <p>
              <label>
-                 Nom Client: <!-- <input id="name" required type="text" formControlName="name" /> -->
+                 Nom Client: 
                  <ion-input id="name" required type="text" formControlName="name" placeholder="Entrez votre nom"></ion-input>
              </label>
          </p>
@@ -25,7 +25,7 @@
          </div>
          <p>
 
-             <ion-label>Prestation</ion-label>
+             <ion-label>Prestation:</ion-label>
              <ion-select placeholder="Selectionner une prestation" formControlName="type">
                 <ion-select-option value="Pose complète gel">Pose complète gel</ion-select-option>
                 <ion-select-option value="Remplissage naturel">Remplissage naturel</ion-select-option>
@@ -38,32 +38,23 @@
          </p>
          
          <p>
-            <ion-item>
-                <ion-label>Spécialiste</ion-label>
+                <ion-label>Spécialiste:</ion-label>
                 <ion-select placeholder="Selectionner une spécialiste" formControlName="employe">
                   <ion-select-option value="Giliane">Giliane</ion-select-option>
                   <ion-select-option value="Christelle">Christelle</ion-select-option>
                   <ion-select-option value="Stephanie">Stéphanie</ion-select-option>
                   <ion-select-option value="Carmen">Carmen</ion-select-option>
                 </ion-select>
-              </ion-item>
          </p>
        
          <p>
-             <!-- <label>
-                Date : <input id="date" type="date" formControlName="date" />
-             </label>-->
-             <ion-label>Date :</ion-label>
+             <ion-label>Date:</ion-label>
              <ion-input id="date" formControlName="date" type="date"></ion-input>
          </p>
          <p>
-            <!-- <label>
-                Heure: <input id="heure" type="time" formControlName="heure" />
-             </label>-->
              <ion-label>Heure :</ion-label>
              <ion-input id="heure" formControlName="heure" type="time"></ion-input>
          </p>
-         <!-- <button type="submit" [disabled]="reservationForm.invalid">Save the reservation!</button> -->
          <ion-button type="submit" [disabled]="reservationForm.invalid">Enregistrer</ion-button>
      </form>
  </div>

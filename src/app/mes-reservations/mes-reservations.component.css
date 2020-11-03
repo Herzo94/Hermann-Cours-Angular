@@ -1,0 +1,19 @@
+#centerElements {
+    text-align: center;
+}
+
+ion-card{
+    width: 25%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+ion-input{
+    width: 20%;
+    margin: auto;
+    border: 1px solid gray;
+}
+
+ion-icon {
+    font-size: 25px;
+}

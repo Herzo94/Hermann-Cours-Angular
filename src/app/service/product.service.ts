@@ -17,14 +17,8 @@ export class ProductService {
 
   readProduct() {
     return this.afs.collection<IProduct>(`${this.collectionName}`, (ref) =>
-      ref.orderBy('createdAt', 'asc')
+      ref.orderBy('createdAt', 'desc')
     );
-  }
-
-  readImageWithUID(uid: string) {
-    return this.afs
-      .collection(`${this.collectionName}`, (ref) => ref.where('uid', '==', uid))
-      .valueChanges({ idField: 'id' });
   }
 
   createProduct(imageUrl, productName, description, price, createdAt, uid) {
@@ -33,11 +27,23 @@ export class ProductService {
       .add({imageUrl, productName, description, price, createdAt, uid});
   }
 
+
+  readImageWithUID(uid: string) {
+    return this.afs
+      .collection<IProduct>(`${this.collectionName}`, (ref) => 
+      ref.orderBy('createdAt', 'desc').where('uid', '==', uid,
+      
+      ))
+
+      .valueChanges({ idField: 'id' });
+  }
+  
+
   createProductWithUID(user) {
-    return this.imageProductCollection.doc(`${this.collectionName}-${user.uid}`).set({
+    return this.imageProductCollection?.doc(`${this.collectionName}-${user.uid}`).set({
       uid: user.uid,
       displayName: user.displayName,
-      createdAt: Date.now(),
+      createdAt: new Date(),
       imageUrl: '',
       productName: '',
       description : '',
@@ -47,13 +53,12 @@ export class ProductService {
 
   //Update product
   updateProduct(product) {
-    return this.afs.doc(`${this.collectionName}/${product.id}`).update({
+    return this.afs?.doc(`${this.collectionName}/${product.id}`).update({
       ...product,
       imageUrl: product.imageUrl,
       name: product.productName,
       description : product.description,
       price: product.price,
-      //createdAt: Date.now(),
     });
   }
 
@@ -61,7 +66,7 @@ export class ProductService {
     return this.afs
       .collection(`${this.collectionName}`)
       //.doc(`ps-${user.uid}`) //décommenter ce bout de code si ça ne marche pas 
-      .doc(`${this.collectionName}-${user.uid}`)
+      ?.doc(`${this.collectionName}-${user.uid}`)
       .update({
         photoURLs: firestore.FieldValue.arrayUnion(photoURL),
       });

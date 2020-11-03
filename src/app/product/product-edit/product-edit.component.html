@@ -8,7 +8,7 @@
     <form [formGroup]="productForm" (ngSubmit)="onUpdateProduct()"> 
         
         <p>
-            <ion-label> Nom Produit : </ion-label>
+            <ion-label> Nom Produit: </ion-label>
             <ion-input id="productName" required type="text" formControlName="productName"></ion-input>
         </p>
         <div *ngIf="productForm.get('productName').invalid && (productForm.get('productName').dirty || productForm.get('productName').touched)">
@@ -28,15 +28,16 @@
         </p>
         <p>
             <ion-label> Prix: </ion-label>
-            <ion-input id="price" type="number" formControlName="price"></ion-input>    
+            <ion-input id="price" type="number" formControlName="price"></ion-input><span>CHF</span>    
         </p>
         <p>
             <ion-label> Image: </ion-label>
             <ion-input id="imageUrl" type="file" formControlName="imageUrl"></ion-input>
         </p>
-        <!-- <div>
-            <img [src]="uploadedImgURL" alt="" style="width: 150px;" />
+         <!-- <div>
+            <img [src]="imageUrl" alt="" style="width: 150px;" />
         </div>-->
+
         <ion-button type="submit">Enregistrer</ion-button>
     </form>
 </ion-content>

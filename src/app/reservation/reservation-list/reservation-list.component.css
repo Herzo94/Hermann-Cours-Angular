@@ -1,0 +1,22 @@
+#centerElements {
+    text-align: center;
+}
+
+ion-card{
+    width: 25%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+ion-icon {
+  font-size: 25px;
+}
+
+ion-item { 
+
+    font-size: 2rem;
+    --background: transparent;
+    max-width: 600px;
+    margin: auto;
+    --color: var(--ion-color-light)!important;
+  }

@@ -1,26 +1,32 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar> 
     <ion-buttons slot="start">
     <ion-menu-button></ion-menu-button>
   </ion-buttons>
   <ion-title>Mes réservations</ion-title>
+  <ion-buttons slot="end">
+    <ion-icon type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+   </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-text-center ion-padding">
+<ion-content color="light" class="ion-text-center ion-padding" color="light">
 
-<div *ngIf="reservation.length === 0; else resaList">
-<ion-icon type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
-<p>Aucune réservation</p>
+<div *ngIf="reservation?.length <= 0">
+   <ion-skeleton-text animated></ion-skeleton-text>
+   <ion-skeleton-text animated></ion-skeleton-text>
+   <ion-skeleton-text animated></ion-skeleton-text>
+</div>
+
+<div *ngIf="reservation?.length === 0; else resaList" class="ion-text-center">
+  <p>Aucune réservation...</p>
 </div>
 
 <ng-template #resaList>
-<div>
-<ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Start searching">
-  <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
-</ion-input>
-<br>
-
-<ion-icon *ngIf="authService.isAdmin" type="button" (click)="insertReservation()" name="add-circle-outline"></ion-icon>
+<div class="ion-text-center">
+  <!-- <ion-input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Recherche">
+    <ion-icon class="ion-text-center" name="search-sharp"></ion-icon>
+  </ion-input>-->
+  <br>
 </div> 
 
 <br>
@@ -53,5 +59,6 @@
 <tr></tr>
 </ion-grid>
 </ng-template>
+
 </ion-content>
 

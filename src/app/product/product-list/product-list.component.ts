@@ -4,7 +4,7 @@ import { ProductService } from './../../service/product.service';
 import { IProduct } from '../../models/IProduct';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/service/auth-service.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   uploadedImgURL = '';
   personalSpace;
 
-  constructor(private productService: ProductService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage, private db: DbService) { }
+  constructor(private productService: ProductService, public authService : AuthService, public modalController: ModalController, private afStorage: AngularFireStorage, private db: DbService, public alertController : AlertController) { }
 
   async ngOnInit() {
 
@@ -60,7 +60,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   postPhoto() {
     console.log(this.photo);
     const uid = this.user.uid;
-    const photoPathOnServer = `image-producs/${uid}/${this.photo.title}`;
+    //const photoPathOnServer = `image-producs/${uid}/${this.photo.title}`;
+    const photoPathOnServer = `image-producs/${this.photo.title}`;
     const photoRef = this.afStorage.ref(photoPathOnServer);
     this.photoServerURL = '';
 
@@ -118,11 +119,34 @@ export class ProductListComponent implements OnInit, OnDestroy {
   } 
 
   async deleteProduct(id){
-    this.productService.deleteProduct(id)
-
-    await Toast.show({ 
-      text: 'Suppression effectuée avec succès!'
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Supprimer un produit',
+      subHeader: "Voulez-vous vraiment supprimer ce produit ?",
+      buttons: [
+        {
+         text: 'Oui',
+         role:'delete',
+         handler: () =>{
+           Toast.show({ 
+            text: 'Suppression effectuée avec succès!'
+          });
+          this.productService.deleteProduct(id)
+           console.log('delete clicked');
+           
+         }
+        },
+        {
+          text: 'Non',
+          role:'NoDelete',
+          handler: () =>{
+            console.log('Cancel clicked');
+          }
+         },
+      ]
     });
+  alert.present();
+  
   }
 
   ngOnDestroy() {

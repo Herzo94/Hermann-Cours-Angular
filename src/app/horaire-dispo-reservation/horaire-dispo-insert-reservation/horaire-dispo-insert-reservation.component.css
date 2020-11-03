@@ -1,0 +1,10 @@
+ion-col > div{
+    border : 1px solid gray;
+    color: black;
+    width: 50%;
+    margin: auto;
+}
+
+ion-icon {
+    font-size: 25px;
+  }
