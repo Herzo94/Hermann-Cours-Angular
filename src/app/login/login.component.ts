@@ -51,15 +51,15 @@ export class LoginComponent implements OnInit {
       console.log('login', this.loginForm.value);
 
       const { email, password} = this.loginForm.value;
-      this.user = await this.authService.login(email, password); //appel à la méthode
-      if (this.user){
+      //this.user = await this.authService.login(email, password); //appel à la méthode
+      //if (this.user){
         //this.router.navigate(['product']);  
         this.router.navigate(['reservations']);  
-      }
+      //}
 
-      if (this.isAdmin){
+      //if (this.isAdmin){
         console.log('CoucouAdmin');
-      }
+      //}
     } catch (error) {
       this.message = error.message;
     }
